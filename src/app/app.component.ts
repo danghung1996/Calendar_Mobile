@@ -4,25 +4,33 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-
+import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
+import { AttendancePage } from '../pages/attendance/attendance';
+import { CheckinPage } from '../pages/checkin/checkin';
+import { LeavePage } from '../pages/leave/leave';
+import { ClaimPage } from '../pages/claim/claim';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{icon: string,title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { icon:'people', title: 'Profile', component: ProfilePage },
+      { icon:'planet', title: 'Attendance', component: AttendancePage },
+      { icon:'podium', title: 'Checkin', component: CheckinPage },
+      { icon:'power', title: 'Leave', component: LeavePage },
+      { icon:'radio', title: 'Claim', component: ClaimPage },
+      { icon:'redo', title: 'Logout', component: LoginPage },
     ];
 
   }
