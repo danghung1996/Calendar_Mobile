@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Mobile Check in</ion-title>
   </ion-navbar>
 
@@ -121,7 +124,7 @@
         </div>
       </div>
       <button ion-button block style="width:70%;margin:auto;background-color:#FF3366;height: 60px;font-size: 27px;margin-top: 20px"
-      (click)="mobileCheckOut()">mobile check-out</button>
+        (click)="mobileCheckOut()">mobile check-out</button>
       <div style="width: 100%;margin-top: 20px;height: 60px">
         <div style="width:15%;height: 100%;float: left;padding-left: 10px" text-center>
           <ion-img src="../../assets/icon/location_558562.png" style="width: 40px;height: 100%;;background-color:inherit"></ion-img>
@@ -139,7 +142,8 @@
       </div>
 
       <div style="position: absolute;width: 100%;bottom: 50%">
-        <button ion-button block style="background-color:#00CCCC;width:60%;margin:auto;height: 50px;font-size: 24px" (click)="confirmCheckOut()">Confirm
+        <button ion-button block style="background-color:#00CCCC;width:60%;margin:auto;height: 50px;font-size: 24px"
+          (click)="confirmCheckOut()">Confirm
           check in</button>
         <button ion-button block style="background-color:#FF3300;width:60%;margin:auto;margin-top:10px;height: 50px;font-size: 24px">Cancel</button>
       </div>

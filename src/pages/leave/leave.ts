@@ -17,14 +17,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class LeavePage {
   @ViewChild('fileInput') fileInput;
-
   show: boolean = false;
   tab_show = true;
   show_type_of_leave = false;
   gaming = 'am'
+  showleave = false;
   type_of_leave = ['Annual', 'Time of in lieu', 'Medical', 'Maternity', 'Compassionate']
   public base64Image: string;
   form: FormGroup;
+  fromdate='2018-12-20'
+  toDate = '2018-12-29'
   constructor(public navCtrl: NavController, formBuilder: FormBuilder, public navParams: NavParams, public menuCtrl: MenuController, private camera: Camera) {
     this.menuCtrl.enable(true, 'myMenu');
     this.form = formBuilder.group({

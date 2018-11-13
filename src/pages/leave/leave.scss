@@ -1,4 +1,19 @@
 page-leave {
+  @font-face {
+    font-family: eurostile;
+    src: url('fonts/eurostile.TTF');
+  }
+
+  @font-face {
+    font-family: EuroStyle_normal;
+    src: url('fonts/EuroStyle\ Normal.ttf');
+  }
+
+  font-family: eurostile !important;
+  $font-family-ios-base: "eurostile";
+  $font-family-md-base:"eurostile";
+  $font-family-wp-base:"eurostile";
+
   .list-header-ios {
     text-transform: none !important
   }
@@ -44,9 +59,37 @@ page-leave {
     border-radius: 5px;
 
   }
-  ion-select{
-      margin-left: 10px;
-      border: 1px solid saddlebrown;
-      border-radius: 5px;
+
+  ion-select {
+    margin-left: 10px;
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+  }
+
+  .toolbar-background {
+    background-color: #2A6595;
+    color: white
+  }
+
+  .toolbar-title-ios {
+    color: white !important
+  }
+
+  .toolbar-title-md {
+    color: white
+  }
+
+  ion-list-header {
+    color: white !important;
+  }
+
+  .typeofleave {
+    background-color: #4397C7 !important;
+    font-size: 18px;
+  }
+
+  .remark {
+    background-color: #80B6D7 !important;
+    font-size: 18px;
   }
 }

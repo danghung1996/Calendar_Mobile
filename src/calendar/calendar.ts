@@ -35,16 +35,13 @@ import * as _ from "lodash";
 `
 })
 export class Calendar {
-  @Output()
-  onDaySelect = new EventEmitter<dateObj>();
-  @Output()
-  onMonthSelect = new EventEmitter<any>();
-  @Input()
-  events: Array<singularDate> = [];
-  @Input()
-  lang: string;
-  @Input()
-  status: Array<any> = [];
+  @Output() onDaySelect = new EventEmitter<dateObj>();
+  @Output() onMonthSelect = new EventEmitter<any>();
+  @Input() events: Array<singularDate> = [];
+  @Input() lang: string;
+  @Input() status: Array<any> = [];
+  @Input() leaveFromDate
+  @Input() leaveToDate
   currentYear: number = moment().year();
   currentMonth: number = moment().month();
   currentDate: number = moment().date();
@@ -61,6 +58,7 @@ export class Calendar {
 
   constructor() {
     this.today();
+
   }
 
   ngOnChanges() {
@@ -73,6 +71,13 @@ export class Calendar {
     }
     if (this.lang === "es") {
       this.weekHead = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+    }
+    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined) {
+      let year = moment(this.leaveFromDate).year();
+      let month = moment(this.leaveFromDate).month();
+      this.displayMonth = month
+      this.displayYear = year;
+    this.createMonth(this.displayYear, this.displayMonth);
     }
   }
 
@@ -115,7 +120,7 @@ export class Calendar {
       if (
         new Date(element.date).getTime() ===
         new Date(year, month, date).getTime()
-      ) result= element.status.toString()
+      ) result = element.status.toString()
     });
     return result;
   }
@@ -187,7 +192,7 @@ export class Calendar {
         isToday: false,
         isSelect: false,
         hasEvent: this.isInEvents(year, month, i + 1) ? true : false,
-        status: this.isHaveStatus(year, month, i + 1) 
+        status: this.isHaveStatus(year, month, i + 1)
       });
     }
 

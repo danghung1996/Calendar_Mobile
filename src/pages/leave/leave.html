@@ -4,13 +4,13 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header >
 
-  <ion-navbar>
-    <button ion-button menuToggle>
+  <ion-navbar >
+    <button style="color:white" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Leave</ion-title>
+    <ion-title>My Leave</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -62,7 +62,7 @@
 
   </ion-item>
   <div style="text-align: center;color:white">
-    <span (click)="show = !show" style="background-color:#4397C7;border-radius:0px 0px 4px 4px;width: 20%">Details</span>
+    <div (click)="show = !show" style="background-color:#4397C7;border-radius:0px 0px 4px 4px;width: 40%;margin: 0 auto;font-size: 15px">Details</div>
   </div>
   <div class="tab">
     <button (click)="tab_show = true" [ngClass]="tab_show ? 'active': 'non-active'">Apply</button>
@@ -73,8 +73,8 @@
       <ion-label>Application date: 20 sept 2018</ion-label>
     </ion-item>
     <ion-list radio-group>
-      <ion-list-header (click)="show_type_of_leave = !show_type_of_leave" style="background-color:#4397C7;color:white">
-        TYPE OF LEAVE
+      <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave">
+        Type of leave
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
         <ion-item *ngFor="let item of type_of_leave;let i = index" no-lines>
@@ -84,8 +84,8 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header (click)="show_type_of_leave = !show_type_of_leave" style="background-color:#4397C7;color:white">
-        DATE <ion-icon name="md-calendar"></ion-icon>
+      <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave" >
+        Date <ion-icon name="md-calendar"></ion-icon>
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
         <ion-item no-lines>
@@ -109,14 +109,14 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header style="background-color:#80B6D7;color:white">
-        REMARK</ion-list-header>
+      <ion-list-header class="remark">
+        Remark</ion-list-header>
       <ion-item no-lines>
         <ion-input placeholder="Input remark" type="text" value=""></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header style="background-color:#80B6D7;color:white">
+      <ion-list-header  class="remark">
         Attachment (optional)</ion-list-header>
       <ion-item no-lines>
         <ion-label (click)="takePicture()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
@@ -126,8 +126,8 @@
 
     </ion-list>
     <ion-list>
-      <ion-list-header style="background-color:#4397C7;color:white">
-        SUMMIT NOW</ion-list-header>
+      <ion-list-header class="typeofleave">
+        Submit now</ion-list-header>
     </ion-list>
   </div>
   <div *ngIf="!tab_show">
@@ -137,11 +137,19 @@
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
       </ion-row>
-      <ion-col>
+      <ion-row (click)="showleave = !showleave" style="background-color:#F4F4F4;height:30px;">
         <ion-col col-4>07 Nov</ion-col>
         <ion-col col-5>Time of in lieu</ion-col>
-        <ion-col col-3><ion-icon name="logo-apple"></ion-icon></ion-col>
-      </ion-col>
+        <ion-col col-3>
+          <ion-icon name="logo-apple"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="showleave">
+        <ion-col col-12>PENDING <span style="float:right">AM to PM</span></ion-col>
+        <ion-col style="background-color:#8AB1C9" col-12>Last Update <span style="float:right">07 Nov 2018</span></ion-col>
+
+        <ion-col col-12> <ion-calendar #calendar [leaveFromDate]="fromdate" [leaveToDate]="toDate"></ion-calendar></ion-col>        
+      </ion-row>
     </ion-grid>
   </div>
 </ion-content>

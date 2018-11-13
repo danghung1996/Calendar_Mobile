@@ -1,3 +1,107 @@
 page-claim {
+  @font-face {
+    font-family: eurostile;
+    src: url('fonts/eurostile.TTF');
+  }
 
+  @font-face {
+    font-family: EuroStyle_normal;
+    src: url('fonts/EuroStyle\ Normal.ttf');
+  }
+
+  font-family: eurostile !important;
+  $font-family-ios-base: "eurostile";
+  $font-family-md-base:"eurostile";
+  $font-family-wp-base:"eurostile";
+
+  .list-header-ios {
+    text-transform: none !important
+  }
+
+  ion-content .leaveavai {
+    border-bottom: 5px solid #F8CECD !important;
+    background-color: #F5F5F5 !important;
+    font-size: 15px;
+    color: #333333
+  }
+
+  ion-col {
+    width: 33%;
+  }
+
+  .tab {
+    margin-top: 50px;
+    position: relative;
+    font-size: large;
+
+    button {
+      width: 50%;
+      position: absolute;
+      bottom: 0
+    }
+
+    .active {
+      height: 40px;
+      background: #EB4997;
+      color: white
+    }
+
+    .non-active {
+      height: 30px;
+      background-color: #DDDDDD
+    }
+  }
+
+  .list-ios {
+    margin: -1px 0 10px !important;
+  }
+
+  ion-datetime {
+    border: 1px solid saddlebrown;
+    width: 40%;
+    border-radius: 5px;
+
+  }
+
+  ion-select {
+    margin-left: 10px;
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+  }
+
+  .toolbar-background {
+    background-color: #EB4997;
+    color: white
+  }
+
+  .toolbar-title-ios {
+    color: white !important
+  }
+
+  .toolbar-title-md {
+    color: white
+  }
+
+  ion-list-header {
+    color: white !important;
+
+
+  }
+
+  .typeofclaim {
+    background-color: #ED7099 !important;
+    font-size: 18px;
+  }
+
+  .remark {
+    background-color: #F4BAB8 !important;
+    font-size: 18px;
+
+  }
+
+  .submit {
+    background-color: #5F3634 !important;
+    font-size: 18px;
+
+  }
 }
