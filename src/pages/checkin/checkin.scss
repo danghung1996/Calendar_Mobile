@@ -1,3 +1,22 @@
 page-checkin {
-
+    .textArea{
+        border:1px solid;
+        border-radius: 5px;
+        margin-top: 10px;   
+        font-size: 22px;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: auto;
+    }
+    .infor{
+        background: url("../../assets/imgs/Capture1.png") center ;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .infor1{
+        background: url("../../assets/imgs/Capture.PNG") center ;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
 }

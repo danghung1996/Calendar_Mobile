@@ -19,6 +19,10 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LoginProvider } from '../providers/login/loginAuth';
+import { HttpModule } from '@angular/http'; 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,11 +36,13 @@ import { Camera } from '@ionic-native/camera';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     FormsModule,
     BrowserAnimationsModule,
     NgCircleProgressModule.forRoot({}),
     CalendarModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +59,10 @@ import { Camera } from '@ionic-native/camera';
     StatusBar,
     SplashScreen,
     Camera,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    LoginProvider,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule { }
