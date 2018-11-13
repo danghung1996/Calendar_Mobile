@@ -14,6 +14,9 @@ import { AttendancePage } from '../pages/attendance/attendance';
 import { CheckinPage } from '../pages/checkin/checkin';
 import { LeavePage } from '../pages/leave/leave';
 import { ClaimPage } from '../pages/claim/claim';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LoginProvider } from '../providers/login/loginAuth';
+import { HttpModule } from '@angular/http'; 
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { ClaimPage } from '../pages/claim/claim';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +49,9 @@ import { ClaimPage } from '../pages/claim/claim';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    LoginProvider,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

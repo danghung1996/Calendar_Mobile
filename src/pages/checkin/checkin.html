@@ -1,5 +1,5 @@
 <!--
-  Generated template for the CheckinPage page.
+  Generated template for the MobileCheckinPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,15 +7,207 @@
 <ion-header>
 
   <ion-navbar>
-  	<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Checkin</ion-title>
+    <ion-title>Mobile Check in</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
+  <!-- check-in -->
+  <div *ngIf="isCheckIn">
+    <!-- start check-in -->
+    <div *ngIf="isCheckInStart" padding>
+      <div class="currentTime" style="font-size: 50px;text-align: center;color:darkturquoise">
+        {{currentTime}}
+      </div>
+      <div class="textArea">
+        <ion-textarea rows="10" placeholder="Reason for online check in."></ion-textarea>
+      </div>
+      <div style="margin-top: 20px">
+        <button ion-button color="secondary" block style="background-color:#00CCCC;width:60%;margin:auto;font-size: 26px"
+          (click)='mobileCheckin()'>
+          Mobile Check-in</button>
+        <div style="width: 100%;position: absolute;bottom: 10px;">
+          <div style="width:10%;height: auto;float: left;">
+            <ion-img src="../../assets/icon/location_558562.png" style="width: 100%;height: 50px;background-color:inherit"></ion-img>
+          </div>
+          <div style="font-size: 18px;width:90%;height: auto;float: right;color:gray">
+            Your GPS location will be track upon mobile check in.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- check-in confirm -->
+    <div *ngIf="isCheckInConfirm" style="margin-top:50px">
+      <div class="currentTime" style="font-size: 55px;text-align: center;color:darkturquoise">
+        09:54:02 AM
+      </div>
 
-<ion-content padding>
+      <div style="position: absolute;width: 100%;bottom: 50%">
+        <button ion-button block style="background-color:#00CCCC;width:60%;margin:auto;height: 50px;font-size: 26px"
+          (click)="checked()">Confirm
+          check-in</button>
+        <button ion-button block style="background-color:#FF3300;width:60%;margin:auto;margin-top:10px;height: 50px;font-size: 26px"
+          (click)="cancel()">Cancel</button>
+      </div>
+      <div style="position: absolute;bottom: 10px;width: 100%;">
 
+        <div style="margin-left:50px;color:gray">online checkin from</div>
+        <div style="width: 100%;height: 50px;padding:0px;background-color: #CCEBEB">
+          <div style="width:10%;height: auto;float: left">
+            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+          </div>
+          <div style="font-size: 25px;height: auto;float: left;margin-left:10px;text-align: center;color:rgb(128, 128, 128)">
+            {{lat}} , {{long}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- successfull check in -->
+    <div *ngIf="isCheckInSuccess">
+      <div style="width: 100%;height: 120px;background-color: #28CFCF;font-size: 28px;padding-top: 40px;color:white;text-align: center;">
+        SUCCESSFUL SIGN-IN ON:
+      </div>
+      <div style="width: 100%;height: 30px;background-color: #F5F5F5;line-height: 30px;padding-right: 20px">
+        <div style="float:right;color:#9F9F9F"> 22 Sept 2018</div>
+      </div>
+      <div style="width: 100%;margin-top:15px;height: 30px" class="infor">
+        <div style="float:left;width: 30%;height: 100%;line-height: 30px;font-size: 15px;color:white;padding-left: 15px">
+          Check-in
+        </div>
+        <div style="widows: 40%;float: right;height: 100%;line-height: 30px;font-size: 15px;color:white;padding-right: 15px">
+          Very late
+        </div>
+      </div>
+      <div style="font-size: 55px;text-align: center;color:darkturquoise;margin-top: 20px">
+        09:54:02 AM
+      </div>
+      <div style="border-bottom: 1px solid;width: 100%;height: 30px;padding-left: 30px;color:#DCDCDC;font-size: 19px;margin-top: 40px">Reason
+        for online check-in</div>
+      <div style="margin-top: 10px;color: gray;font-size: 21px;padding-left: 30px;padding-right: 30px">
+        Going to streight to meeting at Gadong meeting client (Jaya Hypermark)
+      </div>
+      <button ion-button block (click)="checkInSuccess()">Test</button>
+      <div style="position: absolute;width: 100%;bottom: 10px">
+        <div style="margin-left:50px;color:gray">online check out at</div>
+        <div style="width: 100%;height: 50px;padding:0px;background-color: #CCEBEB">
+          <div style="width:15%;height: 100%;float: left" text-center>
+            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+          </div>
+          <div style="font-size: 25px;height: 100%;line-height: 50px;float: left;padding-left:20px;text-align: center;color:rgb(128, 128, 128)">
+            {{lat}} , {{long}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- check out -->
+  <div *ngIf="isCheckOut">
+    <div *ngIf="isCheckOutStart">
+      <div padding>
+        <div style="font-size: 50px;text-align: center;color:darkturquoise;margin-top: 30px">
+          {{currentTime}}
+        </div>
+        <div class="textArea">
+          <ion-textarea rows="5" placeholder="Reason for online check in."></ion-textarea>
+        </div>
+      </div>
+      <div style="width: 100%;height: 120px;background-color:#EEEEEE;margin-top: 20px;padding:10px">
+        <button ion-button block style="width: 60%;height: 27px;;margin: auto;background-color: #009999;border-radius: 15px;font-size: 18px">TO
+          DAY WORK HOUR</button>
+        <div style="color:#28CFCF;font-size: 50px;width: 100%;text-align: center;margin-top: 10px">
+          6HR - 34MIN
+        </div>
+      </div>
+      <button ion-button block style="width:70%;margin:auto;background-color:#FF3366;height: 60px;font-size: 27px;margin-top: 20px"
+      (click)="mobileCheckOut()">mobile check-out</button>
+      <div style="width: 100%;margin-top: 20px;height: 60px">
+        <div style="width:15%;height: 100%;float: left;padding-left: 10px" text-center>
+          <ion-img src="../../assets/icon/location_558562.png" style="width: 40px;height: 100%;;background-color:inherit"></ion-img>
+        </div>
+        <div style="font-size: 18px;width:85%;height: auto;float: right;padding-left: 10px">
+          Your GPS location will be track upon mobile check in.
+        </div>
+      </div>
+    </div>
+    <!-- confirm check out -->
+
+    <div style="margin-top:50px" *ngIf="isCheckOutConfirm">
+      <div class="currentTime" style="font-size: 55px;text-align: center;color:darkturquoise">
+        05:12:02 PM
+      </div>
+
+      <div style="position: absolute;width: 100%;bottom: 50%">
+        <button ion-button block style="background-color:#00CCCC;width:60%;margin:auto;height: 50px;font-size: 24px" (click)="confirmCheckOut()">Confirm
+          check in</button>
+        <button ion-button block style="background-color:#FF3300;width:60%;margin:auto;margin-top:10px;height: 50px;font-size: 24px">Cancel</button>
+      </div>
+      <div style="position: absolute; bottom: 10px;width: 100%;">
+        <div style="margin-left:50px;color:gray">online check-out at</div>
+        <div style="width: 100%;height: 50px;padding:0px;background-color: #CCEBEB">
+          <div style="width:15%;height: auto;float: left" text-center>
+            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+          </div>
+          <div style="font-size: 25px;height: 100%;float: left;margin-left:10px;text-align: center;color:rgb(128, 128, 128);line-height: 50px">
+            {{lat}} , {{long}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- check-out successful -->
+    <div *ngIf="isCheckOutSuccess">
+      <div style="width: 100%;height: 120px;background-color: #28CFCF;font-size: 25px;padding-top: 40px;color:white;text-align: center;">
+        SUCCESSFUL CHECK-OUT ON:
+      </div>
+      <div style="width: 100%;height: 30px;background-color: #F5F5F5;line-height: 30px;padding-right: 20px">
+        <div style="float:right;color:#9F9F9F"> 22 Sept 2018</div>
+      </div>
+      <div style="width: 100%;margin-top:15p  x;height: 30px" class="infor1">
+        <div style="width: 30%;height: 100%;line-height: 30px;font-size: 15px;color:white;padding-left: 15px">
+          Check-out
+        </div>
+      </div>
+      <div style="font-size: 55px;text-align: center;color:darkturquoise;margin-top: 20px">
+        09:54:02 AM
+      </div>
+      <div style="border-bottom: 1px solid;width: 100%;height: 30px;padding-left: 30px;color:#DCDCDC;font-size: 19px;margin-top: 40px">Reason
+        for online check-out</div>
+      <div style="margin-top: 10px;color: gray;font-size: 21px;padding-left: 30px;padding-right: 30px">
+        Going to streight to meeting at Gadong meeting client (Jaya Hypermark)
+      </div>
+      <div style="position: absolute;width: 100%;bottom: 10px">
+        <div style="margin-left:50px;color:gray">online check out at</div>
+        <div style="width: 100%;height: 50px;padding:0px;background-color: #CCEBEB">
+          <div style="width:15%;height: auto;float: left" text-center>
+            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+          </div>
+          <div style="font-size: 25px;height: 100%;float: left;margin-left:10px;text-align: center;color:rgb(128, 128, 128);line-height: 50px">
+            {{lat}} , {{long}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- is Error   -->
+  <div *ngIf="isError">
+    <div style="width: 100%;height: 120px;background-color: #FF0000;font-size: 25px;padding-top: 40px;color:white;text-align: center;">
+      Operation Fail!
+    </div>
+    <div style="width: 100%;height: 30px;background-color: #F5F5F5;line-height: 30px;padding-right: 20px">
+      <div style="float:right;color:#9F9F9F"> 22 Sept 2018</div>
+    </div>
+    <div style="width:100%;font-size: 30px;margin-top: 35px;text-align: center;font-weight: bolder">O o p s !</div>
+
+    <div style="width: 100%;height:auto" text-center>
+      <img src="../../assets/imgs/error.png" style="width: 50%;">
+    </div>
+
+    <div style="color:#CC0000;font-size: 25px;font-weight: bold;text-align: center" padding>
+      Unable to perform this your action at the moment.
+    </div>
+    <div style="color:#CC0000;font-size: 25px;font-weight: bolder;text-align: center" padding>
+      <u>Please try again!</u>
+    </div>
+  </div>
 </ion-content>
