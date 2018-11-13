@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-  	<button ion-button menuToggle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Attendance</ion-title>
@@ -17,5 +17,113 @@
 
 
 <ion-content padding>
+  <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [events]="currentEvents" [status]="status"></ion-calendar>
+  <ion-list-header no-lines no-padding>
+    <button ion-item (click)="showColorCode = !showColorCode;showAtenden=false;showAtendenRP=false" detail-none>
+      <ion-icon item-right name="md-arrow-dropdown" *ngIf="!showColorCode"></ion-icon>
+      <ion-icon item-right name="md-arrow-dropup" *ngIf="showColorCode"></ion-icon>
+      Color code
+    </button>
 
+    <ion-item *ngIf="showColorCode" [@enterAnimation] ion-item detail text-wrap>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-icon style="color:#C6FDE8" name="radio-button-on"></ion-icon>
+            On-time
+          </ion-col>
+          <ion-col>
+            <ion-icon style="color:#D0DFEA" name="radio-button-on"></ion-icon>
+            Onleave
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon style="color:#FCEBCF" name="radio-button-on"></ion-icon>
+            Late
+          </ion-col>
+          <ion-col>
+            <ion-icon style="color:#F3B3B2" name="radio-button-on"></ion-icon>
+            Very late
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon style="color:#E6CDFB" name="radio-button-on"></ion-icon>
+            Absent
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <button (click)="showAtenden = !showAtenden;showColorCode=false;showAtendenRP=false;" ion-item detail-none>
+      <ion-icon item-right name="md-arrow-dropdown" *ngIf="!showAtenden"></ion-icon>
+      <ion-icon item-right name="md-arrow-dropup" *ngIf="showAtenden"></ion-icon>
+      My Attendance
+    </button>
+    <ion-item *ngIf="showAtenden" [@enterAnimation] ion-item detail text-wrap>
+      <div>
+        <div style="text-align:end;background-color:#EEEEEE">20 Sept 2018</div>
+        <div class="checkout"><span>Checkout</span>
+        </div>
+        <div style="text-align:end;"> 14:00:00 PM</div>
+        <div class="checkin">
+          <span>Check In</span>
+          <span style="float:right">Ontime</span>
+        </div>
+        <div style="text-align:end;"> 14:00:00 PM</div>
+      </div>
+
+    </ion-item>
+    <button (click)="showAtendenRP = !showAtendenRP;showAtenden=false;showColorCode=false" ion-item detail-none>
+      <ion-icon item-right name="md-arrow-dropdown" *ngIf="!showAtendenRP"></ion-icon>
+      <ion-icon item-right name="md-arrow-dropup" *ngIf="showAtendenRP"></ion-icon>
+      My Attendance
+    </button>
+    <ion-item *ngIf="showAtendenRP" [@enterAnimation] ion-item detail text-wrap>
+      <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#4397C7'"
+        [innerStrokeColor]="'#4397C7'" [responsive]=true [animation]="false" [toFixed]=2 [showSubtitle]="false"
+        [animationDuration]="0"></circle-progress>
+      <h2 class="text-end">SEPTEMBER</h2>
+      <h4 class="text-end">Monthly Attendence</h4>
+      <h5 class="text-end">As of 22 September 2018</h5>
+      <ion-grid>
+        <ion-row style="color:white;background-color:#296291;text-align:center">
+          <ion-col>On time</ion-col>
+          <ion-col>On leave</ion-col>
+        </ion-row>
+        <ion-row style="text-align:center;font-size:40px">
+          <ion-col style="color:#4397C7">43%</ion-col>
+          <ion-col style="color:#F19E9C">14%</ion-col>
+        </ion-row>
+        <ion-row style="text-align:center">
+          <ion-col>9 days</ion-col>
+          <ion-col>3 dasy</ion-col>
+        </ion-row>
+        <ion-row style="color:white;background-color:#296291;text-align:center">
+          <ion-col>Late</ion-col>
+          <ion-col>Very late</ion-col>
+        </ion-row>
+        <ion-row style="text-align:center;font-size:40px">
+          <ion-col style="color:#719898">43%</ion-col>
+          <ion-col style="color:#67C99C">14%</ion-col>
+        </ion-row>
+        <ion-row style="text-align:center">
+          <ion-col>9 days</ion-col>
+          <ion-col>3 dasy</ion-col>
+        </ion-row>
+        <ion-row style="color:white;background-color:#296291;text-align:center">
+          <ion-col>Absence</ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <ion-row style="text-align:center;font-size:40px">
+          <ion-col style="color:#EB4826">43%</ion-col>
+          <ion-col style="color:#F19E9C"></ion-col>
+        </ion-row>
+        <ion-row style="text-align:center">
+          <ion-col>9 days</ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list-header>
 </ion-content>

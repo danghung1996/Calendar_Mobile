@@ -1,3 +1,36 @@
 page-attendance {
+  ion-calendar .calendar-row .calendar-col {
+    border: 0px;
+  }
+
+  ion-content ion-list-header button {
+    color: white !important;
+    background-color: #296291 !important;
+    margin-top: 1px !important
+  }
+
+  .list-header-ios {
+    text-transform: none !important
+  }
+
+  .text-end {
+    text-align: end
+  }
+
+  .checkout {
+    background: url('../../assets/imgs/checkout.png') no-repeat center;
+    background-size: cover;
+    height: 30px;
+    color: white
+  }
+
+  .checkin {
+    background: url('../../assets/imgs/chekin.png') no-repeat center;
+    background-size: cover;
+    height: 30px;
+    color: white;
+  
+  }
+
 
 }

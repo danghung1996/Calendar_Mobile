@@ -14,7 +14,11 @@ import { AttendancePage } from '../pages/attendance/attendance';
 import { CheckinPage } from '../pages/checkin/checkin';
 import { LeavePage } from '../pages/leave/leave';
 import { ClaimPage } from '../pages/claim/claim';
-
+import { CalendarModule } from '../calendar/calendar.module'
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { Camera } from '@ionic-native/camera';
 @NgModule({
   declarations: [
     MyApp,
@@ -24,11 +28,15 @@ import { ClaimPage } from '../pages/claim/claim';
     AttendancePage,
     CheckinPage,
     LeavePage,
-    ClaimPage
+    ClaimPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    FormsModule,
+    BrowserAnimationsModule,
+    NgCircleProgressModule.forRoot({}),
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +52,9 @@ import { ClaimPage } from '../pages/claim/claim';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Camera,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }
+

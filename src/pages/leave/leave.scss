@@ -1,3 +1,52 @@
 page-leave {
+  .list-header-ios {
+    text-transform: none !important
+  }
 
+  ion-content .leaveavai {
+    border-bottom: 5px solid #4397C7 !important;
+    background-color: #F5F5F5 !important;
+  }
+
+  ion-col {
+    width: 33%;
+  }
+
+  .tab {
+    margin-top: 50px;
+    position: relative;
+
+    button {
+      width: 50%;
+      position: absolute;
+      bottom: 0
+    }
+
+    .active {
+      height: 40px;
+      background: #4397C7;
+      color: white
+    }
+
+    .non-active {
+      height: 30px;
+      background-color: #DDDDDD
+    }
+  }
+
+  .list-ios {
+    margin: -1px 0 10px !important;
+  }
+
+  ion-datetime {
+    border: 1px solid saddlebrown;
+    width: 40%;
+    border-radius: 5px;
+
+  }
+  ion-select{
+      margin-left: 10px;
+      border: 1px solid saddlebrown;
+      border-radius: 5px;
+  }
 }
