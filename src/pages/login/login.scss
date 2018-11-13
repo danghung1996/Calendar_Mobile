@@ -3,6 +3,7 @@ page-login {
         background-color: inherit;
         line-height: 50%;
         color:white;
+        padding: 0px 10px 0px 10px;
         
     }
     .item{
@@ -19,4 +20,58 @@ page-login {
         background-color:inherit;
         width: 50%;
     }
+    .toolbar-background{
+        background-color:#045584;
+        width: 100%;
+    }
+    .toolbar{
+    padding:0px;
+    }
+    .logo{
+        width: 100%;
+        height:auto;
+        padding:0px;
+    }
+    .iconTnR{
+        margin-top: 10px;
+        background-color:inherit;
+        height: 30px;
+    }
+    .iconPeople{
+        height: 230px;
+    }
+    .title{
+        color:white;
+        text-align: center;
+        margin:0px;
+    }
+    .logo-warning{
+        font-size: 140px;
+        color:red;
+    }
+    .button{
+        background-color:#99CC00;
+    }
+    @media only all and (max-width: 320px   ) {
+        .iconTnR{
+            height: 20px;
+        }
+        .iconPeople{
+            height: 200px;
+        }
+        .title{
+            font-size: 20px;
+            padding:0px;
+        }
+        .logo-warning{
+            font-size: 120px;
+            color:red;
+        }
+    }
+    @media only all and (min-width: 370px   ) {
+        .button{
+            margin-top: 30px;
+        }
+    }
+    
 }

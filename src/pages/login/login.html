@@ -6,24 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar no-lines>
+    <ion-title style="background-color: #045584"></ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content padding style="background-color:#045584">
+<ion-content style="background-color:#045584">
   
   <div style="width: 100%;height:auto" text-center>
-      <img src="../../assets/imgs/logo1.png"style="background-color:inherit;height: 30px;">
+      <img src="../../assets/imgs/logo1.png" class="iconTnR">
   </div>
-  <div style="width: 100%;height:auto" text-center>
-    <img src="../../assets/imgs/login.png"style="background-color:inherit;height: 250px;">
+  <div class="logo" text-center>
+    <img src="../../assets/imgs/login.png" class="iconPeople">
   </div>
-  <div class="formInput">
-      <ion-list *ngIf="!isLogged && !isFailed">
-          <h3 style="color:white;text-align: center">Employee Self Service</h3>
+  <div class="formInput" *ngIf="!isLogged && !isFailed">
+      <ion-list>
+          <h3 class="title">Employee Self Service</h3>
           <hr style="background-color: white">
       
           <ion-item>
@@ -41,7 +40,7 @@
             <ion-checkbox [(ngModel)]="cucumber"></ion-checkbox>
           </ion-item>
       
-          <button ion-button style="background-color:#99CC00 " block (click)="login()" [disabled]="!cucumber">Login</button>
+          <button ion-button class="button" block (click)="login()" [disabled]="!cucumber">Login</button>
       
         </ion-list>
   </div>
@@ -59,11 +58,11 @@
     </ion-list>
   </div>
 
-  <div *ngIf="isFailed" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-    <h3 style="color:white;text-align: center">Employee Self Service</h3>
+  <div *ngIf="isFailed" padding>
+    <h3 class="title">Employee Self Service</h3>
     <hr style="background-color: white">
-    <div style="width:100%;height: auto;" text-center>
-        <ion-icon name="warning" style="font-size: 150px;color:red;"></ion-icon>
+    <div class="logo" text-center>
+        <ion-icon name="warning" class="logo-warning"></ion-icon>
     </div>
     <h1 style="color: #FFCC00;text-align: center">LOGIN FAILED</h1>
     <h5 style="color:white;text-align: center" (click)="reTry()"><u>Please try again</u></h5>

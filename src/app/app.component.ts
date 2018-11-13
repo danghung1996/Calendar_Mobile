@@ -16,7 +16,7 @@ import { ClaimPage } from '../pages/claim/claim';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{icon: string,title: string, component: any}>;
 
