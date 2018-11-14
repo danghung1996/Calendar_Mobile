@@ -13,38 +13,46 @@
 </ion-header>
 
 <ion-content style="background-color:#045584">
-  
+
   <div style="width: 100%;height:auto" text-center>
-      <img src="../../assets/imgs/logo1.png" class="iconTnR">
+    <img src="../../assets/imgs/logo1.png" class="iconTnR">
   </div>
   <div class="logo" text-center>
     <img src="../../assets/imgs/login.png" class="iconPeople">
   </div>
+
+
   <div class="formInput" *ngIf="!isLogged && !isFailed">
+    <form [formGroup]="formGroup">
       <ion-list>
-          <h3 class="title">Employee Self Service</h3>
-          <hr style="background-color: white">
-      
-          <ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input [(ngModel)]="username" type="text" value="" required></ion-input>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input [(ngModel)]="password" type="password" value="" required></ion-input>
-          </ion-item>
-      
-          <ion-item class="item">
-            <ion-label class="lable">I agree to the <u>Term of service</u> and <u>Privacy Policy</u></ion-label>
-            <ion-checkbox [(ngModel)]="cucumber"></ion-checkbox>
-          </ion-item>
-      
-          <button ion-button class="button" block (click)="login()" [disabled]="!cucumber">Login</button>
-      
-        </ion-list>
+        <h3 class="title">Employee Self Service</h3>
+        <hr style="background-color: white">
+
+        <ion-item>
+          <ion-label floating>Username</ion-label>
+          <ion-input type="text" formControlName="email" value="" required></ion-input>
+        </ion-item>
+        
+
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" formControlName="password" value="" required></ion-input>
+        </ion-item>
+        <!-- <div *ngIf="password.hasError('required') && password.touched" style="font-size: 15px;color:red" padding>
+          Password is required
+        </div> -->
+
+        <ion-item class="item">
+          <ion-label class="lable">I agree to the <u>Term of service</u> and <u>Privacy Policy</u></ion-label>
+          <ion-checkbox formControlName="cucumber" [(ngModel)]="cucumber"></ion-checkbox>
+        </ion-item>
+
+        <button ion-button class="button" block (click)="login()" [disabled]="!cucumber">Login</button>
+        <!-- {{ formGroup.value | json}} -->
+      </ion-list>
+    </form>
   </div>
-  
+
   <div *ngIf="isLogged">
     <ion-list class="formInput">
       <h3 style="color:white;text-align: center">Sign in Successful</h3>
@@ -62,7 +70,7 @@
     <h3 class="title">Employee Self Service</h3>
     <hr style="background-color: white">
     <div class="logo" text-center>
-        <ion-icon name="warning" class="logo-warning"></ion-icon>
+      <ion-icon name="warning" class="logo-warning"></ion-icon>
     </div>
     <h1 style="color: #FFCC00;text-align: center">LOGIN FAILED</h1>
     <h5 style="color:white;text-align: center" (click)="reTry()"><u>Please try again</u></h5>

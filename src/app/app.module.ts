@@ -22,6 +22,8 @@ import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LoginProvider } from '../providers/login/loginAuth';
 import { HttpModule } from '@angular/http'; 
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,15 +35,17 @@ import { HttpModule } from '@angular/http';
     CheckinPage,
     LeavePage,
     ClaimPage,
+    
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     FormsModule,
     BrowserAnimationsModule,
     NgCircleProgressModule.forRoot({}),
-    CalendarModule
+    CalendarModule,
+    IonicStorageModule.forRoot()
     
   ],
   bootstrap: [IonicApp],

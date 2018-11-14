@@ -2,13 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginProvider } from '../../providers/login/loginAuth'
+import { LoginPage } from '../login/login';
 
-/**
- * Generated class for the LeavePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-leave',
@@ -25,13 +22,20 @@ export class LeavePage {
   type_of_leave = ['Annual', 'Time of in lieu', 'Medical', 'Maternity', 'Compassionate']
   public base64Image: string;
   form: FormGroup;
-  fromdate='2018-12-20'
+  fromdate = '2018-12-20'
   toDate = '2018-12-29'
-  constructor(public navCtrl: NavController, formBuilder: FormBuilder, public navParams: NavParams, public menuCtrl: MenuController, private camera: Camera) {
+  constructor(
+    public navCtrl: NavController,
+    formBuilder: FormBuilder,
+    public navParams: NavParams,
+    public menuCtrl: MenuController,
+    private camera: Camera,
+    public loginService: LoginProvider) {
     this.menuCtrl.enable(true, 'myMenu');
     this.form = formBuilder.group({
       profilePic: [''],
     });
+    
   }
   takePicture() {
     if (Camera['installed']()) {
@@ -62,5 +66,14 @@ export class LeavePage {
     console.log('ionViewDidLoad LeavePage');
   }
 
+  // async canEnter() {
+  //   let check = await this.loginService.auth();
+  //   if (!check) {
+  //     console.log(this.loginService.auth());
 
+  //     this.navCtrl.setRoot(LoginPage);
+  //   }
+  //   console.log(this.loginService.auth());
+
+  // }
 }

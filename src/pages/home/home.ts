@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,MenuController } from 'ionic-angular';
+import {LoginProvider} from '../../providers/login/loginAuth'
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,13 @@ import { NavController,MenuController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,public menuCtrl: MenuController) {
-  	this.menuCtrl.enable(true,'myMenu');
+  constructor(
+    public navCtrl: NavController,
+    public menuCtrl: MenuController,
+    public loginService: LoginProvider) {
+    this.menuCtrl.enable(true,'myMenu');
+   this.loginService.auth();
   }
+  
 
 }

@@ -1,6 +1,11 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../../Model/EmployeeAccount';
+import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/fromPromise';
+
 
 /*
   Generated class for the LoginProvider provider.
@@ -10,10 +15,11 @@ import { Account } from '../../Model/EmployeeAccount';
 */
 @Injectable()
 export class LoginProvider {
-  urlLogin = "http://10.0.96.11:1111/api/login";
-  
+  urlLogin = "http://10.0.105.20:1111/api/login";
+  token:string = "";
   constructor(
-    public http: Http
+    public http: HttpClient,
+    public storage: Storage
   ) {
     console.log('Hello LoginProvider Provider');
   }
@@ -26,5 +32,19 @@ export class LoginProvider {
       "password": password
     })
   }
+  async auth(){
+   await this.getToken();
+   console.log(this.token);
+   if(this.token !== null && this.token !==undefined){
+     return this.token;
+   }
+   return false;
+  }
+   async getToken(){
+    await this.storage.get("token").then(data => {
+      this.token = data;
+    })
+  }
+
 
 }
