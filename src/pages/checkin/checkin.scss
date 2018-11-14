@@ -1,40 +1,57 @@
 page-checkin {
-    .textArea{
-        border:1px solid;
-        border-radius: 5px;
-        margin-top: 10px;   
-        font-size: 22px;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: auto;
-    }
-    .textAreaConfirm{
-        font-size: 22px;
-        padding-left: 30px;
-        padding-right: 30px;
-        height: auto;
-        font-size: 21;
-        color:gray;
-    }
-    .infor{
-        background: url("../../assets/imgs/Capture1.png") center ;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .infor1{
-        background: url("../../assets/imgs/Capture.PNG") center ;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .logoLocation{
-        background: url("../../assets/icon/location_558562.png") center ;
-        width: 30px;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .location{
-        position: absolute;
-        bottom: 5px;
-    }
-    
+  .textArea {
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
+  }
+
+  .textAreaConfirm {
+    font-size: 22px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: auto;
+    font-size: 21;
+    color: gray;
+  }
+
+  .infor {
+    background: url("../../assets/imgs/Capture1.png") center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .infor1 {
+    background: url("../../assets/imgs/Capture.PNG") center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .logoLocation {
+    background: url("../../assets/icon/location_558562.png") center;
+    width: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .location {
+    position: absolute;
+    bottom: 5px;
+  }
+
+  .toolbar-background {
+    background-color: #2A6595;
+    color: white
+  }
+
+  .toolbar-title-ios {
+    color: white !important
+  }
+
+  .toolbar-title-md {
+    color: white
+  }
 }

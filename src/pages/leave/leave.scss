@@ -1,18 +1,5 @@
 page-leave {
-  @font-face {
-    font-family: eurostile;
-    src: url('fonts/eurostile.TTF');
-  }
-
-  @font-face {
-    font-family: EuroStyle_normal;
-    src: url('fonts/EuroStyle\ Normal.ttf');
-  }
-
-  font-family: eurostile !important;
-  $font-family-ios-base: "eurostile";
-  $font-family-md-base:"eurostile";
-  $font-family-wp-base:"eurostile";
+  font-family: "Eurostile" !important;
 
   .list-header-ios {
     text-transform: none !important
@@ -23,18 +10,20 @@ page-leave {
     background-color: #F5F5F5 !important;
   }
 
-  ion-col {
-    width: 33%;
+  ion-item ion-label {
+    color: #666666;
   }
 
   .tab {
     margin-top: 50px;
     position: relative;
+    font-size: 18px !important;
 
     button {
       width: 50%;
       position: absolute;
-      bottom: 0
+      bottom: 0;
+      font-size: 16px !important;
     }
 
     .active {
@@ -45,7 +34,8 @@ page-leave {
 
     .non-active {
       height: 30px;
-      background-color: #DDDDDD
+      background-color: #DDDDDD;
+      color: #666666;
     }
   }
 
@@ -55,9 +45,22 @@ page-leave {
 
   ion-datetime {
     border: 1px solid saddlebrown;
-    width: 40%;
+    width: 45%;
     border-radius: 5px;
 
+  }
+
+  .camera {
+    color: #C9C9C9;
+
+    ion-icon {
+      float: right;
+      font-size: 50px;
+    }
+  }
+
+  .status {
+    font-size: 18px;
   }
 
   ion-select {
@@ -92,4 +95,5 @@ page-leave {
     background-color: #80B6D7 !important;
     font-size: 18px;
   }
+
 }

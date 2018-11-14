@@ -42,11 +42,27 @@ page-profile {
     }
     
     .content{
-        ion-item{
-            line-height: 150%;
+      ion-item{
+        line-height: 150%;
         }
     }
     .toolbar-background{
         background-color:#006699;
     }
+
+
+  .toolbar-title-ios {
+    color: white !important
+  }
+
+  .toolbar-title-md {
+    color: white
+  }
+
+  .header-ios .toolbar-ios:last-child .toolbar-background-ios {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+  }
 }
