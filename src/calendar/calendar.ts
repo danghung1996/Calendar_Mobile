@@ -6,15 +6,15 @@ import * as _ from "lodash";
   selector: "ion-calendar",
   template: `
     <ion-grid>
-        <ion-row justify-content-center>
+        <ion-row (swipeleft)="forward()" (swiperight)="back()" class="select-month" justify-content-center>
             <ion-col col-auto (click)="back()">
-                <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+                <ion-icon ios="ios-arrow-round-back-outline" name="md-arrow-back"></ion-icon>
             </ion-col>
             <ion-col col-auto>
                 <div>{{displayYear}} - {{displayMonth + 1 | monthName:lang}}</div>
             </ion-col>
             <ion-col col-auto (click)="forward()">
-                <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+                <ion-icon ios="ios-arrow-round-forward-outline" md="md-arrow-forward"></ion-icon>
             </ion-col>
         </ion-row>
 

@@ -6,11 +6,12 @@ page-attendance {
   ion-content ion-list-header button {
     color: white !important;
     background-color: #296291 !important;
-    margin-top: 1px !important
+    margin-top: 1px !important;
+    font-weight: bold !important;
   }
 
   .list-header-ios {
-    text-transform: none !important
+    text-transform: none !important;
   }
 
   .text-end {
@@ -21,15 +22,56 @@ page-attendance {
     background: url('../../assets/imgs/checkout.png') no-repeat center;
     background-size: cover;
     height: 30px;
-    color: white
+    color: white;
+    font-weight: bold;
   }
 
+  .checkout-time {
+    text-align: end;
+    font-size: 28px;
+    color: #C2C2C2;
+  }
+
+  .checkin-time {
+    text-align: end;
+    color: #64CDCF;
+    font-size: 28px;
+  }
+  
   .checkin {
     background: url('../../assets/imgs/chekin.png') no-repeat center;
     background-size: cover;
     height: 30px;
     color: white;
+    font-weight: bold;
+  }
+  .month{
+    color: #4197C7;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .toolbar-background {
+    background-color: #006699;
+    color: white;
   }
 
+  .toolbar-title-ios {
+    color: white !important;
+    // font-family: "EuroStyleNormal" !important;
+  }
+
+  .toolbar-title-md {
+    color: white
+  }
+  .attenden{
+    line-height: 32px;
+    color: #666666;
+    div{
+      height: 32px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: 5px;
+    }
+  }
 
 }

@@ -7,6 +7,15 @@ ion-calendar {
     font-size: 1rem;
     color: #666;
   }
+  .select-month{
+    color: #666666;
+    font-size: 22px;
+    ion-col{
+      ion-icon{
+        font-size: 35px;
+      }
+    }
+  }
   .calendar-row {
     &:last-child {
       border-bottom: 1px solid #eee;
@@ -21,6 +30,7 @@ ion-calendar {
       &:last-child {
         border-right: 1px solid #eee;
       }
+      color: #666666;
     }
     .not-this-month {
       color: #989898;

@@ -64,7 +64,7 @@
       <ion-list-header class="remark">
         Attachment (optional)</ion-list-header>
       <ion-item no-lines>
-        <ion-label (click)="takePicture()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
+        <ion-label class="camera" (click)="takePicture()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
         </ion-label>
       </ion-item>
       <img [src]="base64Image" *ngIf="base64Image" />
@@ -76,7 +76,7 @@
     </ion-list>
   </div>
   <div *ngIf="!tab_show">
-    <ion-grid>
+    <ion-grid class="status">
       <ion-row>
         <ion-col col-4>Applied on</ion-col>
         <ion-col col-5>Type</ion-col>
@@ -90,8 +90,16 @@
         </ion-col>
       </ion-row>
       <ion-row *ngIf="showleave">
-        <ion-col col-12>PENDING <span style="float:right">56$</span></ion-col>
-        <ion-col style="background-color:#8AB1C9" col-12>Last Update <span style="float:right">07 Nov 2018</span></ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>PENDING</ion-col>
+            <ion-col col-6>56$</ion-col>
+          </ion-row>
+          <ion-row style="background-color:#8AB1C9">
+            <ion-col col-6>Last Update </ion-col>
+            <ion-col col-6>07 Nov 2018</ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-row>
     </ion-grid>
   </div>

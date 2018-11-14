@@ -1,18 +1,5 @@
 page-claim {
-  @font-face {
-    font-family: eurostile;
-    src: url('fonts/eurostile.TTF');
-  }
-
-  @font-face {
-    font-family: EuroStyle_normal;
-    src: url('fonts/EuroStyle\ Normal.ttf');
-  }
-
-  font-family: eurostile !important;
-  $font-family-ios-base: "eurostile";
-  $font-family-md-base:"eurostile";
-  $font-family-wp-base:"eurostile";
+  font-family: "Eurostile" !important;
 
   .list-header-ios {
     text-transform: none !important
@@ -37,7 +24,8 @@ page-claim {
     button {
       width: 50%;
       position: absolute;
-      bottom: 0
+      bottom: 0;
+      font-size: 16px !important;
     }
 
     .active {
@@ -67,6 +55,19 @@ page-claim {
     margin-left: 10px;
     border: 1px solid saddlebrown;
     border-radius: 5px;
+  }
+
+  .camera {
+    color: #C9C9C9;
+
+    ion-icon {
+      float: right;
+      font-size: 50px;
+    }
+  }
+
+  .status {
+    font-size: 18px;
   }
 
   .toolbar-background {

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button style="color:white" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Attendance</ion-title>
@@ -61,16 +61,16 @@
       My Attendance
     </button>
     <ion-item *ngIf="showAtenden" [@enterAnimation] ion-item detail text-wrap>
-      <div>
+      <div class="attenden">
         <div style="text-align:end;background-color:#EEEEEE">20 Sept 2018</div>
         <div class="checkout"><span>Checkout</span>
         </div>
-        <div style="text-align:end;"> 14:00:00 PM</div>
+        <div class="checkout-time"> 14:00:00 PM</div>
         <div class="checkin">
           <span>Check In</span>
           <span style="float:right">Ontime</span>
         </div>
-        <div style="text-align:end;"> 14:00:00 PM</div>
+        <div class="checkin-time"> 14:00:00 PM</div>
       </div>
 
     </ion-item>
@@ -83,8 +83,8 @@
       <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#4397C7'"
         [innerStrokeColor]="'#4397C7'" [responsive]=true [animation]="false" [toFixed]=2 [showSubtitle]="false"
         [animationDuration]="0"></circle-progress>
-      <h2 class="text-end">SEPTEMBER</h2>
-      <h4 class="text-end">Monthly Attendence</h4>
+      <h2 class="text-end month">SEPTEMBER</h2>
+      <h4 class="text-end month">Monthly Attendence</h4>
       <h5 class="text-end">As of 22 September 2018</h5>
       <ion-grid>
         <ion-row style="color:white;background-color:#296291;text-align:center">

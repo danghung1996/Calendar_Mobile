@@ -18,7 +18,10 @@ export class ProfilePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
   	this.menuCtrl.enable(true,'myMenu');
   }
-
+  tapEvent(event){
+    console.log(event);
+    
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
