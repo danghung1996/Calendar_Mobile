@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+
 import { Storage } from '@ionic/storage';
 import { LoginProvider } from '../../providers/login/loginAuth'
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms'
+import { AttendancePage } from '../attendance/attendance';
 
 
 @IonicPage()
@@ -40,7 +41,7 @@ export class LoginPage {
   isLoginAlready() {
     this._loginService.auth().then(data => {
       if(data){
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(AttendancePage);
       }
     })
   }
@@ -49,7 +50,7 @@ export class LoginPage {
     
   }
   loginConfirm() {
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.setRoot(AttendancePage);
   }
   login() {
     if (!this.formGroup.valid) {
