@@ -16,7 +16,7 @@
 
 <ion-content>
   <!-- check-in -->
-  <div *ngIf="false">
+  <div *ngIf="isCheckIn">
     <!-- start check-in -->
     <div *ngIf="isCheckInStart" padding>
       <div class="currentTime">
@@ -193,7 +193,7 @@
     </div>
   </div>
   <!-- is Error   -->
-  <div *ngIf="true">
+  <div *ngIf="isError">
     <div class="wrapper header-error">
       Operation Fail!
     </div>

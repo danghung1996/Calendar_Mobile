@@ -6,6 +6,7 @@ import { LoginProvider } from '../../providers/login/loginAuth'
 import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms'
 import { AttendancePage } from '../attendance/attendance';
+import { ProfilePage } from '../profile/profile';
 
 
 @IonicPage()
@@ -57,29 +58,24 @@ export class LoginPage {
     
   }
   loginConfirm() {
-    this.navCtrl.setRoot(AttendancePage);
+    this.navCtrl.setRoot(ProfilePage);
   }
   login() {
     if (!this.formGroup.valid) {
       console.log("error");
       return
     } else {
-      // this._storage.set("token", "123123123123")
-      // this.isLogged = true;
       const loader = this.loadingCtrl.create({
         content: "Login Authentication",
       });
       loader.present();
       this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
         data => {
-          console.log("vao roi");
-          
           var token = data['token']
           if (token !== undefined && token !== null) {
             this._storage.set("token", token)
             loader.dismiss();
             console.log(token);
-  
           }
           this.isLogged = true;
         }, error => {

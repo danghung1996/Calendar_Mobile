@@ -23,7 +23,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LoginProvider } from '../providers/login/loginAuth';
 import { HttpModule } from '@angular/http'; 
 import { IonicStorageModule } from '@ionic/storage';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProfileProvider } from '../providers/profile/ProfileSerivce';
 import { HttpClientProvider } from '../providers/http-client/http-client';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
@@ -72,7 +72,7 @@ import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor'
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProfileProvider,
     HttpClientProvider,
-    AuthInterceptor,
+
   ]
 })
 export class AppModule { }

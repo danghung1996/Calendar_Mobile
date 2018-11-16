@@ -19,7 +19,7 @@
 <ion-content padding>
   <ion-item style="margin-top:5px" no-lines>
     <ion-label>Approver</ion-label>
-    <ion-label>Steven Chong</ion-label>
+    <ion-label style="font-weight: bolder">Steven Chong</ion-label>
   </ion-item>
   <button class="leaveavai" ion-item (click)="show = !show" detail-none>
     <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show"></ion-icon>
@@ -73,8 +73,10 @@
       <ion-label>Application date: 20 sept 2018</ion-label>
     </ion-item>
 
-    <ion-list radio-group [formControl]="leavetype" >
+    <ion-list radio-group [formControl]="leavetype">
       <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave">
+          <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
+          <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
         Type of leave
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
@@ -112,16 +114,22 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark">
-        Remark</ion-list-header>
-      <ion-item no-lines>
+      <ion-list-header class="remark" (click)="showRemark()">
+        Remark
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>   
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>     
+      </ion-list-header>
+      <ion-item no-lines *ngIf="isRemark">
         <ion-input [formControl]="remark" placeholder="Input remark" type="text" value=""></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark">
-        Attachment (optional)</ion-list-header>
-      <ion-item no-lines>
+      <ion-list-header class="remark" (click)="showAttachment()">
+        Attachment (optional)
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>   
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>     
+      </ion-list-header>
+      <ion-item no-lines *ngIf="isAttachment">
         <ion-label class="camera" (click)="presentActionSheet()">Open Camera
           <ion-icon name="md-camera"></ion-icon>
         </ion-label>

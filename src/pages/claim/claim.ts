@@ -17,6 +17,8 @@ import { Camera } from '@ionic-native/camera';
 })
 export class ClaimPage {
   @ViewChild('fileInput') fileInput;
+  isRemark:boolean = false;
+  isAttachment:boolean = false;
   show: boolean = false;
   tab_show = true;
   show_type_of_leave = false;
@@ -29,6 +31,18 @@ export class ClaimPage {
   toDate = '2018-12-29'
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,private camera: Camera) {
   	this.menuCtrl.enable(true,'myMenu');
+  }
+  showRemark(){
+    if(this.isRemark == true){
+      return this.isRemark = false;
+    }
+    this.isRemark = true;
+  }
+  showAttachment(){
+    if(this.isAttachment == true){
+      return this.isAttachment = false;
+    }
+    this.isAttachment = true;
   }
   takePicture() {
     if (Camera['installed']()) {

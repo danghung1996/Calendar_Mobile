@@ -20,9 +20,12 @@ export class LeavePage {
   gaming = 'am'
   showleave = false;
   show_datepickder = false;
+  isRemark:boolean = false;
+  isAttachment:boolean = false;
   type_of_leave = ['Annual', 'Time of in lieu', 'Medical', 'Maternity', 'Compassionate']
   public base64Image: string;
   form_leave: FormGroup;
+
   leavetype = new FormControl('', Validators.required);
   fromdate = new FormControl('', Validators.required);
   todate = new FormControl('', Validators.required);
@@ -47,6 +50,20 @@ export class LeavePage {
       attachment: this.attachment
     })
   }
+
+  showRemark(){
+    if(this.isRemark == true){
+      return this.isRemark = false;
+    }
+    this.isRemark = true;
+  }
+  showAttachment(){
+    if(this.isAttachment == true){
+      return this.isAttachment = false;
+    }
+    this.isAttachment = true;
+  }
+
   takePhoto(sourceType) {
     const options: CameraOptions = {
       quality: 90,

@@ -19,7 +19,7 @@ import firebase from 'firebase';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProfilePage;
+  rootPage: any = LeavePage;
 
   pages: Array<{ icon: string, title: string, component: any }>;
 

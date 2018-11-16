@@ -19,7 +19,7 @@
 <ion-content padding>
   <ion-item style="margin-top:5px" no-lines>
     <ion-label>Approver</ion-label>
-    <ion-label>Steven Chong</ion-label>
+    <ion-label style="font-weight: bolder">Steven Chong</ion-label>
   </ion-item>
   <button class="leaveavai" ion-item (click)="show = !show" detail-none>
     Total successful claims this year <span style="color:#EB4997;float:right">$42.22</span>
@@ -35,6 +35,8 @@
     <ion-list radio-group>
       <ion-list-header class="typeofclaim" (click)="show_type_of_leave = !show_type_of_leave">
         Type of claim
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
+          <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
         <ion-item *ngFor="let item of type_of_leave;let i = index" no-lines>
@@ -46,6 +48,8 @@
     <ion-list>
       <ion-list-header class="typeofclaim" (click)="show_type_of_leave = !show_type_of_leave">
         Amount
+        <ion-icon item-right name="md-arrow-dropdown"></ion-icon>
+          <!-- <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon> -->
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
         <ion-item no-lines>
@@ -54,16 +58,24 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark">
-        Remark</ion-list-header>
-      <ion-item no-lines>
+      <ion-list-header class="remark" (click)="showRemark()">
+        Remark
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>   
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>      
+
+      </ion-list-header>
+      <ion-item no-lines *ngIf="isRemark">
         <ion-input placeholder="Input remark" type="text" value=""></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark">
-        Attachment (optional)</ion-list-header>
-      <ion-item no-lines>
+      <ion-list-header class="remark" (click)="showAttachment()">
+        Attachment (optional)
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>   
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>      
+
+      </ion-list-header>
+      <ion-item no-lines *ngIf="isAttachment">
         <ion-label class="camera" (click)="takePicture()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
         </ion-label>
       </ion-item>
@@ -72,7 +84,9 @@
     </ion-list>
     <ion-list>
       <ion-list-header class="submit">
-        Submit claim</ion-list-header>
+        Submit claim
+        <ion-icon item-right name="ios-arrow-forward"></ion-icon>
+      </ion-list-header>
     </ion-list>
   </div>
   <div *ngIf="!tab_show">
