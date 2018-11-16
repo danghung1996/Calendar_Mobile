@@ -62,7 +62,7 @@
 
   </ion-item>
   <div style="text-align: center;color:white">
-    <div (click)="show = !show" style="background-color:#4397C7;border-radius:0px 0px 4px 4px;width: 40%;margin: 0 auto;font-size: 16px;padding-bottom: 20px;">Details</div>
+    <div (click)="show = !show" style="background-color:#4397C7;border-radius:0px 0px 4px 4px;width: 40%;margin: 0 auto;font-size: 16px;height: 28px;line-height: 25px;">Details</div>
   </div>
   <div class="tab">
     <button (click)="tab_show = true" [ngClass]="tab_show ? 'active': 'non-active'">Apply</button>
@@ -86,12 +86,12 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave">
+      <ion-list-header class="typeofleave" (click)="show_datepickder = !show_datepickder">
         Date
         <ion-icon item-right name="md-calendar"></ion-icon>
       </ion-list-header>
-      <div *ngIf="show_type_of_leave">
-        <ion-item no-lines>
+      <div *ngIf="show_datepickder">
+        <ion-item style="margin-top:10px;" no-lines>
           <ion-label>Start</ion-label>
           <ion-datetime [formControl]="fromdate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [max]="2099-31-12"></ion-datetime>
           <ion-select [(ngModel)]="gaming" interface="popover">
@@ -99,7 +99,7 @@
             <ion-option value="pm">PM</ion-option>
           </ion-select>
         </ion-item>
-        <ion-item no-lines>
+        <ion-item style="margin-top:10px;" no-lines>
           <ion-label>End </ion-label>
           <ion-datetime [formControl]="todate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [min]="fromdate.value ? fromdate.value :2016 " [max]="2099-31-12"></ion-datetime>
           <ion-select [(ngModel)]="gaming" interface="popover">
@@ -129,9 +129,9 @@
       <img [src]="base64Image" *ngIf="base64Image" />
 
     </ion-list>
-    <ion-list>
+    <ion-list >
       <ion-list-header class="typeofleave">
-        <button (click)="logForm()" type="submit">Submit</button>
+        <ion-label (click)="logForm()" type="submit">Submit</ion-label>
         <ion-icon item-right name="ios-arrow-forward"></ion-icon>
       </ion-list-header>
     </ion-list>
@@ -143,7 +143,7 @@
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
       </ion-row>
-      <ion-row (click)="showleave = !showleave" style="background-color:#F4F4F4;height:30px;">
+      <ion-row (click)="showleave = !showleave" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
         <ion-col col-4>07 Nov</ion-col>
         <ion-col col-5>Time of in lieu</ion-col>
         <ion-col col-3>

@@ -11,7 +11,8 @@ import { CheckinPage } from '../pages/checkin/checkin';
 import { LeavePage } from '../pages/leave/leave';
 import { ClaimPage } from '../pages/claim/claim';
 import { Storage } from '@ionic/storage';
-import { LoginProvider } from '../providers/login/loginAuth'
+import { LoginProvider } from '../providers/login/loginAuth';
+import firebase from 'firebase';
 @Component({
   templateUrl: 'app.html'
 })
@@ -57,6 +58,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      const firebaseConfig = {
+        apiKey: "AIzaSyBl8RwUv3M1ItwoO-0tPktUcUxi9swmLSI",
+        authDomain: "calendarmobile-b223c.firebaseapp.com",
+        databaseURL: "https://calendarmobile-b223c.firebaseio.com",
+        projectId: "calendarmobile-b223c",
+        storageBucket: "calendarmobile-b223c.appspot.com",
+        messagingSenderId: "970963003093"
+      };
+      firebase.initializeApp(firebaseConfig);
     });
   }
   openPage(page) {
