@@ -24,6 +24,7 @@ import { LoginProvider } from '../providers/login/loginAuth';
 import { HttpModule } from '@angular/http'; 
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileProvider } from '../providers/profile/ProfileSerivce';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginProvider,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ProfileProvider,
   ]
 })
 export class AppModule { }

@@ -44,7 +44,7 @@ export class LoginPage {
         this.navCtrl.setRoot(AttendancePage);
       }
     })
-  }
+  } 
 
   ionViewDidLoad() {
     
@@ -57,24 +57,26 @@ export class LoginPage {
       console.log("error");
       return
     } else {
-      this._storage.set("token", "123123123123")
-      this.isLogged = true;
+      // this._storage.set("token", "123123123123")
+      // this.isLogged = true;
+      this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
+        data => {
+          console.log("vao roi");
+          
+          var token = data['token']
+          if (token !== undefined && token !== null) {
+            this._storage.set("token", token)
+            console.log(token);
+  
+          }
+          this.isLogged = true;
+        }, error => {
+          console.log(error)
+        }
+      )
     }
 
-    // this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
-    //   data => {
-    //     console.log("vao roi");
-    //     var token = data['token']
-    //     if (token !== undefined && token !== null) {
-    //       this._storage.set("token", token)
-    //       console.log(token);
-
-    //     }
-    //     this.isLogged = true;
-    //   }, error => {
-    //     console.log(error)
-    //   }
-    // )
+   
     // console.log(this.username+"--"+this.password+"---"+this.cucumber);
     // if(this.formGroup.get("email") === '123'){
 
