@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileProvider } from '../providers/profile/ProfileSerivce';
 import { HttpClientProvider } from '../providers/http-client/http-client';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
+import { ApplyleaveProvider } from '../providers/applyleave/applyleave';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor'
     ProfileProvider,
     HttpClientProvider,
     AuthInterceptor,
+    ApplyleaveProvider,
   ]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@ import { LoginProvider } from '../../providers/login/loginAuth'
 import { LoginPage } from '../login/login';
 import firebase from 'firebase';
 import { LoadingController } from 'ionic-angular';
+import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 @IonicPage()
 @Component({
   selector: 'page-leave',
@@ -36,15 +37,16 @@ export class LeavePage {
     public menuCtrl: MenuController,
     private camera: Camera,
     public loginService: LoginProvider,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    private applyleaveProvider: ApplyleaveProvider
   ) {
     this.menuCtrl.enable(true, 'myMenu');
     this.form_leave = this.formBuilder.group({
-      leavetype: this.leavetype,
-      fromdate: this.fromdate,
-      todate: this.todate,
-      remark: this.remark,
-      attachment: this.attachment
+      leave_type: this.leavetype,
+      leave_from_date: this.fromdate,
+      leave_to_date: this.todate,
+      leave_remarks: this.remark,
+      image: this.attachment
     })
   }
   takePhoto(sourceType) {
@@ -93,30 +95,42 @@ export class LeavePage {
     return 'url(' + this.base64Image + ')'
   }
   async logForm() {
-    // console.log(this.form_leave.value);
-    if (this.base64Image) {
-      await this.uploadImage();
-      await console.log(this.form_leave.value);
+    if (this.form_leave.valid) {
+      let loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: 'Loading Please Wait...'
+      });
+      loading.present();
+      if (this.base64Image) {
+        await this.uploadImage().then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((url) => {
+            this.form_leave.patchValue({ attachment: url })
+            console.log(this.form_leave.value);
+            // this.applyleaveProvider.myformPost(this.form_leave.value);
+            loading.dismiss();
+          })
+        });
+      }
     }
   }
   uploadImage() {
-    let loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: 'Loading Please Wait...'
-    });
-    loading.present();
+
     let storageRef = firebase.storage().ref();
     // Create a timestamp as filename
     const filename = Math.floor(Date.now() / 1000);
     // Create a reference to 'images/todays-date.jpg'
     const imageRef = storageRef.child(`images/${filename}.jpg`);
-    return imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL).then((snapshot) => {
-      snapshot.ref.getDownloadURL().then((url) => {
-        this.form_leave.patchValue({ attachment: url })
-        console.log(this.form_leave.value);
-        loading.dismiss();
-      })
-    });
+    return imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL)
+    // .then((snapshot) => {
+    //   snapshot.ref.getDownloadURL().then((url) => {
+    //     this.form_leave.patchValue({ attachment: url })
+    //     console.log(this.form_leave.value);
+    //     loading.dismiss();
+    //   })
+    // });
+  }
+  onClick() {
+    this.applyleaveProvider.myformPost(1);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeavePage');
