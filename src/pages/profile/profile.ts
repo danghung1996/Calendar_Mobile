@@ -29,7 +29,7 @@ export class ProfilePage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
-    console.log(this.profileService.getUserProfile());
+    this.profileService.getUserProfile();
     
   }
 

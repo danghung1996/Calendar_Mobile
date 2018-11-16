@@ -12,22 +12,23 @@ import { Profile } from '../../Model/Profile';
 */
 @Injectable()
 export class ProfileProvider {
-  urlGetProfile: string = "http://10.0.105.20:1111/api/employee-data";
+  urlGetProfile: string = "http://10.0.96.26:1111/api/employee-data";
   constructor(public httpClient: HttpClient,
     private _auth: LoginProvider) {
     console.log('Hello ProfileProvider Provider');
   }
   getUserProfile() {
-    console.log(this.buildHeaer());
-    let headers = new Headers(this.buildHeaer());
-    this.httpClient.get(this.urlGetProfile)
+    this.httpClient.get(this.urlGetProfile).subscribe(data => {
+      console.log(data);
+      
+    })
   }
    buildHeaer() {
     let headers = new Headers({
       'Content-Type': 'application/json',
       'withCredentials': 'true'
     });
-   headers.append('Authorization', 'Basic ' + this._auth.auth());
+   headers.append('Authorization', 'Basic ' + this._auth.tokenAuth());
     return headers;
   }
 

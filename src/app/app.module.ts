@@ -26,6 +26,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileProvider } from '../providers/profile/ProfileSerivce';
 import { HttpClientProvider } from '../providers/http-client/http-client';
+import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { HttpClientProvider } from '../providers/http-client/http-client';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProfileProvider,
     HttpClientProvider,
+    AuthInterceptor,
   ]
 })
 export class AppModule { }

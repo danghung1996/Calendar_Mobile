@@ -29,7 +29,7 @@ export class LoginProvider {
       "password": password
     })
   }
-  async auth(){
+  async tokenAuth(){
    await this.getToken();
    console.log(this.token);
    // this.token = token form THIS class

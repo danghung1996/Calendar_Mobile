@@ -40,7 +40,7 @@ export class LoginPage {
     this.isLoginAlready()
   }
   isLoginAlready() {
-    this._loginService.auth().then(data => {
+    this._loginService.tokenAuth().then(data => {
       if(data){
         this.navCtrl.setRoot(AttendancePage);
       }

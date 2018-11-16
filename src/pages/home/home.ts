@@ -13,7 +13,7 @@ export class HomePage {
     public menuCtrl: MenuController,
     public loginService: LoginProvider) {
     this.menuCtrl.enable(true,'myMenu');
-   this.loginService.auth();
+   this.loginService.tokenAuth();
   }
   
 

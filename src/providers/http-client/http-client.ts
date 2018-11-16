@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import 'rxjs/add/operator/map';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 
@@ -38,7 +39,7 @@ export class HttpClientProvider {
 
   // get(url) {
   //   return Observable
-  //     .fromPromise(this.buildHeaders())
+  //     .fromPromise(this.buildHeaders()).pipe()
   //     .switchMap((headers) => this.http.get(url, { headers: headers }));
   // }
 

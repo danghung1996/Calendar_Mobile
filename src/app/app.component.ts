@@ -18,7 +18,7 @@ import { LoginProvider } from '../providers/login/loginAuth'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = CheckinPage;
+  rootPage: any = ProfilePage;
 
   pages: Array<{ icon: string, title: string, component: any }>;
 
@@ -67,7 +67,7 @@ export class MyApp {
       this.storage.remove("token");
     }
 
-    this._auth.auth().then(data => {
+    this._auth.tokenAuth().then(data => {
       if (!data) {
         this.authLogin();
         this.nav.setRoot(LoginPage);
