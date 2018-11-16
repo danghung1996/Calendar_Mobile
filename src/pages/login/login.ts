@@ -61,29 +61,30 @@ export class LoginPage {
     this.navCtrl.setRoot(ProfilePage);
   }
   login() {
-    if (!this.formGroup.valid) {
-      console.log("error");
-      return
-    } else {
-      const loader = this.loadingCtrl.create({
-        content: "Login Authentication",
-      });
-      loader.present();
-      this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
-        data => {
-          var token = data['token']
-          if (token !== undefined && token !== null) {
-            this._storage.set("token", token)
-            loader.dismiss();
-            console.log(token);
-          }
-          this.isLogged = true;
-        }, error => {
-          console.log(error)
-          loader.dismiss();
-        }
-      )
-    }
+    this.isLogged = true;
+    // if (!this.formGroup.valid) {
+    //   console.log("error");
+    //   return
+    // } else {
+    //   const loader = this.loadingCtrl.create({
+    //     content: "Login Authentication",
+    //   });
+    //   loader.present();
+    //   this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
+    //     data => {
+    //       var token = data['token']
+    //       if (token !== undefined && token !== null) {
+    //         this._storage.set("token", token)
+    //         loader.dismiss();
+    //         console.log(token);
+    //       }
+    //       this.isLogged = true;
+    //     }, error => {
+    //       console.log(error)
+    //       loader.dismiss();
+    //     }
+    //   )
+    // }
 
    
     // console.log(this.username+"--"+this.password+"---"+this.cucumber);

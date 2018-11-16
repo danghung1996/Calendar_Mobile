@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import {ProfileProvider} from '../../providers/profile/ProfileSerivce'
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -20,13 +21,11 @@ export class ProfilePage {
     public navCtrl: NavController,
      public navParams: NavParams,
       public menuCtrl: MenuController,
-      public profileService: ProfileProvider) {
+      public profileService: ProfileProvider,
+      public apple:ApplyleaveProvider) {
   	this.menuCtrl.enable(true,'myMenu');
   }
-  tapEvent(event){
-    console.log(event);
-    
-  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.profileService.getUserProfile();

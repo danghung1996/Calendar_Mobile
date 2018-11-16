@@ -19,7 +19,7 @@ import firebase from 'firebase';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LeavePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{ icon: string, title: string, component: any }>;
 
@@ -79,8 +79,9 @@ export class MyApp {
 
     this._auth.tokenAuth().then(data => {
       if (!data) {
-        this.authLogin();
-        this.nav.setRoot(LoginPage);
+        // this.authLogin();
+        this.nav.setRoot(page.component)
+        // this.nav.setRoot(LoginPage);
       } else {
         this.nav.setRoot(page.component);
       }

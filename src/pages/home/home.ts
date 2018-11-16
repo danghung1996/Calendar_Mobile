@@ -11,7 +11,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
-    public loginService: LoginProvider) {
+    public loginService: LoginProvider) { 
     this.menuCtrl.enable(true,'myMenu');
    this.loginService.tokenAuth();
   }
