@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -18,7 +18,7 @@ import { LoginProvider } from '../providers/login/loginAuth'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = CheckinPage;
 
   pages: Array<{ icon: string, title: string, component: any }>;
 
@@ -27,7 +27,8 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public storage: Storage,
-    private _auth: LoginProvider) {
+    private _auth: LoginProvider,
+    public toastCtrl: ToastController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,7 +42,15 @@ export class MyApp {
     ];
 
   }
-
+  authLogin() {
+    const toast = this.toastCtrl.create({
+      message: 'Re-try login',
+      duration: 3000,
+      cssClass: 'authLoginToast',
+      position: 'top'
+    });
+    toast.present();
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -50,10 +59,6 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-  isLoginAlready() {
-
-  }
-
   openPage(page) {
 
     // Reset the content nav to have just this page
@@ -64,6 +69,7 @@ export class MyApp {
 
     this._auth.auth().then(data => {
       if (!data) {
+        this.authLogin();
         this.nav.setRoot(LoginPage);
       } else {
         this.nav.setRoot(page.component);

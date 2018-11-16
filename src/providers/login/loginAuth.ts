@@ -26,8 +26,10 @@ export class LoginProvider {
 
 
 
+
+
   login(email: string, password: string) {
-    return this.http.post(this.urlLogin, {
+    return this.http.post(this.urlLogin,{
       "email": email,
       "password": password
     })
@@ -35,6 +37,7 @@ export class LoginProvider {
   async auth(){
    await this.getToken();
    console.log(this.token);
+   // this.token = token form THIS class
    if(this.token !== null && this.token !==undefined){
      return this.token;
    }
