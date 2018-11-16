@@ -45,8 +45,8 @@ export class MyApp {
   authLogin() {
     const toast = this.toastCtrl.create({
       message: 'Re-try login',
-      duration: 3000,
-      cssClass: 'authLoginToast',
+      duration: 1500,
+      cssClass: 'success',
       position: 'top'
     });
     toast.present();
