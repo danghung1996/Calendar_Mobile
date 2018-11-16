@@ -17,6 +17,7 @@ export class LoginPage {
   formGroup: FormGroup;
   isLogged: boolean = false;
   isFailed: boolean = false;
+  isLoading:boolean = false;
   listCompany: string[] = [
     "Company A", "Company B", "Company C"
   ]
@@ -39,12 +40,18 @@ export class LoginPage {
     this.isLoginAlready()
   }
   isLoginAlready() {
-    this._loginService.auth().then(data => {
+    this._loginService.tokenAuth().then(data => {
       if(data){
         this.navCtrl.setRoot(AttendancePage);
       }
     })
   } 
+  presentLoading(mess: string) {
+      const loader = this.loadingCtrl.create({
+        content: mess,
+      });
+      loader.present();
+  }
 
   ionViewDidLoad() {
     
@@ -59,6 +66,10 @@ export class LoginPage {
     } else {
       // this._storage.set("token", "123123123123")
       // this.isLogged = true;
+      const loader = this.loadingCtrl.create({
+        content: "Login Authentication",
+      });
+      loader.present();
       this._loginService.login("thangnv@gmail.com", "thangpro123").subscribe(
         data => {
           console.log("vao roi");
@@ -66,12 +77,14 @@ export class LoginPage {
           var token = data['token']
           if (token !== undefined && token !== null) {
             this._storage.set("token", token)
+            loader.dismiss();
             console.log(token);
   
           }
           this.isLogged = true;
         }, error => {
           console.log(error)
+          loader.dismiss();
         }
       )
     }

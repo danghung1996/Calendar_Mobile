@@ -23,6 +23,11 @@
     height: 100%;
     float: left;
     margin-left: 3px
+}   
+ion-toast.success .toast-wrapper {
+    background-color: orangered;
+    color:white;
+    font-size: 20px;
 }
 .userName{
     width: 75%;

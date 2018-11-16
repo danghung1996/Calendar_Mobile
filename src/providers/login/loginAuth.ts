@@ -23,18 +23,13 @@ export class LoginProvider {
   ) {
     console.log('Hello LoginProvider Provider');
   }
-
-
-
-
-
   login(email: string, password: string) {
     return this.http.post(this.urlLogin,{
       "email": email,
       "password": password
     })
   }
-  async auth(){
+  async tokenAuth(){
    await this.getToken();
    console.log(this.token);
    // this.token = token form THIS class

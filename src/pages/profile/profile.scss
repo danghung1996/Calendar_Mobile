@@ -8,14 +8,26 @@ page-profile {
         background-size: cover;
         
     }
-    .avataImage{
+    .avataGroup{
         background-repeat: no-repeat,repeat;
         background-size: cover; 
+        border-radius: 10px;
+        width: 100%;
+    }
+    .avataElement{
+        width: 180px;
+        height: 180px;
+        position: absolute;
+        top: 0px;
+        background-color: red;
+        background-repeat: no-repeat,repeat;
+        background-size: cover; 
+        border-radius: 5px;
     }
     .avata{
         background-color: inherit;
-        width: 200px; 
-        height:200px;
+        width: 180px; 
+        height:205px;
         border-radius: 5px;
         clear: both;
         position: absolute;
@@ -23,12 +35,22 @@ page-profile {
         z-index: 10;
         right:25%;
         left:50%;
-        margin-left:-100px;
+        margin-left:-90px;
     }
+
     @media only all and (max-width:320px) {
-        .avata{
-            background-color: inherit;
-        width: 160px; 
+        .avataElement{
+            width: 135px;
+            height: 135px;
+            border-radius: 5px;
+        }
+        .avataGroup{
+            width: 135px !important; 
+            height:160px;
+        }
+       .avata{
+        background-color: inherit;
+        width: 135px; 
         height: 160px;
         border-radius: 5px;
         clear: both;
@@ -37,9 +59,10 @@ page-profile {
         z-index: 10;
         right:25%;
         left:50%;
-        margin-left:-80px;
+        margin-left:-67px;
         }
     }
+
     
     .content{
       ion-item{
