@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LoginProvider } from '../../providers/login/loginAuth'
 import { LoginPage } from '../login/login';
 
@@ -21,36 +21,27 @@ export class LeavePage {
   showleave = false;
   type_of_leave = ['Annual', 'Time of in lieu', 'Medical', 'Maternity', 'Compassionate']
   public base64Image: string;
-  form: FormGroup;
-  fromdate = '2018-12-20'
-  toDate = '2018-12-29'
+  form_leave: FormGroup;
+  leavetype = new FormControl('',Validators.required);
+  fromdate =  new FormControl('',Validators.required);
+  todate =  new FormControl('',Validators.required);
+  remark = new FormControl('',Validators.required);
+  
   constructor(public navCtrl: NavController,
-    formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     public navParams: NavParams,
     public menuCtrl: MenuController,
     private camera: Camera,
     public loginService: LoginProvider,
     public actionSheetCtrl: ActionSheetController) {
     this.menuCtrl.enable(true, 'myMenu');
-    this.form = formBuilder.group({
-      profilePic: [''],
-    });
-    
-  }
-  takePicture() {
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
-      }).then((data) => {
-        this.base64Image = 'data:image/jpg;base64,' + data
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      this.fileInput.nativeElement.click();
-    }
+    this.form_leave = this.formBuilder.group({
+      leavetype: this.leavetype,
+      fromdate: this.fromdate,
+      todate: this.todate,
+      remark: this.remark,
+      image: new FormControl('')
+    })
   }
   takePhoto(sourceType) {
     const options: CameraOptions = {
@@ -64,18 +55,10 @@ export class LeavePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.form_leave.patchValue({image:imageData})
     }, (err) => {
       // Handle error
     });
-  }
-  processWebImage(event) {
-    let reader = new FileReader();
-    reader.onload = (readerEvent) => {
-      let imageData = (readerEvent.target as any).result;
-      this.base64Image = imageData;
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
   }
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
@@ -104,6 +87,9 @@ export class LeavePage {
   }
   getProfileImageStyle() {
     return 'url(' + this.base64Image + ')'
+  }
+  logForm(){
+    console.log(this.form_leave.value);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeavePage');
