@@ -22,6 +22,7 @@ export class ClaimPage {
   show: boolean = false;
   tab_show = true;
   show_type_of_leave = false;
+  show_type_of_claim = false;
   gaming = 'am'
   showleave = false;
   type_of_leave = ['Entertainment', 'Medical', 'Traveling', 'Miscellaneous']

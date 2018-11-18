@@ -15,7 +15,7 @@ import 'rxjs/add/observable/fromPromise';
 */
 @Injectable()
 export class LoginProvider {
-  urlLogin = "http://10.0.96.26:1111/api/login";
+  urlLogin = "http://202.160.1.102:8085/api/login";
   token:string = "";
   constructor(
     public http: HttpClient,

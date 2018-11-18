@@ -46,12 +46,12 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header class="typeofclaim" (click)="show_type_of_leave = !show_type_of_leave">
+      <ion-list-header class="typeofclaim" (click)="show_type_of_claim = !show_type_of_claim">
         Amount
         <ion-icon item-right name="md-arrow-dropdown"></ion-icon>
           <!-- <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon> -->
       </ion-list-header>
-      <div *ngIf="show_type_of_leave">
+      <div *ngIf="show_type_of_claim">
         <ion-item no-lines>
           <ion-input placeholder="Input Amount" type="text" value=""></ion-input>
         </ion-item>

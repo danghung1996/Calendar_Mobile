@@ -28,6 +28,8 @@ import { ProfileProvider } from '../providers/profile/ProfileSerivce';
 import { HttpClientProvider } from '../providers/http-client/http-client';
 import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor';
 import { ApplyleaveProvider } from '../providers/applyleave/applyleave';
+import { EventProvider } from '../providers/event/event';
+import { AttendaceProvider } from '../providers/attendace/attendace';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { ApplyleaveProvider } from '../providers/applyleave/applyleave';
     ProfileProvider,
     HttpClientProvider,
     ApplyleaveProvider,
+    EventProvider,
+    AttendaceProvider,
   ]
 })
 export class AppModule { }
