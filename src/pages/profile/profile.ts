@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import {ProfileProvider} from '../../providers/profile/ProfileSerivce'
+import { ProfileProvider } from '../../providers/profile/ProfileSerivce'
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 /**
@@ -17,19 +17,31 @@ import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 })
 export class ProfilePage {
 
+  employeeName: string;
+  employeeID: string;
+  department: string;
+  designnation: string;
+  supervisor: string;
+  hrMaster: string;
   constructor(
     public navCtrl: NavController,
-     public navParams: NavParams,
-      public menuCtrl: MenuController,
-      public profileService: ProfileProvider,
-      public apple:ApplyleaveProvider) {
-  	this.menuCtrl.enable(true,'myMenu');
+    public navParams: NavParams,
+    public menuCtrl: MenuController,
+    public profileService: ProfileProvider,
+    public apple: ApplyleaveProvider) {
+    this.menuCtrl.enable(true, 'myMenu');
   }
-  
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-    this.profileService.getUserProfile();
-    
+    this.profileService.getUserProfile()
+    this.profileService.getProfile.subscribe(data => {
+      this.employeeName = data['employee_name'];
+      this.employeeID = data['employee_id'];
+      this.department = data['department'];
+      this.designnation = data['designation'];
+      this.hrMaster = data['hr_master'];
+      this.supervisor = data['supervisor'];
+    })
   }
 
 }

@@ -13,6 +13,8 @@ import { ClaimPage } from '../pages/claim/claim';
 import { Storage } from '@ionic/storage';
 import { LoginProvider } from '../providers/login/loginAuth';
 import firebase from 'firebase';
+import { ProfileProvider } from '../providers/profile/ProfileSerivce'
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +22,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
+  employeeName: string = ""
   pages: Array<{ icon: string, title: string, component: any }>;
 
   constructor(
@@ -29,7 +31,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public storage: Storage,
     private _auth: LoginProvider,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    private _profileService: ProfileProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,7 +44,13 @@ export class MyApp {
       { icon: 'radio', title: 'Claim', component: ClaimPage },
       { icon: 'redo', title: 'Logout', component: LoginPage },
     ];
-
+    this.getDataProfile();
+  }
+  getDataProfile(){
+    this._profileService.getUserProfile();
+    this._profileService.getProfile.subscribe(data => {
+      this.employeeName = data['employee_name']
+    })
   }
   authLogin() {
     const toast = this.toastCtrl.create({
@@ -79,9 +88,9 @@ export class MyApp {
 
     this._auth.tokenAuth().then(data => {
       if (!data) {
-        // this.authLogin();
-        this.nav.setRoot(page.component)
-        // this.nav.setRoot(LoginPage);
+        this.authLogin();
+        // this.nav.setRoot(page.component)
+        this.nav.setRoot(LoginPage);
       } else {
         this.nav.setRoot(page.component);
       }
