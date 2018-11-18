@@ -31,16 +31,17 @@ export class LoginProvider {
   }
   async tokenAuth(){
    await this.getToken();
-   console.log(this.token);
-   // this.token = token form THIS class
    if(this.token !== null && this.token !==undefined){
      return this.token;
    }
    return false;
   }
+  async ExpiredToken(){
+
+  }
    async getToken(){
-    await this.storage.get("token").then(data => {
-      this.token = data;
+    await this.storage.get("token").then(data => {  
+      this.token = data;  
     })
   }
 

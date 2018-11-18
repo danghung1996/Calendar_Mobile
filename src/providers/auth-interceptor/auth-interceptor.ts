@@ -11,35 +11,13 @@ import { AlertController } from 'ionic-angular/umd';
   and Angular DI.
 */
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor  {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  
-    let promise = this.storage.get('token');
-   return Observable.fromPromise(promise)
-   .mergeMap(token =>{
-     let cloneReq = this.addToken(req,token);
-
-     return next.handle(cloneReq)
-   })
-  }
-  private addToken(request: HttpRequest<any>,token:any){
-    if(token){
-      let clone:HttpRequest<any>;
-      clone = request.clone({
-        setHeaders:{
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
-      return clone;
-    }
-  }
+export class AuthInterceptor {
   constructor(public http: HttpClient,
     public loginAuth: LoginProvider,
-    public storage: Storage,
-    private alertCtrl: AlertController) {
+    public storage: Storage,) {
     console.log('Hello AuthInterceptorProvider Provider');
   }
-
+  tokenExpired(){
+    
+  }
 }

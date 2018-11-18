@@ -30,6 +30,7 @@ import { AuthInterceptor } from '../providers/auth-interceptor/auth-interceptor'
 import { ApplyleaveProvider } from '../providers/applyleave/applyleave';
 import { EventProvider } from '../providers/event/event';
 import { AttendaceProvider } from '../providers/attendace/attendace';
+import { CheckInProvider } from '../providers/check-in/check-in';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { AttendaceProvider } from '../providers/attendace/attendace';
     ApplyleaveProvider,
     EventProvider,
     AttendaceProvider,
+    CheckInProvider,
   ]
 })
 export class AppModule { }

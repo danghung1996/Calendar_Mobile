@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, ToastController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { LoginProvider } from '../../providers/login/loginAuth'
@@ -30,7 +30,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     private _loginService: LoginProvider,
     private _storage: Storage,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public toastCtrl: ToastController,
   ) {
     this.menuCtrl.enable(false, 'myMenu');
     this.formGroup = new FormGroup({
@@ -61,15 +62,23 @@ export class LoginPage {
     this.navCtrl.setRoot(ProfilePage);
   }
   login() {
+    // this.isLogged = true;
     if (!this.formGroup.valid) {
       console.log("error");
+      const toast = this.toastCtrl.create({
+        message: 'Please! Check Email and Password',
+        duration: 1500,
+        cssClass: 'success',
+        position: 'top'
+      });
+      toast.present();
       return
     } else {
       const loader = this.loadingCtrl.create({
         content: "Login Authentication",
       });
       loader.present();
-      this._loginService.login("tamnd1@gmail.com", "tamnguyen123").subscribe(
+      this._loginService.login(this.formGroup.controls.email.value,this.formGroup.controls.password.value).subscribe(
         data => {
           var token = data['token']
           if (token !== undefined && token !== null) {
@@ -81,31 +90,12 @@ export class LoginPage {
         }, error => {
           console.log(error)
           loader.dismiss();
+          this.isFailed = true;
+          this.isLogged = false
         }
       )
     }
-
-
-    // console.log(this.username+"--"+this.password+"---"+this.cucumber);
-    // if(this.formGroup.get("email") === '123'){
-
-    //   this.isLogged = true;
-    // }else{
-    //   this.isFailed = true;
-    // }
   }
-
-  // loadingDate() {
-  //   let loading = this.loadingCtrl.create({
-  //     content: ''
-  //   });
-
-  //   loading.present();
-
-  //   setTimeout(() => {
-  //     loading.dismiss();
-  //   }, 1000);
-  // }
 
   reTry() {
     this.isFailed = false;
