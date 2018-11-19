@@ -75,7 +75,7 @@ export class AttendancePage {
     public menuCtrl: MenuController,
     private AttendanceProvider: AttendaceProvider) {
     this.menuCtrl.enable(true, 'myMenu');
-    this.AttendanceProvider.getAttendence(new Date().getMonth, new Date().getFullYear())
+    this.AttendanceProvider.getAttendence(new Date().getMonth(), new Date().getFullYear())
     this.buildData();
   }
   onMonthSelect(event) {
@@ -90,8 +90,8 @@ export class AttendancePage {
         this.myAttendace.push({
           date: moment(element.attendance_date).format('YYYY/MM/DD'),
           status: this.status[element.attendance_status],
-          checkin: moment('2018-11-11 ' + element.scan_in_time).format('LTS'),
-          checkout: moment('2018-11-11 ' + element.scan_out_time).format('LTS')
+          checkin:element.scan_in_time !==null ? moment('2018-11-11 ' + element.scan_in_time).format('LTS'):'Invalid',
+          checkout: element.scan_out_time !==null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : 'Invalid'
         })
       })
       console.log(this.myAttendace);

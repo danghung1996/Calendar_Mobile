@@ -153,6 +153,7 @@ export class LeavePage {
           this.show_datepickder = false;
           this.isRemark=false;
           this.isAttachment = false;
+          this.base64Image='';
         })
       });
     } else {

@@ -26,11 +26,14 @@ export class AttendaceProvider {
   get myAttendace(): Observable<Attendance[]> {
     return this._myAttendance.asObservable()
   }
-  getAttendence(month, year) {
+  getAttendence(month : number, year:number) {
+    console.log(month);
+    
     if (new Date().getMonth() - month > 2) return
     month = month + 1;
     const url = api + `/personal-attendance?month=${month}&year=${year}`;
-    const parram = new HttpParams().set('month', month + 1).set('year', year)
+    
+    const parram = new HttpParams().set('month', month + 1+'').set('year', year+'')
     this.storage.get('token').then(data => {
       if (data != null) {
         let header = new HttpHeaders().set("Authorization", "Bearer " + data);

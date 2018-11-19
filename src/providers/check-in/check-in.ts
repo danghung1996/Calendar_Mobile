@@ -4,6 +4,7 @@ import { LoginProvider } from '../login/loginAuth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import moment from 'moment';
+import { api } from '../const/const';
 
 
 
@@ -15,10 +16,10 @@ import moment from 'moment';
 */
 @Injectable()
 export class CheckInProvider {
-  urlCheckIn: string = "http://202.160.1.102:8085/api/checkIn";
-  urlCheckOut: string = "http://202.160.1.102:8085/api/checkOut";
-  isCheckInUrl = "http://202.160.1.102:8085/api/checkin-exists";
-  isCheckOutUrl = "http://202.160.1.102:8085/api/checkout-exists";
+  urlCheckIn: string = api + "/checkIn";
+  urlCheckOut: string = api + "/checkOut";
+  isCheckInUrl = api + "/checkin-exists";
+  isCheckOutUrl = api + "/checkout-exists";
 
   private _isCheckIn: BehaviorSubject<any>;
   private _isCheckOut: BehaviorSubject<any>;
@@ -27,14 +28,14 @@ export class CheckInProvider {
   constructor(
     public http: HttpClient,
     private _auth: LoginProvider,
-    public storage: Storage    
-    ) {
+    public storage: Storage
+  ) {
     console.log('Hello CheckInProvider Provider');
-    this.isCheckInDataStore = {_isCheckInData: []}
+    this.isCheckInDataStore = { _isCheckInData: [] }
     this._isCheckIn = new BehaviorSubject<any[]>([]);
-    this.isCheckOutDataStore = {_isCheckOutData: []}
+    this.isCheckOutDataStore = { _isCheckOutData: [] }
     this._isCheckOut = new BehaviorSubject<any[]>([]);
-    this.isErrorDataStore = {_isErrorInData: []}
+    this.isErrorDataStore = { _isErrorInData: [] }
     this._isError = new BehaviorSubject<any[]>([]);
   }
   private isCheckInDataStore: {
@@ -106,7 +107,7 @@ export class CheckInProvider {
         "scan_in_location": location,
         "scan_in_remarks": remarks
       }, { headers: header }).subscribe(data => {
-        this.storage.set("timeCheckIn",currentDate)
+        this.storage.set("timeCheckIn", currentDate)
         console.log(data);
       }, error => {
         console.log(error)
@@ -125,8 +126,8 @@ export class CheckInProvider {
         "scan_out_remarks": remarks
       }, { headers: header }).subscribe(data => {
         console.log(remarks);
-        this.storage.set("remarksCheckOut",remarks),
-        this.storage.set("timeCheckOut",currentTime)
+        this.storage.set("remarksCheckOut", remarks),
+          this.storage.set("timeCheckOut", currentTime)
         console.log(data);
       }, error => {
         console.log(error)
@@ -143,10 +144,10 @@ export class CheckInProvider {
     })
     return header
   }
-  async getCheckInTime(){
-     await this.storage.get("timeCheckIn").then(data => {
-       console.log(data);
-       
-     })
+  async getCheckInTime() {
+    await this.storage.get("timeCheckIn").then(data => {
+      console.log(data);
+
+    })
   }
 }

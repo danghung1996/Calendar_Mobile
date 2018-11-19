@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Nav } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../../pages/login/login';
+import { api } from '../const/const';
 
 /*
   Generated class for the ProfileProvider provider.
@@ -17,7 +18,7 @@ import { LoginPage } from '../../pages/login/login';
 export class ProfileProvider {
   @ViewChild(Nav) nav: Nav;
 
-  urlGetProfile: string = "http://202.160.1.102:8085/api/employee-data";
+  urlGetProfile: string = api+"/employee-data";
   profile: any
   private _profile: BehaviorSubject<Profile[]>;
   constructor(

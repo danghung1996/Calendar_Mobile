@@ -76,6 +76,8 @@ export class Calendar {
     if (this.lang === "es") {
       this.weekHead = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
     }
+    console.log(this.status);
+    
     if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate!=='' && this.leaveToDate !== '') {
       let year = moment(this.leaveFromDate).year();
       let month = moment(this.leaveFromDate).month();
