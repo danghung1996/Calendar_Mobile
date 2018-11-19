@@ -16,8 +16,8 @@ import { LoginPage } from '../../pages/login/login';
 @Injectable()
 export class ProfileProvider {
   @ViewChild(Nav) nav: Nav;
-
-  urlGetProfile: string = "http://202.160.1.102:8085/api/employee-data";
+  port = "10.0.105.20:1111"
+  urlGetProfile: string = "http://10.0.105.20:1111/api/employee-data";
   profile: any
   private _profile: BehaviorSubject<Profile[]>;
   constructor(

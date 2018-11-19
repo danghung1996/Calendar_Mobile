@@ -15,10 +15,10 @@ import moment from 'moment';
 */
 @Injectable()
 export class CheckInProvider {
-  urlCheckIn: string = "http://202.160.1.102:8085/api/checkIn";
-  urlCheckOut: string = "http://202.160.1.102:8085/api/checkOut";
-  isCheckInUrl = "http://202.160.1.102:8085/api/checkin-exists";
-  isCheckOutUrl = "http://202.160.1.102:8085/api/checkout-exists";
+  urlCheckIn: string = "http://10.0.105.20:1111/api/checkIn";
+  urlCheckOut: string = "http://10.0.105.20:1111/api/checkOut";
+  isCheckInUrl = "http://10.0.105.20:1111/api/checkin-exists";
+  isCheckOutUrl = "http://10.0.105.20:1111/api/checkout-exists";
 
   private _isCheckIn: BehaviorSubject<any>;
   private _isCheckOut: BehaviorSubject<any>;
