@@ -18,7 +18,7 @@ export class LoginPage {
   formGroup: FormGroup;
   isLogged: boolean = false;
   isFailed: boolean = false;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   listCompany: string[] = [
     "Company A", "Company B", "Company C"
   ]
@@ -43,19 +43,20 @@ export class LoginPage {
   }
   isLoginAlready() {
     this._loginService.tokenAuth().then(data => {
-      if(data){
+      if (data) {
         this.navCtrl.setRoot(AttendancePage);
       }
     })
-  } 
+  }
   presentLoading(mess: string) {
-      const loader = this.loadingCtrl.create({
-        content: mess,
-      });
-      loader.present();
+    const loader = this.loadingCtrl.create({
+      content: mess,
+    });
+    loader.present();
   }
 
   ionViewDidLoad() {
+
   }
   loginConfirm() {
     this.navCtrl.setRoot(ProfilePage);

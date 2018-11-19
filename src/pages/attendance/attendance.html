@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-  <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [events]="currentEvents" [status]="status"></ion-calendar>
+  <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [events]="currentEvents" [status]="myAttendace"></ion-calendar>
   <ion-list-header no-lines no-padding>
     <button ion-item (click)="showColorCode = !showColorCode;showAtenden=false;showAtendenRP=false" detail-none>
       <ion-icon item-right name="md-arrow-dropdown" *ngIf="!showColorCode"></ion-icon>
@@ -61,17 +61,21 @@
       My Attendance
     </button>
     <ion-item *ngIf="showAtenden" [@enterAnimation] ion-item detail text-wrap>
-      <div class="attenden">
-        <div style="text-align:end;background-color:#EEEEEE">20 Sept 2018</div>
-        <div class="checkout"><span>Checkout</span>
-        </div>
-        <div class="checkout-time"> 14:00:00 PM</div>
-        <div class="checkin">
-          <span>Check In</span>
-          <span style="float:right">Ontime</span>
-        </div>
-        <div class="checkin-time"> 14:00:00 PM</div>
-      </div>
+      <ion-card *ngFor="let atten of myAttendace" class="attenden">
+        <ion-card-header style="text-align:end;background-color:#EEEEEE">{{atten.date}}</ion-card-header>
+        <ion-card-content>
+          <!-- <div style="text-align:end;background-color:#EEEEEE">{{atten.date}}</div> -->
+          <div class="checkout">
+            <span>Checkout</span>
+          </div>
+          <div class="checkout-time"> {{atten.checkin}}</div>
+          <div class="checkin">
+            <span>Check In</span>
+            <span style="float:right">{{atten.status}}</span>
+          </div>
+          <div class="checkin-time"> {{atten.checkout}}</div>
+        </ion-card-content>
+      </ion-card>
 
     </ion-item>
     <button (click)="showAtendenRP = !showAtendenRP;showAtenden=false;showColorCode=false" ion-item detail-none>
@@ -81,8 +85,7 @@
     </button>
     <ion-item *ngIf="showAtendenRP" [@enterAnimation] ion-item detail text-wrap>
       <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#4397C7'"
-        [innerStrokeColor]="'#4397C7'" [responsive]=true [animation]="false" [toFixed]=2 [showSubtitle]="false"
-        [animationDuration]="0"></circle-progress>
+        [innerStrokeColor]="'#4397C7'" [responsive]=true [animation]="false" [toFixed]=2 [showSubtitle]="false" [animationDuration]="0"></circle-progress>
       <h2 class="text-end month">SEPTEMBER</h2>
       <h4 class="text-end month">Monthly Attendence</h4>
       <h5 class="text-end">As of 22 September 2018</h5>

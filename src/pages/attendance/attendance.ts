@@ -6,6 +6,11 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import { AttendaceProvider } from '../../providers/attendace/attendace';
+import { Attendance } from '../../Model/Attendance';
+import { elementAt } from 'rxjs/operator/elementAt';
+import moment from 'moment-timezone';
+
 /**
  * Generated class for the AttendancePage page.
  *
@@ -34,7 +39,8 @@ export class AttendancePage {
   showColorCode: boolean = false;
   showAtenden: boolean = false;
   showAtendenRP: boolean = false;
-  fakeData = [{}];
+  myAtttendace: Attendance[] = []
+  status = ['absent', 'ontime', 'late', 'verylate', 'onleave']
   currentEvents = [
     {
       year: 2018,
@@ -47,7 +53,8 @@ export class AttendancePage {
       date: 26
     }
   ];
-  status = [
+  myAttendace = [];
+  myAttendace12 = [
     { date: '2018/11/20', status: 'late', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
     { date: '2018/11/22', status: 'late', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
     { date: '2018/11/21', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
@@ -55,6 +62,7 @@ export class AttendancePage {
     { date: '2018/12/21', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
     { date: '2018/12/22', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
   ];
+  myAttendace1 = []
   eventSource = [];
   viewTitle: string;
   selectedDay = new Date();
@@ -62,12 +70,33 @@ export class AttendancePage {
     mode: "month",
     currentDate: new Date()
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public menuCtrl: MenuController,
+    private AttendanceProvider: AttendaceProvider) {
     this.menuCtrl.enable(true, 'myMenu');
+    this.AttendanceProvider.getAttendence(new Date().getMonth, new Date().getFullYear())
+    this.buildData();
   }
   onMonthSelect(event) {
     console.log(event);
+    this.AttendanceProvider.getAttendence(event.month, event.year);
+    this.buildData()
+  }
+  buildData() {
+    this.AttendanceProvider.myAttendace.subscribe(data => {
+      this.myAttendace = [];
+      data.forEach(element => {
+        this.myAttendace.push({
+          date: moment(element.attendance_date).format('YYYY/MM/DD'),
+          status: this.status[element.attendance_status],
+          checkin: moment('2018-11-11 ' + element.scan_in_time).format('LTS'),
+          checkout: moment('2018-11-11 ' + element.scan_out_time).format('LTS')
+        })
+      })
+      console.log(this.myAttendace);
 
+    })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AttendancePage');

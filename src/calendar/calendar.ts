@@ -62,6 +62,10 @@ export class Calendar {
   }
 
   ngOnChanges() {
+    
+    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate!=='' && this.leaveToDate !== '') {
+      this.buildStatus(this.leaveFromDate,this.leaveToDate)
+    }
     this.createMonth(this.displayYear, this.displayMonth);
   }
 
@@ -72,15 +76,25 @@ export class Calendar {
     if (this.lang === "es") {
       this.weekHead = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
     }
-    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined) {
+    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate!=='' && this.leaveToDate !== '') {
       let year = moment(this.leaveFromDate).year();
       let month = moment(this.leaveFromDate).month();
       this.displayMonth = month
       this.displayYear = year;
-    this.createMonth(this.displayYear, this.displayMonth);
+      this.createMonth(this.displayYear, this.displayMonth);
     }
   }
-
+  buildStatus(fromdate, todate) {
+    this.status =[]    
+    var from = new Date(fromdate.toString().replace(' ', 'T'));
+    var to = new Date(todate.toString().replace(' ', 'T'));
+    for (let day = from; day <= to; day.setDate(day.getDate() + 1)) {
+      this.status.push({
+        date: moment(day).format('YYYY/MM/DD'),
+        status: 'leavestatus'
+      })    
+    }
+  }
   // Jump to today
   today() {
     this.displayYear = this.currentYear;

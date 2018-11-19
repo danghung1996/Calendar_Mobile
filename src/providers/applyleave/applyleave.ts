@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 import { LoginProvider } from '../login/loginAuth';
 import { Storage } from '@ionic/storage';
 import { api } from '../const/const';
+import { AlertController } from 'ionic-angular';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ApplyLeave } from '../../Model/ApplyLeave';
+import { Jsonp } from '@angular/http';
+import moment from 'moment-timezone';
+
 
 /*
   Generated class for the ApplyleaveProvider provider.
@@ -13,28 +19,77 @@ import { api } from '../const/const';
 @Injectable()
 export class ApplyleaveProvider {
 
-  constructor(public http: HttpClient, private loginProvider: LoginProvider, private storage: Storage) {
-    console.log('Hello ApplyleaveProvider Provider');
+  private _myLeaves: BehaviorSubject<ApplyLeave[]>;
+  constructor(public http: HttpClient,
+    private loginProvider: LoginProvider,
+    private storage: Storage,
+    public alertCtrl: AlertController
+  ) {
+    this.dataStore = { myleaves: [] }
+    this._myLeaves = new BehaviorSubject<ApplyLeave[]>([]);
+    this.getAllMyApply();
   }
-  async myformPost(data) {
-    let header
-    await this.storage.get('token').then(data => {
+  private dataStore: {
+    myleaves: ApplyLeave[]
+  }
+  get myLeaves(): Observable<ApplyLeave[]> {
+    return this._myLeaves.asObservable()
+  }
+  myformPost(leaverequest, loading) {
+    console.log(JSON.stringify(leaverequest));
+    
+    this.storage.get('token').then(data => {
       if (data != null) {
-        header = new HttpHeaders().set("Authorization", "Bearer " + data);
+        let header = new HttpHeaders().set("Authorization", "Bearer " + data);
+        return this.http.post(api + '/employee-leave', leaverequest
+          , { headers: header }).subscribe(res => {
+            this.showAlert('Notification', 'Applied Leave Request Successfully')
+            this.getAllMyApply()
+            loading.dismiss()
+          }, error => {
+            this.showAlert('Notification', 'Error')
+            loading.dismiss()
+          })
       }
     })
-    if (header !== null)
-      return await this.http.post(api + '/employee-leave',
-        {
-          "leave_from_date": "2018-11-17 08:00:00",
-          "leave_to_date": "2018-11-19 09:00:00",
-          "date_applied": '1',
-          "leave_type": "2",
-          "image": 'thang'
-        }
-        , { headers: header }).subscribe(data => {
-          console.log(data);
+  }
+  getAllMyApply() {
+    const url = api + '/my-leave';
+    let myleaves: ApplyLeave[] = []
+    this.storage.get('token').then(data => {
+      if (data != null) {
+        let header = new HttpHeaders().set("Authorization", "Bearer " + data);
+        return this.http.get(url, { headers: header }).subscribe(res => {
+          let data: ApplyLeave[] = res['data'];
+          data.forEach(element => {
+            myleaves.push(
+              {
+                date_applied: element.date_applied,
+                leave_type: element.leave_type,
+                leave_from_date: element.leave_from_date,
+                leave_to_date: element.leave_to_date,
+                leave_status: element.leave_status,
+                image: element.image,
+                created_at: moment(element.created_at).format('MMM Do'),
+                show:false
+              }
+            )
+          })
+          this.dataStore.myleaves = myleaves.reverse();
+          this._myLeaves.next(Object.assign({}, this.dataStore).myleaves);
+        },error=>{
+          console.log(error);         
         })
+      }
+    })
+  }
+  showAlert(title, content) {
+    const alert = this.alertCtrl.create({
+      title: title,
+      subTitle: content,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 

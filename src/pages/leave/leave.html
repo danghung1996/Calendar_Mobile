@@ -75,8 +75,8 @@
 
     <ion-list radio-group [formControl]="leavetype">
       <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave">
-          <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
-          <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
         Type of leave
       </ion-list-header>
       <div *ngIf="show_type_of_leave">
@@ -95,29 +95,30 @@
       <div *ngIf="show_datepickder">
         <ion-item style="margin-top:10px;" no-lines>
           <ion-label>Start</ion-label>
-          <ion-datetime [formControl]="fromdate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [max]="2099-31-12"></ion-datetime>
-          <ion-select [(ngModel)]="gaming" interface="popover">
+          <ion-datetime [formControl]="fromdate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [max]="2099-31-12" (ionChange)="countDateApply()"></ion-datetime>
+          <ion-select (ionChange)="countDateApply()" [(ngModel)]="from_a" interface="popover">
             <ion-option value="am">AM</ion-option>
             <ion-option value="pm">PM</ion-option>
           </ion-select>
         </ion-item>
         <ion-item style="margin-top:10px;" no-lines>
           <ion-label>End </ion-label>
-          <ion-datetime [formControl]="todate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [min]="fromdate.value ? fromdate.value :2016 " [max]="2099-31-12"></ion-datetime>
-          <ion-select [(ngModel)]="gaming" interface="popover">
+          <ion-datetime (ionChange)="countDateApply()" [formControl]="todate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY"
+            [min]="fromdate.value ? fromdate.value :2016 " [max]="2099-31-12"></ion-datetime>
+          <ion-select (ionChange)="countDateApply()" [(ngModel)]="to_a" interface="popover">
             <ion-option value="am">AM</ion-option>
             <ion-option value="pm">PM</ion-option>
           </ion-select>
         </ion-item>
-        <ion-calendar #calendar></ion-calendar>
+        <ion-calendar #calendar [(leaveFromDate)]="fromdate.value" [(leaveToDate)]="todate.value"></ion-calendar>
 
       </div>
     </ion-list>
     <ion-list>
       <ion-list-header class="remark" (click)="showRemark()">
         Remark
-        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>   
-        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>     
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>
       </ion-list-header>
       <ion-item no-lines *ngIf="isRemark">
         <ion-input [formControl]="remark" placeholder="Input remark" type="text" value=""></ion-input>
@@ -126,8 +127,8 @@
     <ion-list>
       <ion-list-header class="remark" (click)="showAttachment()">
         Attachment (optional)
-        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>   
-        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>     
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>
       </ion-list-header>
       <ion-item no-lines *ngIf="isAttachment">
         <ion-label class="camera" (click)="presentActionSheet()">Open Camera
@@ -137,7 +138,7 @@
       <img [src]="base64Image" *ngIf="base64Image" />
 
     </ion-list>
-    <ion-list >
+    <ion-list>
       <ion-list-header class="typeofleave">
         <ion-label (click)="logForm()" type="submit">Submit</ion-label>
         <ion-icon item-right name="ios-arrow-forward"></ion-icon>
@@ -151,25 +152,30 @@
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
       </ion-row>
-      <ion-row (click)="showleave = !showleave" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
-        <ion-col col-4>07 Nov</ion-col>
-        <ion-col col-5>Time of in lieu</ion-col>
-        <ion-col col-3>
-          <ion-icon name="logo-apple"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="showleave">
-        <ion-col col-12>PENDING
-          <span style="float:right">AM to PM</span>
-        </ion-col>
-        <ion-col style="background-color:#8AB1C9" col-12>Last Update
-          <span style="float:right">07 Nov 2018</span>
-        </ion-col>
+      <div *ngFor="let leave of myleave | async">
+        <ion-row (click)="leave.show = !leave.show" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
+          <ion-col col-4>{{leave.created_at }}</ion-col>
+          <ion-col col-5>{{type_of_leave[leave.leave_type]}}</ion-col>
+          <ion-col col-3>
+            <ion-icon name="logo-apple"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="leave.show">
+          <ion-col col-12>{{status_leave[leave.leave_status]}}
+            <span style="float:right">AM to PM</span>
+          </ion-col>
+          <ion-col style="background-color:#8AB1C9" col-12>Last Update
+            <span style="float:right">07 Nov 2018</span>
+          </ion-col>
 
-        <ion-col col-12>
-          <ion-calendar #calendar [leaveFromDate]="fromdate" [leaveToDate]="toDate"></ion-calendar>
-        </ion-col>
-      </ion-row>
+          <ion-col col-12>
+            <ion-calendar #calendar [leaveFromDate]="leave.leave_from_date" [leaveToDate]="leave.leave_to_date"></ion-calendar>
+          </ion-col>
+          <img style="width:500px;height:500px;" [src]="leave.image" *ngIf="leave.image" />
+
+        </ion-row>
+      </div>
     </ion-grid>
   </div>
+  <button (click)="onClick()">aaaaaa</button>
 </ion-content>
