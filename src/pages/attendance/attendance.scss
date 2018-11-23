@@ -9,7 +9,14 @@ page-attendance {
     margin-top: 1px !important;
     font-weight: bold !important;
   }
-
+  ion-card-header{
+    padding:0px 10px 0px 0px !important;
+    height: 45px;
+    line-height: 45px;
+  }
+  ion-card-content{
+    padding: 0px 0px 14px 0px !important;
+  }
   .list-header-ios {
     text-transform: none !important;
   }
@@ -17,13 +24,16 @@ page-attendance {
   .text-end {
     text-align: end
   }
-
+  .item-inner{
+    padding-right: 0px !important;
+  }
   .checkout {
     background: url('../../assets/imgs/checkout.png') no-repeat center;
     background-size: cover;
     height: 30px;
     color: white;
     font-weight: bold;
+    line-height: 30px;
   }
 
   .checkout-time {
@@ -44,6 +54,7 @@ page-attendance {
     height: 30px;
     color: white;
     font-weight: bold;
+    line-height: 30px;
   }
   .month{
     color: #4197C7;
@@ -66,12 +77,18 @@ page-attendance {
   .attenden{
     line-height: 32px;
     color: #666666;
+    margin-bottom: 10px;
     div{
       height: 32px;
       padding-left: 10px;
       padding-right: 10px;
-      margin-top: 5px;
     }
   }
 
+  ion-label .label{
+    margin:10px 0px 10px 0px !important;
+  }
+  ion-item{
+    padding-left: 0px !important; 
+  }
 }

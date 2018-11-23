@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [events]="currentEvents" [status]="myAttendace"></ion-calendar>
   <ion-list-header no-lines no-padding>
     <button ion-item (click)="showColorCode = !showColorCode;showAtenden=false;showAtendenRP=false" detail-none>

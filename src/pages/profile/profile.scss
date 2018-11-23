@@ -3,7 +3,8 @@ page-profile {
         width: 100%;
         height: 35vh;
         position: relative;
-        background: url("../../assets/imgs/backgroundProfile.png") center;
+        // background: url("../../assets/imgs/backgroundProfile.png") center;
+        background-color: #006699;
         background-repeat: no-repeat,repeat;
         background-size: cover;
         
@@ -27,7 +28,7 @@ page-profile {
     .avata{
         background-color: inherit;
         width: 180px; 
-        height:205px;
+        height:215px;
         border-radius: 5px;
         clear: both;
         position: absolute;
@@ -51,7 +52,7 @@ page-profile {
        .avata{
         background-color: inherit;
         width: 135px; 
-        height: 160px;
+        height: 170px;
         border-radius: 5px;
         clear: both;
         position: absolute;
@@ -87,5 +88,11 @@ page-profile {
     border-bottom-color: transparent !important;
     background-image: none !important;
     border-bottom: none !important;
+  }
+  .empName{
+    font-size: 28px;
+    font-weight: bolder;
+    text-align: center;
+    color:#006699;
   }
 }

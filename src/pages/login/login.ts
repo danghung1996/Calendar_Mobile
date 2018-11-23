@@ -20,9 +20,9 @@ export class LoginPage {
   isFailed: boolean = false;
   isLoading: boolean = false;
   listCompany: string[] = [
-    "Company A", "Company B", "Company C"
+    "Company Name A", "Company Name B", "Company Name C"
   ]
-
+  company: any = null;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,6 +47,12 @@ export class LoginPage {
         this.navCtrl.setRoot(AttendancePage);
       }
     })
+  }
+  selectCompany(index) {
+    console.log(index);
+    this.company = index
+    console.log(this.company);
+    
   }
   presentLoading(mess: string) {
     const loader = this.loadingCtrl.create({
@@ -78,7 +84,7 @@ export class LoginPage {
         content: "Login Authentication",
       });
       loader.present();
-      this._loginService.login(this.formGroup.controls.email.value,this.formGroup.controls.password.value).subscribe(
+      this._loginService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe(
         data => {
           var token = data['token']
           if (token !== undefined && token !== null) {

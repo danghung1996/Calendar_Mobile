@@ -63,7 +63,6 @@ export class ProfileProvider {
     await this._loginService.tokenAuth().then(data => {
       if (data) {
         console.log(data);
-        
         header = new HttpHeaders().set("Authorization", "Bearer " + data);
       }
     })
