@@ -53,7 +53,7 @@
       </ion-list-header>
       <div *ngIf="show_type_of_claim">
         <ion-item no-lines>
-          <ion-input placeholder="Input Amount" type="text" value=""></ion-input>
+          <ion-input placeholder="Input Amount" type="number" value=""></ion-input>
         </ion-item>
       </div>
     </ion-list>
@@ -76,7 +76,7 @@
 
       </ion-list-header>
       <ion-item no-lines *ngIf="isAttachment">
-        <ion-label class="camera" (click)="takePicture()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
+        <ion-label class="camera" (click)="presentActionSheet()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
         </ion-label>
       </ion-item>
       <img [src]="base64Image" *ngIf="base64Image" />

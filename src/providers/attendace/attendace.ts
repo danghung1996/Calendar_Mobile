@@ -39,8 +39,6 @@ export class AttendaceProvider {
         let header = new HttpHeaders().set("Authorization", "Bearer " + data);
         return this.http.get(url, { headers: header })
           .subscribe(data => {
-            console.log(data);
-            
             let myattendace: Attendance[] = []
             let attendance = data['data']
             if (attendance === undefined) return;
@@ -56,7 +54,7 @@ export class AttendaceProvider {
             
             this._myAttendance.next(Object.assign({}, this.dataStore).myattendace);
           }, error => {
-            console.log('thang' + error.error);
+            console.log(error);
 
           })
       }

@@ -71,7 +71,6 @@ export class CheckinPage {
     });
     loader.present();
     this.now = moment(new Date).format("Do MMM YY")
-    this.storage.remove("remarksCheckOut")
   }
 
   async getDataCheckOut(){

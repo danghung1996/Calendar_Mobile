@@ -37,7 +37,7 @@ export class ApplyleaveProvider {
   }
   myformPost(leaverequest, loading) {
     console.log(JSON.stringify(leaverequest));
-    
+
     this.storage.get('token').then(data => {
       if (data != null) {
         let header = new HttpHeaders().set("Authorization", "Bearer " + data);
@@ -47,7 +47,8 @@ export class ApplyleaveProvider {
             this.getAllMyApply()
             loading.dismiss()
           }, error => {
-            this.showAlert('Notification', 'Error')
+            if (error['error']['success'] === false) this.showAlert('Notification', 'Do not apply on Block day')
+            else this.showAlert('Notification', 'Error ! Try Again')
             loading.dismiss()
           })
       }
@@ -57,6 +58,8 @@ export class ApplyleaveProvider {
     const url = api + '/my-leave';
     let myleaves: ApplyLeave[] = []
     this.storage.get('token').then(data => {
+      console.log(data);
+
       if (data != null) {
         let header = new HttpHeaders().set("Authorization", "Bearer " + data);
         return this.http.get(url, { headers: header }).subscribe(res => {
@@ -71,17 +74,38 @@ export class ApplyleaveProvider {
                 leave_status: element.leave_status,
                 image: element.image,
                 created_at: moment(element.created_at).format('MMM Do'),
-                show:false
+                show: false
               }
             )
           })
           this.dataStore.myleaves = myleaves.reverse();
           this._myLeaves.next(Object.assign({}, this.dataStore).myleaves);
-        },error=>{
-          console.log(error);         
+        }, error => {
+          console.log(error);
         })
       }
     })
+  }
+  checkApplyLeave(date): boolean {
+    let check = false;
+    this.myLeaves.subscribe(data => {
+      data.filter(x => {
+        return (
+          x.leave_status === 2 &&
+          (new Date(date).getMonth() === new Date(x.leave_from_date).getMonth()
+            || new Date(date).getMonth() === new Date(x.leave_to_date).getMonth( )))
+      }).forEach(element => {
+        let day = new Date(moment(date).format('YYYY MM DD 00:00:00'))
+
+        if ((day >= new Date(element.leave_from_date)) && (day <= new Date(element.leave_to_date))) {
+          check = true;
+        }
+        // if ((day.isSame(fromDate) || day.isAfter(fromDate)) && (day.isSame(toDate) || day.isBefore(toDate))) {
+        //   check = true;
+        // }
+      });
+    })
+    return check;
   }
   showAlert(title, content) {
     const alert = this.alertCtrl.create({

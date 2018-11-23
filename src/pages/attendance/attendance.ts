@@ -10,6 +10,8 @@ import { AttendaceProvider } from '../../providers/attendace/attendace';
 import { Attendance } from '../../Model/Attendance';
 import { elementAt } from 'rxjs/operator/elementAt';
 import moment from 'moment-timezone';
+import { ScrollHideConfig } from '../../providers/const/scroll-hide';
+import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 
 /**
  * Generated class for the AttendancePage page.
@@ -41,27 +43,7 @@ export class AttendancePage {
   showAtendenRP: boolean = false;
   myAtttendace: Attendance[] = []
   status = ['absent', 'ontime', 'late', 'verylate', 'onleave']
-  currentEvents = [
-    {
-      year: 2018,
-      month: 11,
-      date: 25
-    },
-    {
-      year: 2018,
-      month: 11,
-      date: 26
-    }
-  ];
   myAttendace = [];
-  myAttendace12 = [
-    { date: '2018/11/20', status: 'late', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-    { date: '2018/11/22', status: 'late', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-    { date: '2018/11/21', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-    { date: '2018/12/20', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-    { date: '2018/12/21', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-    { date: '2018/12/22', status: 'ontime', checkin: '08:00:00 AM', checkout: '14:00:00 PM' },
-  ];
   myAttendace1 = []
   eventSource = [];
   viewTitle: string;
@@ -73,7 +55,9 @@ export class AttendancePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
-    private AttendanceProvider: AttendaceProvider) {
+    private AttendanceProvider: AttendaceProvider,
+    private LeaveProvider: ApplyleaveProvider
+  ) {
     this.menuCtrl.enable(true, 'myMenu');
     this.AttendanceProvider.getAttendence(new Date().getMonth(), new Date().getFullYear())
     this.buildData();
@@ -84,18 +68,18 @@ export class AttendancePage {
     this.buildData()
   }
   buildData() {
+    this.LeaveProvider.getAllMyApply();
     this.AttendanceProvider.myAttendace.subscribe(data => {
       this.myAttendace = [];
       data.forEach(element => {
         this.myAttendace.push({
           date: moment(element.attendance_date).format('YYYY/MM/DD'),
-          status: this.status[element.attendance_status],
-          checkin:element.scan_in_time !==null ? moment('2018-11-11 ' + element.scan_in_time).format('LTS'):'Invalid',
-          checkout: element.scan_out_time !==null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : 'Invalid'
+          status: this.LeaveProvider.checkApplyLeave(new Date(element.attendance_date))?'onleave': this.status[element.attendance_status],
+          checkin: element.scan_in_time !== null ? moment('2018-11-11 ' + element.scan_in_time).format('LTS') : null,
+          checkout: element.scan_out_time !== null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : null
         })
       })
       console.log(this.myAttendace);
-
     })
   }
   ionViewDidLoad() {

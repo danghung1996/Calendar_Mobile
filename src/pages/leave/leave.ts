@@ -8,7 +8,6 @@ import firebase from 'firebase';
 import { LoadingController } from 'ionic-angular';
 import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 import { EventProvider } from '../../providers/event/event';
-import { elementAt } from 'rxjs/operators';
 import moment from 'moment-timezone';
 import { ApplyLeave } from '../../Model/ApplyLeave';
 import { Observable } from 'rxjs';
@@ -32,17 +31,20 @@ export class LeavePage {
   isRemark: boolean = false;
 
   isAttachment: boolean = false;
-  type_of_leave:string[]= ['Medical', 'Annual', 'Compassionate', 'Maternity', 'Pilgrimage', 'Prolong Illness']
-  status_leave: string[] = ['PENDING', 'ON HOLD','APPROVE','CANCEL','DECLINE']
+  type_of_leave: string[] = ['Medical', 'Annual', 'Compassionate', 'Maternity', 'Pilgrimage', 'Prolong Illness']
+  status_leave: string[] = ['PENDING', 'ON HOLD', 'APPROVE', 'CANCEL', 'DECLINE']
+  currentEvents = []
+  todayEvents = ['No events']
+  today = moment(new Date()).format('Do MMM YYYY')
   public base64Image: string;
   form_leave: FormGroup;
-   myleave : Observable<ApplyLeave[]>
+  myleave: Observable<ApplyLeave[]>
   leavetype = new FormControl('', Validators.required);
   fromdate = new FormControl('', Validators.required);
   todate = new FormControl('', Validators.required);
   remark = new FormControl('', Validators.required);
   image = new FormControl('');
-  date_apply = new FormControl('', Validators.required);
+  date_apply = new FormControl('0', Validators.required);
   constructor(
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
@@ -65,9 +67,20 @@ export class LeavePage {
       image: this.image,
       date_applied: this.date_apply
     })
+    this.applyleaveProvider.getAllMyApply();
     this.myleave = this.applyleaveProvider.myLeaves;
-  }
+    this.getEvent()
 
+  }
+  onDaySelect(event) {
+    if (event.events !== undefined) {
+      this.todayEvents = event.events;
+      console.log(this.todayEvents);
+    } else {
+      this.todayEvents = ['No events']
+    }
+
+  }
   showRemark() {
     if (this.isRemark == true) {
       return this.isRemark = false;
@@ -132,6 +145,14 @@ export class LeavePage {
   getProfileImageStyle() {
     return 'url(' + this.base64Image + ')'
   }
+  resetForm() {
+    this.show_type_of_leave = false;
+    this.show_datepickder = false;
+    this.isRemark = false;
+    this.isAttachment = false;
+    this.base64Image = '';
+    this.tab_show = false
+  }
   async logForm() {
     if (!this.form_leave.valid) {
       this.showAlert();
@@ -142,24 +163,20 @@ export class LeavePage {
       content: 'Loading Please Wait...'
     });
     loading.present();
-
+    
     if (this.base64Image) {
       await this.uploadImage().then((snapshot) => {
         snapshot.ref.getDownloadURL().then((url) => {
           this.image.setValue(url);
           var leaverequest = this.buildData();
           this.applyleaveProvider.myformPost(leaverequest, loading);
-          this.show_type_of_leave = false;
-          this.show_datepickder = false;
-          this.isRemark=false;
-          this.isAttachment = false;
-          this.base64Image='';
+          this.resetForm();
         })
       });
     } else {
       var leaverequest = this.buildData();
       this.applyleaveProvider.myformPost(leaverequest, loading)
-
+      this.resetForm()
     }
   }
   buildData() {
@@ -189,40 +206,46 @@ export class LeavePage {
       let days: Date[]
       this.eventProvider.eventNonworkingDetail.subscribe(data => {
         days = data;
-        console.log(data);
+        daysOfleave = []
+        for (let day = new Date(this.fromdate.value); day <= new Date(this.todate.value); day.setDate(day.getDate() + 1)) {
+          daysOfleave.push({ date: new Date(day), active: true, value: 1 })
+        }
+        console.log(daysOfleave);
 
         if (days.length > 0) {
           days = days.filter(x => {
-            return (x.getDate() >= new Date(this.fromdate.value).getDate() && x.getDate() <= new Date(this.todate.value).getDate());
+            return (moment(x) >= moment(this.fromdate.value) && moment(x) <= moment(this.todate.value));
           })
           console.log(days);
-          daysOfleave = []
-          for (let day = new Date(this.fromdate.value); day <= new Date(this.todate.value); day.setDate(day.getDate() + 1)) {
-            daysOfleave.push({ date: new Date(day), active: true, value: 1 })
-          }
+
           days.forEach(element => {
-            let find_day = daysOfleave.findIndex(x => { return x.date.getDate() === element.getDate() })
+            let find_day = daysOfleave.findIndex(x => { return moment(x.date) === moment(element) })
             daysOfleave[find_day].active = false;
           });
-          if (this.from_a === 'pm') daysOfleave[0].value = 0.5;
-          if (this.to_a === 'am') daysOfleave[daysOfleave.length - 1].value = 0.5;
-          daysOfleave.forEach(element => {
-            if (element.active) {
-              dayapplied += element.value
-            }
-          })
-          // this.form_leave.patchValue({ date_applied: dayapplied })
-          this.date_apply.setValue(dayapplied)
-          console.log(this.form_leave.value);
         }
+        if (this.from_a === 'pm') daysOfleave[0].value = 0.5;
+        if (this.to_a === 'am') daysOfleave[daysOfleave.length - 1].value = 0.5;
+        daysOfleave.forEach(element => {
+          if (element.active) {
+            dayapplied += element.value
+          }
+        })
+        this.date_apply.setValue(dayapplied)
       })
     }
   }
-  onClick() {
-   this.applyleaveProvider.myLeaves.subscribe(data=>{
-     console.log(data);
-     
-   })
+  getEvent() {
+    this.eventProvider.allEvent.subscribe(data => {
+      this.currentEvents = []
+      data.forEach(element => {
+        this.currentEvents.push({
+          year: element.date.getFullYear(),
+          month: element.date.getMonth(),
+          date: element.date.getDate(),
+          events: element.events
+        })
+      })
+    })
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeavePage');
