@@ -47,7 +47,7 @@ export class ApplyleaveProvider {
             this.getAllMyApply()
             loading.dismiss()
           }, error => {
-            if (error['error']['success'] === false) this.showAlert('Notification', 'Do not apply on Block day')
+            if (error['error']['success'] === false) this.showAlert('Notification', 'Unable to apply leave on blocked day')
             else this.showAlert('Notification', 'Error ! Try Again')
             loading.dismiss()
           })

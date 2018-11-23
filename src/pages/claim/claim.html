@@ -32,14 +32,14 @@
     <ion-item no-lines>
       <ion-label>Application date: 20 sept 2018</ion-label>
     </ion-item>
-    <ion-list radio-group>
+    <ion-list radio-group [formControl]="claimtypeFC">
       <ion-list-header class="typeofclaim" (click)="show_type_of_leave = !show_type_of_leave">
         Type of claim
         <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
           <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
       </ion-list-header>
-      <div *ngIf="show_type_of_leave">
-        <ion-item *ngFor="let item of type_of_leave;let i = index" no-lines>
+      <div *ngIf="show_type_of_leave" >
+        <ion-item *ngFor="let item of type_of_claim;let i = index" no-lines>
           <ion-label>{{item}}</ion-label>
           <ion-radio [value]="i"></ion-radio>
         </ion-item>
@@ -84,7 +84,7 @@
     </ion-list>
     <ion-list>
       <ion-list-header class="submit">
-        Submit claim
+        <ion-label (click)="presentActionSheet1()" type="submit">Submit</ion-label>
         <ion-icon item-right name="ios-arrow-forward"></ion-icon>
       </ion-list-header>
     </ion-list>

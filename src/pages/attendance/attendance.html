@@ -62,7 +62,7 @@
     </button>
     <ion-item *ngIf="showAtenden" [@enterAnimation] ion-item detail text-wrap>
       <ion-card *ngFor="let atten of myAttendace" class="attenden">
-        <ion-card-header style="text-align:end;background-color:#EEEEEE">{{atten.date}}</ion-card-header>
+        <ion-card-header style="text-align:end;background-color:#EEEEEE">{{atten.date | date:'d/M/yy'}}</ion-card-header>
         <ion-card-content>
           <!-- <div style="text-align:end;background-color:#EEEEEE">{{atten.date}}</div> -->
           <div class="checkout">

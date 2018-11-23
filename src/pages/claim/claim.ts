@@ -25,12 +25,12 @@ export class ClaimPage {
   show_type_of_claim = false;
   gaming = 'am'
   showleave = false;
-  type_of_leave = ['Entertainment', 'Medical', 'Traveling', 'Miscellaneous']
+  type_of_claim = ['Entertainment', 'Medical', 'Traveling', 'Miscellaneous']
   public base64Image: string;
   form: FormGroup;
-  claimtypeFC = new FormControl('',Validators.required);
-  amountFC = new FormControl('',Validators.required);
-  remarkFC = new FormControl('',Validators.required);
+  claimtypeFC = new FormControl('', Validators.required);
+  amountFC = new FormControl('', Validators.required);
+  remarkFC = new FormControl('', Validators.required);
   imageFC = new FormControl('');
   constructor(
     public navCtrl: NavController,
@@ -70,6 +70,9 @@ export class ClaimPage {
       // Handle error
     });
   }
+  presentActionSheet1() {
+    console.log('thangnvs')
+  }
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
       title: 'Select photo',
@@ -95,6 +98,7 @@ export class ClaimPage {
     });
     actionSheet.present();
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClaimPage');
   }
