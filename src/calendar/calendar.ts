@@ -35,7 +35,7 @@ import * as _ from "lodash";
 `
 })
 export class Calendar {
-  @Output() onDaySelect = new EventEmitter<dateObj>();
+  @Output() onDaySelect = new EventEmitter<any>();
   @Output() onMonthSelect = new EventEmitter<any>();
   @Input() events: Array<singularDate> = [];
   @Input() lang: string;
@@ -62,9 +62,9 @@ export class Calendar {
   }
 
   ngOnChanges() {
-    
-    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate!=='' && this.leaveToDate !== '') {
-      this.buildStatus(this.leaveFromDate,this.leaveToDate)
+
+    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate !== '' && this.leaveToDate !== '') {
+      this.buildStatus(this.leaveFromDate, this.leaveToDate)
     }
     this.createMonth(this.displayYear, this.displayMonth);
   }
@@ -77,8 +77,8 @@ export class Calendar {
       this.weekHead = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
     }
     console.log(this.status);
-    
-    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate!=='' && this.leaveToDate !== '') {
+
+    if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate !== '' && this.leaveToDate !== '') {
       let year = moment(this.leaveFromDate).year();
       let month = moment(this.leaveFromDate).month();
       this.displayMonth = month
@@ -87,14 +87,14 @@ export class Calendar {
     }
   }
   buildStatus(fromdate, todate) {
-    this.status =[]    
+    this.status = []
     var from = new Date(fromdate.toString().replace(' ', 'T'));
     var to = new Date(todate.toString().replace(' ', 'T'));
     for (let day = from; day <= to; day.setDate(day.getDate() + 1)) {
       this.status.push({
         date: moment(day).format('YYYY/MM/DD'),
         status: 'leavestatus'
-      })    
+      })
     }
   }
   // Jump to today
@@ -291,7 +291,13 @@ export class Calendar {
     });
     this.createMonth(this.displayYear, this.displayMonth);
   }
-
+  findEvents(day) {
+    var event = this.events.find(x => {
+      return (x.date === day.date && x.month === day.month && x.year === day.year)
+    }); 
+    if(event ===undefined) return undefined;
+    return event.events;
+  }
   // Select a day, click event
   daySelect(day, i, j) {
     // First clear the last click status
@@ -299,8 +305,8 @@ export class Calendar {
     // Store this clicked status
     this.lastSelect = i * 7 + j;
     this.dateArray[i * 7 + j].isSelect = true;
-
-    this.onDaySelect.emit(day);
+    let eventday = { day: day, events: this.findEvents(day) }
+    this.onDaySelect.emit(eventday);
   }
 }
 
@@ -308,6 +314,7 @@ interface singularDate {
   year: number;
   month: number;
   date: number;
+  events: string[];
 }
 
 // Each grid item of a calendar

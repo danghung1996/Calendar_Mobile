@@ -20,7 +20,7 @@ export class LoginProvider {
   token:string = "";
   constructor(
     public http: HttpClient,
-    public storage: Storage
+    public storage: Storage,
   ) {
     console.log('Hello LoginProvider Provider');
   }

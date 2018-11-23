@@ -7,6 +7,8 @@ import { _iterableDiffersFactory } from '@angular/core/src/application_module';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms'
 import { AttendancePage } from '../attendance/attendance';
 import { ProfilePage } from '../profile/profile';
+import { ScrollHideConfig } from '../../providers/const/scroll-hide';
+import { ProfileProvider } from '../../providers/profile/ProfileSerivce';
 
 
 @IonicPage()
@@ -30,6 +32,7 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     private _loginService: LoginProvider,
     private _storage: Storage,
+    private _profileProvider : ProfileProvider,
     public formBuilder: FormBuilder,
     public toastCtrl: ToastController,
   ) {
@@ -91,6 +94,7 @@ export class LoginPage {
             this._storage.set("token", token)
             loader.dismiss();
             console.log(token);
+            this._profileProvider.getUserProfile();
           }
           this.isLogged = true;
         }, error => {

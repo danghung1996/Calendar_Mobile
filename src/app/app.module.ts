@@ -31,6 +31,7 @@ import { ApplyleaveProvider } from '../providers/applyleave/applyleave';
 import { EventProvider } from '../providers/event/event';
 import { AttendaceProvider } from '../providers/attendace/attendace';
 import { CheckInProvider } from '../providers/check-in/check-in';
+import { ScrollHideDirective } from '../providers/const/scroll-hide';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { CheckInProvider } from '../providers/check-in/check-in';
     CheckinPage,
     LeavePage,
     ClaimPage,
-    
+    ScrollHideDirective
   ],
   imports: [
     BrowserModule,

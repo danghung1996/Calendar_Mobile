@@ -70,7 +70,7 @@
   </div>
   <div style="margin-top:10px" *ngIf="tab_show">
     <ion-item no-lines>
-      <ion-label>Application date: 20 sept 2018</ion-label>
+      <ion-label>Application date: {{today}}</ion-label>
     </ion-item>
 
     <ion-list radio-group [formControl]="leavetype">
@@ -110,8 +110,21 @@
             <ion-option value="pm">PM</ion-option>
           </ion-select>
         </ion-item>
-        <ion-calendar #calendar [(leaveFromDate)]="fromdate.value" [(leaveToDate)]="todate.value"></ion-calendar>
-
+        <ion-item>
+          <ion-label>Day(s) Applied : {{date_apply.value}}</ion-label>
+        </ion-item>
+        <ion-calendar #calendar [events]="currentEvents" (onDaySelect)="onDaySelect($event)" [(leaveFromDate)]="fromdate.value" [(leaveToDate)]="todate.value"></ion-calendar>
+        <ion-card style="margin-bottom:25px;">
+          <ion-card-header style="background-color:#EEEEEE">
+            Events
+          </ion-card-header>
+          <ion-list>
+            <button *ngFor="let event of todayEvents" ion-item no-lines detail-none>
+              <ion-icon ios="ios-checkmark" md="md-checkmark" item-start></ion-icon>
+              {{event}}
+            </button>
+          </ion-list>
+        </ion-card>
       </div>
     </ion-list>
     <ion-list>
@@ -147,7 +160,7 @@
   </div>
   <div *ngIf="!tab_show">
     <ion-grid class="status">
-      <ion-row>
+      <ion-row style="margin-top:20px;margin-bottom:20px;">
         <ion-col col-4>Applied on</ion-col>
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
@@ -161,14 +174,19 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="leave.show">
-          <ion-col col-12>{{status_leave[leave.leave_status]}}
+          <ion-col style="background-color:#8AB1C9" col-12>{{status_leave[leave.leave_status]}}
             <span style="float:right">AM to PM</span>
           </ion-col>
-          <ion-col style="background-color:#8AB1C9" col-12>Last Update
+          <ion-col col-12>Last Update
             <span style="float:right">07 Nov 2018</span>
           </ion-col>
-
           <ion-col col-12>
+
+            Day(s) Applied : {{leave.date_applied}}
+
+          </ion-col>
+          <ion-col col-12>
+
             <ion-calendar #calendar [leaveFromDate]="leave.leave_from_date" [leaveToDate]="leave.leave_to_date"></ion-calendar>
           </ion-col>
           <img style="width:500px;height:500px;" [src]="leave.image" *ngIf="leave.image" />
