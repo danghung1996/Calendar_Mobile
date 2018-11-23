@@ -22,6 +22,7 @@ export class CheckinPage {
   now: any;
   currentTime: any;
   timeCheckin: any;
+  timeCheckin1: any;
   totalWorkHour: any;
   timecheckOut: any;
   long: any;
@@ -60,6 +61,15 @@ export class CheckinPage {
       this.currentTime = moment(new Date).format('h:mm:ss a');
     }, 1);
 
+
+    this.getCheckInTime();
+    if (this.timeCheckin1 !== null || this.timeCheckin1 !== undefined) {
+      setInterval(() => {
+        console.log("hello");
+        var currentDate = moment(new Date()).format("HH:mm:ss")
+        this.totalWorkHour = moment.utc(moment(currentDate, "HH:mm:ss").diff(moment(this.timeCheckin1, "HH:mm"))).format("HH:mm");
+      }, 1)
+    }
     this.checkCheckIn();
     this.checkCheckOut();
   }
@@ -67,22 +77,19 @@ export class CheckinPage {
   ionViewDidLoad() {
     const loader = this.loadingCtrl.create({
       content: "Waiting",
-      duration: 1000
+      duration: 2000
     });
     loader.present();
     this.now = moment(new Date).format("Do MMM YY")
   }
 
-  async getDataCheckOut(){
+  async getDataCheckOut() {
     await this.storage.get("remarksCheckOut").then(data => {
-     this.remarks = data;
-     console.log(data);
+      this.remarks = data;
     })
     await this.storage.get("timeCheckOut").then(data => {
       this.timecheckOut = data;
-     console.log(this.timecheckOut);
-
-     })
+    })
   }
 
   statusCheckIn(): string {
@@ -136,10 +143,8 @@ export class CheckinPage {
     })
   }
   async getCheckInTime() {
-    var currentDate = moment(new Date()).format("HH:mm:ss")
     await this.storage.get("timeCheckIn").then(data => {
-      console.log();
-      this.totalWorkHour = moment.utc(moment(currentDate, "HH:mm:ss").diff(moment(data, "HH:mm:ss"))).format("HH:mm");
+      this.timeCheckin1 = data;
     })
   }
   checkCheckOut() {

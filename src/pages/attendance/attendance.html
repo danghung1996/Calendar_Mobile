@@ -16,8 +16,8 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [status]="myAttendace"></ion-calendar>
+<ion-content>
+  <ion-calendar #calendar (onMonthSelect)="onMonthSelect($event)" [events]="currentEvents" [status]="myAttendace"></ion-calendar>
   <ion-list-header no-lines no-padding>
     <button ion-item (click)="showColorCode = !showColorCode;showAtenden=false;showAtendenRP=false" detail-none>
       <ion-icon item-right name="md-arrow-dropdown" *ngIf="!showColorCode"></ion-icon>

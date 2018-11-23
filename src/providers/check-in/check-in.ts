@@ -71,8 +71,8 @@ export class CheckInProvider {
         this._isCheckIn.next(Object.assign({}, this.isCheckInDataStore)._isCheckInData)
       }, error => {
         console.log(error.statusText);
-        if (error.statusText === 'Unauthorized') {
-
+        if(error.statusText === "Unauthorized"){
+          this.storage.remove("token");
         }
       })
     }
@@ -89,8 +89,8 @@ export class CheckInProvider {
         this._isCheckOut.next(Object.assign({}, this.isCheckOutDataStore)._isCheckOutData)
       }, error => {
         console.log(error.statusText);
-        if (error.statusText === 'Unauthorized') {
-
+        if(error.statusText === "Unauthorized"){
+          this.storage.remove("token");
         }
       })
     }
@@ -111,6 +111,9 @@ export class CheckInProvider {
         console.log(data);
       }, error => {
         console.log(error)
+        if(error.statusText === "Unauthorized"){
+          this.storage.remove("token");
+        }
       })
     }
   }
@@ -131,6 +134,9 @@ export class CheckInProvider {
         console.log(data);
       }, error => {
         console.log(error)
+        if(error.statusText === "Unauthorized"){
+          this.storage.remove("token");
+        }
       })
     }
   }

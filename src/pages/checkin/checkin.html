@@ -23,7 +23,7 @@
         {{currentTime}}
       </div>
       <div class="textArea">
-        <ion-textarea rows="8" [(ngModel)]="remarks" placeholder="Reason for online check in."></ion-textarea>
+        <ion-textarea rows="5" [(ngModel)]="remarks" placeholder="Reason for online check in."></ion-textarea>
       </div>
       <button ion-button color="secondary" class="button" block (click)='mobileCheckin()'>
         Mobile Check-in</button>
@@ -40,21 +40,21 @@
       <div class="currentTime">
         {{timeCheckin}}
       </div>
+      <div class="locationConfirm">
+          <div class="labelLocation">online check-out at</div>
+          <div class="addressDetail">
+            <div class="addressLogo">
+              <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+            </div>
+            <div class="address">
+              {{lat}} , {{long}}
+            </div>
+          </div>
+        </div>
       <div class="groupButtonConfirm">
         <button ion-button block class="button" (click)="confirmCheckIn()">Confirm
           check-in</button>
         <button ion-button block class="button" style="background-color:#FF0000" (click)="cancel()">Cancel</button>
-      </div>
-      <div class="location">
-        <div class="labelLocation">online checkin from</div>
-        <div class="addressDetail">
-          <div class="addressLogo">
-            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
-          </div>
-          <div class="address">
-            {{lat}} , {{long}}
-          </div>
-        </div>
       </div>
     </div>
     <!-- successfull check in -->
@@ -109,17 +109,17 @@
           {{currentTime}}
         </div>
         <div class="textArea">
-          <ion-textarea rows="5" [(ngModel)]="remarks" placeholder="Reason for online check in."></ion-textarea>
+          <ion-textarea rows="5" [(ngModel)]="remarks" placeholder="Reason for online check out."></ion-textarea>
         </div>
       </div>
+      <button ion-button block class="buttonCheckOut" (click)="mobileCheckOut()">mobile check-out</button>
       <div class="headerCheckOut">
-        <button ion-button block class="workHours">TO
-          DAY WORK HOUR</button>
+        <button ion-button block class="workHours">
+          TO DAY WORK HOUR</button>
         <div class="currentTime">
           {{totalWorkHour}}
         </div>
       </div>
-      <button ion-button block class="buttonCheckOut" (click)="mobileCheckOut()">mobile check-out</button>
       <div class="location">
         <div class="locationLogo">
         </div>
@@ -134,22 +134,21 @@
       <div class="currentTime">
        {{timecheckOut}}
       </div>
-
+      <div class="locationConfirm">
+          <div class="labelLocation">online check-out at</div>
+          <div class="addressDetail">
+            <div class="addressLogo">
+              <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
+            </div>
+            <div class="address">
+              {{lat}} , {{long}}
+            </div>
+          </div>
+        </div>
       <div class="groupButtonConfirm">
         <button ion-button block style="background-color:#00CCCC" class="button" (click)="confirmCheckOut()">Confirm
           check in</button>
         <button ion-button block style="background-color:#FF3300" class="button" (click)="cancel()">Cancel</button>
-      </div>
-      <div class="location">
-        <div class="labelLocation">online check-out at</div>
-        <div class="addressDetail">
-          <div class="addressLogo">
-            <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
-          </div>
-          <div class="address">
-            {{lat}} , {{long}}
-          </div>
-        </div>
       </div>
     </div>
     <!-- check-out successful -->
@@ -176,7 +175,7 @@
         for online check-out</div>
       <div class="textAreaConfirm" padding>
         <ion-textarea readonly rows="3" [(ngModel)]="remarks"
-          placeholder="Reason for online check in.">
+          placeholder="Reason for online check out.">
         </ion-textarea>
       </div>
       <div style="width: 100%" class="location">
