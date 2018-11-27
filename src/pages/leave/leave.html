@@ -61,7 +61,7 @@
     </ion-grid>
 
   </ion-item>
-  <div style="text-align: center;color:white">
+  <div style="text-align: center;color:white;height:55px;">
     <div (click)="show = !show" style="background-color:#4397C7;border-radius:0px 0px 4px 4px;width: 40%;margin: 0 auto;font-size: 16px;height: 28px;line-height: 25px;">Details</div>
   </div>
   <div class="tab">
@@ -166,14 +166,14 @@
         <ion-col col-3>Status</ion-col>
       </ion-row>
       <div *ngFor="let leave of (myleave | async); let i = index">
-        <ion-row (click)="tesstt =!tesstt" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
+        <ion-row (click)="collaspeStatus(i)" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
           <ion-col col-4>{{leave.created_at }}</ion-col>
           <ion-col col-5> {{type_of_leave[leave.leave_type]}}</ion-col>
           <ion-col col-3>
             <img [src]="icon_status[leave.leave_status]">
           </ion-col>
         </ion-row>
-        <ion-row class="leave-details" *ngIf="tesstt">
+        <ion-row class="leave-details" *ngIf="leave.show">
           <ion-col style="background-color:#8AB1C9;color:white;" col-12>{{status_leave[leave.leave_status]}}
             <span style="float:right">AM to PM</span>
           </ion-col>

@@ -42,12 +42,16 @@ page-attendance {
     text-align: end;
     font-size: 28px;
     color: #C2C2C2;
+    width: 100%;  
   }
 
   .checkin-time {
     text-align: end;
     color: #64CDCF;
     font-size: 28px;
+    width: 100%;
+    margin-bottom: 7px;
+    float: right;    
   }
   
   .checkin {
