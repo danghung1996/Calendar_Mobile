@@ -255,7 +255,7 @@ export class LeavePage {
     this.myleave.subscribe(data => {
       if(data[i].show) {data[i].show = false; return;}
       data.forEach((element, index) => {
-        element.show = index === i ? true : false;
+        element.show = index === i ;
       })
     })
 
