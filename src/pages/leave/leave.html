@@ -16,9 +16,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
   <ion-item style="margin-top:5px" no-lines>
-    <ion-label>Approver</ion-label>
+    <ion-label>Approver:</ion-label>
     <ion-label style="font-weight: bolder">Steven Chong</ion-label>
   </ion-item>
   <button class="leaveavai" ion-item (click)="show = !show" detail-none>
@@ -74,12 +74,12 @@
     </ion-item>
 
     <ion-list radio-group [formControl]="leavetype">
-      <ion-list-header class="typeofleave" (click)="show_type_of_leave = !show_type_of_leave">
+      <ion-list-header class="typeofleave" (click)="showLeaveRequest(0)">
         <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
         <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
         Type of leave
       </ion-list-header>
-      <div *ngIf="show_type_of_leave">
+      <div *ngIf="showLeave[0]">
         <ion-item *ngFor="let item of type_of_leave;let i = index" no-lines>
           <ion-label>{{item}}</ion-label>
           <ion-radio [value]="i"></ion-radio>
@@ -88,11 +88,11 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header class="typeofleave" (click)="show_datepickder = !show_datepickder">
+      <ion-list-header class="typeofleave" (click)="showLeaveRequest(1)">
         Date
         <ion-icon item-right name="md-calendar"></ion-icon>
       </ion-list-header>
-      <div *ngIf="show_datepickder">
+      <div *ngIf="showLeave[1]">
         <ion-item style="margin-top:10px;" no-lines>
           <ion-label>Start</ion-label>
           <ion-datetime [formControl]="fromdate" displayFormat="MM/DD/YYYY" pickerFormat="MM DD YYYY" [max]="2099-31-12" (ionChange)="countDateApply()"></ion-datetime>
@@ -128,22 +128,22 @@
       </div>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark" (click)="showRemark()">
+      <ion-list-header class="remark" (click)="showLeaveRequest(2)">
         Remark
         <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>
         <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>
       </ion-list-header>
-      <ion-item no-lines *ngIf="isRemark">
+      <ion-item no-lines *ngIf="showLeave[2]">
         <ion-input [formControl]="remark" placeholder="Input remark" type="text" value=""></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
-      <ion-list-header class="remark" (click)="showAttachment()">
+      <ion-list-header class="remark" (click)="showLeaveRequest(3)">
         Attachment (optional)
         <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>
         <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>
       </ion-list-header>
-      <ion-item no-lines *ngIf="isAttachment">
+      <ion-item no-lines *ngIf="showLeave[3]">
         <ion-label class="camera" (click)="presentActionSheet()">Open Camera
           <ion-icon name="md-camera"></ion-icon>
         </ion-label>
@@ -152,7 +152,7 @@
 
     </ion-list>
     <ion-list>
-      <ion-list-header class="typeofleave">
+      <ion-list-header class="submit">
         <ion-label (click)="logForm()" type="submit">Submit</ion-label>
         <ion-icon item-right name="ios-arrow-forward"></ion-icon>
       </ion-list-header>
@@ -165,31 +165,31 @@
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
       </ion-row>
-      <div *ngFor="let leave of myleave | async">
-        <ion-row (click)="leave.show = !leave.show" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
-          <ion-col col-4>{{leave.created_at }}</ion-col>
-          <ion-col col-5>{{type_of_leave[leave.leave_type]}}</ion-col>
+      <!-- <div *ngFor="let leave of (myleave | async); let i = index"> --><div>
+        <ion-row (click)="tesstt =!tesstt" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
+          <ion-col col-4>20 Nov</ion-col>
+          <ion-col col-5> Annual</ion-col>
           <ion-col col-3>
-            <img src="../../assets/icon/m_approve.png">
+            <img [src]="icon_status[0]">
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="leave.show">
-          <ion-col style="background-color:#8AB1C9" col-12>{{status_leave[leave.leave_status]}}
+        <ion-row *ngIf="tesstt">
+          <ion-col style="background-color:#8AB1C9;color:white;padding:10px 0px 10px 0px" col-12>Pending
             <span style="float:right">AM to PM</span>
           </ion-col>
-          <ion-col col-12>Last Update
+          <ion-col style="padding:10px 0px 10px 0px" col-12>Last Update
             <span style="float:right">07 Nov 2018</span>
           </ion-col>
-          <ion-col col-12>
+          <ion-col style="padding:10px 0px 10px 0px" col-12>
 
-            Day(s) Applied : {{leave.date_applied}}
+            Day(s) Applied :1.5
 
           </ion-col>
           <ion-col col-12>
 
-            <ion-calendar #calendar [leaveFromDate]="leave.leave_from_date" [leaveToDate]="leave.leave_to_date"></ion-calendar>
+            <ion-calendar #calendar></ion-calendar>
           </ion-col>
-          <img style="width:500px;height:500px;" [src]="leave.image" *ngIf="leave.image" />
+          <!-- <img style="width:500px;height:500px;" [src]="leave.image" *ngIf="leave.image" /> -->
 
         </ion-row>
       </div>

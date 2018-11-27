@@ -17,12 +17,12 @@ import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 })
 export class ProfilePage {
 
-  employeeName: string;
-  employeeID: string;
-  department: string;
-  designnation: string;
-  supervisor: string;
-  hrMaster: string;
+  employeeName: string='Nguyen Viet Thang';
+  employeeID: string='SE05071';
+  department: string='Infomation Techology';
+  designnation: string='Intern Software';
+  supervisor: string='Simon Soo';
+  hrMaster: string='Jason Ngo';
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,15 +33,15 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.profileService.getUserProfile()
-    this.profileService.getProfile.subscribe(data => {
-      this.employeeName = data['employee_name'];
-      this.employeeID = data['employee_id'];
-      this.department = data['department'];
-      this.designnation = data['designation'];
-      this.hrMaster = data['hr_master'];
-      this.supervisor = data['supervisor'];
-    })
+    // this.profileService.getUserProfile()
+    // this.profileService.getProfile.subscribe(data => {
+    //   this.employeeName = data['employee_name'];
+    //   this.employeeID = data['employee_id'];
+    //   this.department = data['department'];
+    //   this.designnation = data['designation'];
+    //   this.hrMaster = data['hr_master'];
+    //   this.supervisor = data['supervisor'];
+    // })
   }
 
 }

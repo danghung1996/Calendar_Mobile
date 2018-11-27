@@ -26,13 +26,20 @@ export class LeavePage {
   gaming = 'am'
   from_a = 'am'
   to_a = 'am'
-  showleave = false;
   show_datepickder = false;
   isRemark: boolean = false;
-
+  tesstt= false;
   isAttachment: boolean = false;
   type_of_leave: string[] = ['Medical', 'Annual', 'Compassionate', 'Maternity', 'Pilgrimage', 'Prolong Illness']
   status_leave: string[] = ['PENDING', 'ON HOLD', 'APPROVE', 'CANCEL', 'DECLINE']
+  icon_status: string[] = [
+    '../../assets/icon/m_pending.png',
+    '../../assets/icon/m_onhold.png',
+    '../../assets/icon/m_approve.png',
+    '../../assets/icon/m_cancel.png',
+    '../../assets/icon/m_decline.png'
+  ]
+  showLeave: boolean[] = [false, false, false, false]
   currentEvents = []
   todayEvents = ['No events']
   today = moment(new Date()).format('Do MMM YYYY')
@@ -81,17 +88,12 @@ export class LeavePage {
     }
 
   }
-  showRemark() {
-    if (this.isRemark == true) {
-      return this.isRemark = false;
-    }
-    this.isRemark = true;
-  }
-  showAttachment() {
-    if (this.isAttachment == true) {
-      return this.isAttachment = false;
-    }
-    this.isAttachment = true;
+  showLeaveRequest(i: number) {
+    if(this.showLeave[i]) {this.showLeave[i]= false;return;}
+    this.showLeave.forEach((element, index) => {
+      this.showLeave[index] = index === i
+    })
+     
   }
   showAlert() {
     const alert = this.alertCtrl.create({
@@ -127,7 +129,7 @@ export class LeavePage {
             this.takePhoto(this.camera.PictureSourceType.PHOTOLIBRARY)
           }
         }, {
-          text: 'Text a picture',
+          text: 'Take a picture',
           handler: () => {
             this.takePhoto(this.camera.PictureSourceType.CAMERA)
           }
@@ -163,7 +165,7 @@ export class LeavePage {
       content: 'Loading Please Wait...'
     });
     loading.present();
-    
+
     if (this.base64Image) {
       await this.uploadImage().then((snapshot) => {
         snapshot.ref.getDownloadURL().then((url) => {
@@ -208,7 +210,7 @@ export class LeavePage {
         days = data;
         daysOfleave = []
         for (let day = new Date(this.fromdate.value); day <= new Date(this.todate.value); day.setDate(day.getDate() + 1)) {
-          daysOfleave.push({ date: new Date(day), active: true, value: 1 })
+          daysOfleave.push({ date: new Date(moment(day).format('YYYY MM DD 00:00:00')), active: true, value: 1 })
         }
         console.log(daysOfleave);
 
@@ -219,8 +221,9 @@ export class LeavePage {
           console.log(days);
 
           days.forEach(element => {
-            let find_day = daysOfleave.findIndex(x => { return moment(x.date) === moment(element) })
-            daysOfleave[find_day].active = false;
+            let find_day = daysOfleave.findIndex(x => { return moment(x.date).isSame(moment(element)) })
+
+            if (find_day >= 0) daysOfleave[find_day].active = false;
           });
         }
         if (this.from_a === 'pm') daysOfleave[0].value = 0.5;
@@ -235,6 +238,7 @@ export class LeavePage {
     }
   }
   getEvent() {
+    this.eventProvider.getAllEvent();
     this.eventProvider.allEvent.subscribe(data => {
       this.currentEvents = []
       data.forEach(element => {
@@ -246,6 +250,15 @@ export class LeavePage {
         })
       })
     })
+  }
+  collaspeStatus(i) {
+    this.myleave.subscribe(data => {
+      if(data[i].show) {data[i].show = false; return;}
+      data.forEach((element, index) => {
+        element.show = index === i ? true : false;
+      })
+    })
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeavePage');

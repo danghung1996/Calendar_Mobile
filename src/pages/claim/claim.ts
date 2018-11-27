@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ActionSheetController, AlertController } from 'ionic-angular';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IonicPage, NavController, NavParams, MenuController, ActionSheetController, AlertController, LoadingController } from 'ionic-angular';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import firebase from 'firebase';
+import moment from 'moment-timezone';
 
 /**
  * Generated class for the ClaimPage page.
@@ -27,32 +29,44 @@ export class ClaimPage {
   showleave = false;
   type_of_claim = ['Entertainment', 'Medical', 'Traveling', 'Miscellaneous']
   public base64Image: string;
-  form: FormGroup;
+  form_claim: FormGroup;
   claimtypeFC = new FormControl('', Validators.required);
   amountFC = new FormControl('', Validators.required);
   remarkFC = new FormControl('', Validators.required);
   imageFC = new FormControl('');
+  icon_status: string[] = [
+    '../../assets/icon/m_pending.png',
+    '../../assets/icon/m_onhold.png',
+    '../../assets/icon/m_approve.png',
+    '../../assets/icon/m_cancel.png',
+    '../../assets/icon/m_decline.png'
+  ]
+  showClaim: boolean[] = [false, false, false, false]
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,    
+    private formBuilder: FormBuilder
   ) {
     this.menuCtrl.enable(true, 'myMenu');
+    this.form_claim = this.formBuilder.group({
+      application_date: moment().format('YYYY-MM-DD'),
+      claim_type: this.claimtypeFC,
+      amount:this.amountFC,
+      remarks:this.remarkFC
+    })
   }
-  showRemark() {
-    if (this.isRemark == true) {
-      return this.isRemark = false;
-    }
-    this.isRemark = true;
-  }
-  showAttachment() {
-    if (this.isAttachment == true) {
-      return this.isAttachment = false;
-    }
-    this.isAttachment = true;
+  
+  showClaimInput(i: number) {
+    if(this.showClaim[i]) {this.showClaim[i]= false;return;}
+    this.showClaim.forEach((element, index) => {
+      this.showClaim[index] = index === i
+    })
+     
   }
   takePhoto(sourceType) {
     const options: CameraOptions = {
@@ -70,8 +84,33 @@ export class ClaimPage {
       // Handle error
     });
   }
-  presentActionSheet1() {
-    console.log('thangnvs')
+  uploadImage() {
+    let storageRef = firebase.storage().ref();
+    // Create a timestamp as filename
+    const filename = Math.floor(Date.now() / 1000);
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child(`images/${filename}.jpg`);
+    return imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL)
+  }
+  onClick() {
+    if (!this.form_claim.valid) {
+      this.showAlert();
+      return;
+    }
+    const loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Loading Please Wait...'
+    });
+    console.log(this.form_claim.value);
+    
+  }
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: 'Notification',
+      subTitle: 'Check your leave request again !',
+      buttons: ['OK']
+    });
+    alert.present();
   }
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
@@ -83,7 +122,7 @@ export class ClaimPage {
             this.takePhoto(this.camera.PictureSourceType.PHOTOLIBRARY)
           }
         }, {
-          text: 'Text a picture',
+          text: 'Take a picture',
           handler: () => {
             this.takePhoto(this.camera.PictureSourceType.CAMERA)
           }

@@ -40,23 +40,23 @@ export class ProfileProvider {
 
 
   async getUserProfile() {
-    let header
-    await this.buildHeader().then(data => {
-      header = data
-    })
-    if (header) {
-      return this.httpClient.get(this.urlGetProfile, { headers: header }).subscribe(data => {
-        console.log(data['data']);
-        this.dataStore._profileData = data['data']
-        if (this.dataStore._profileData) {
-          this._profile.next(Object.assign({}, this.dataStore)._profileData)
-        }
-      }, error => {
-          if(error.statusText === "Unauthorized"){
-            this.storage.remove("token");
-          }
-        })
-    }
+    // let header
+    // await this.buildHeader().then(data => {
+    //   header = data
+    // })
+    // if (header) {
+    //   return this.httpClient.get(this.urlGetProfile, { headers: header }).subscribe(data => {
+    //     console.log(data['data']);
+    //     this.dataStore._profileData = data['data']
+    //     if (this.dataStore._profileData) {
+    //       this._profile.next(Object.assign({}, this.dataStore)._profileData)
+    //     }
+    //   }, error => {
+    //       if(error.statusText === "Unauthorized"){
+    //         this.storage.remove("token");
+    //       }
+    //     })
+    // }
   }
   async buildHeader() {
     let header

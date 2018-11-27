@@ -88,9 +88,9 @@ export class MyApp {
 
     this._auth.tokenAuth().then(data => {
       if (!data) {
-        this.authLogin();
-        // this.nav.setRoot(page.component)
-        this.nav.setRoot(LoginPage);
+        // this.authLogin();
+        this.nav.setRoot(page.component)
+        // this.nav.setRoot(LoginPage);
       } else {
         this.nav.setRoot(page.component);
       }

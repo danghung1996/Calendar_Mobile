@@ -89,10 +89,26 @@ page-leave {
     background-color: #4397C7 !important;
     font-size: 18px;
   }
+  .submit{
+    background-color: #2A6595 !important;
+    font-size: 18px;
+  }
 
   .remark {
     background-color: #80B6D7 !important;
     font-size: 18px;
   }
+  .picker-md .picker-toolbar{
+    background-color: #4397C7 !important;
+  }
+  .picker-columns,
+ .picker-toolbar,
+ .picker-md .picker-wrapper,
+ .picker-md .picker-toolbar
+  {
+  //background: map-get($colors,primary-dark);
+  background-color: #4397C7 !important
+}
+
 
 }

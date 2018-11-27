@@ -109,3 +109,9 @@ body {
 .toolbar-title-md {
   font-size: 22px !important;  
 }
+.picker-md .picker-toolbar,.picker-ios .picker-toolbar{
+  background-color: #5996C2 !important;
+}
+.picker-md .picker-button, .picker-md .picker-button.activated,.picker-ios .picker-button, .picker-ios.picker-button.activated{
+  color: white !important;
+}
