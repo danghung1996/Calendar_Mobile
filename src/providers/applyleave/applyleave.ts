@@ -55,36 +55,36 @@ export class ApplyleaveProvider {
     })
   }
   getAllMyApply() {
-    // const url = api + '/my-leave';
-    // let myleaves: ApplyLeave[] = []
-    // this.storage.get('token').then(data => {
-    //   console.log(data);
+    const url = api + '/my-leave';
+    let myleaves: ApplyLeave[] = []
+    this.storage.get('token').then(data => {
+      console.log(data);
 
-    //   if (data != null) {
-    //     let header = new HttpHeaders().set("Authorization", "Bearer " + data);
-    //     return this.http.get(url, { headers: header }).subscribe(res => {
-    //       let data: ApplyLeave[] = res['data'];
-    //       data.forEach(element => {
-    //         myleaves.push(
-    //           {
-    //             date_applied: element.date_applied,
-    //             leave_type: element.leave_type,
-    //             leave_from_date: element.leave_from_date,
-    //             leave_to_date: element.leave_to_date,
-    //             leave_status: element.leave_status,
-    //             image: element.image,
-    //             created_at: moment(element.created_at).format('MMM Do'),
-    //             show: false
-    //           }
-    //         )
-    //       })
-    //       this.dataStore.myleaves = myleaves.reverse();
-    //       this._myLeaves.next(Object.assign({}, this.dataStore).myleaves);
-    //     }, error => {
-    //       console.log(error);
-    //     })
-    //   }
-    // })
+      if (data != null) {
+        let header = new HttpHeaders().set("Authorization", "Bearer " + data);
+        return this.http.get(url, { headers: header }).subscribe(res => {
+          let data: ApplyLeave[] = res['data'];
+          data.forEach(element => {
+            myleaves.push(
+              {
+                date_applied: element.date_applied,
+                leave_type: element.leave_type,
+                leave_from_date: element.leave_from_date,
+                leave_to_date: element.leave_to_date,
+                leave_status: element.leave_status,
+                image: element.image,
+                created_at: moment(element.created_at).format('MMM Do'),
+                show: false
+              }
+            )
+          })
+          this.dataStore.myleaves = myleaves.reverse();
+          this._myLeaves.next(Object.assign({}, this.dataStore).myleaves);
+        }, error => {
+          console.log(error);
+        })
+      }
+    })
   }
   checkApplyLeave(date): boolean {
     let check = false;

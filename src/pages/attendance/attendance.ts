@@ -82,52 +82,52 @@ export class AttendancePage {
     this.buildData()
   }
   buildData() {
-    // this.LeaveProvider.getAllMyApply();
-    // this.AttendanceProvider.myAttendace.subscribe(data => {
-    //   this.myAttendace = [];
-    //   data.forEach(element => {
-    //     this.myAttendace.push({
-    //       date: moment(element.attendance_date).format('YYYY/MM/DD'),
-    //       status: this.LeaveProvider.checkApplyLeave(new Date(element.attendance_date)) ? 'onleave' : this.status[element.attendance_status],
-    //       checkin: element.scan_in_time !== null ? moment('2018-11-11 ' + element.scan_in_time).format('LTS') : null,
-    //       checkout: element.scan_out_time !== null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : null
-    //     })
-    //   })
-    //   console.log(this.myAttendace);
-    //   this.reportAttendance();
+    this.LeaveProvider.getAllMyApply();
+    this.AttendanceProvider.myAttendace.subscribe(data => {
+      this.myAttendace = [];
+      data.forEach(element => {
+        this.myAttendace.push({
+          date: moment(element.attendance_date).format('YYYY/MM/DD'),
+          status: this.LeaveProvider.checkApplyLeave(new Date(element.attendance_date)) ? 'onleave' : this.status[element.attendance_status],
+          checkin: element.scan_in_time !== null ? moment('2018-11-11 ' + element.scan_in_time).format('LTS') : null,
+          checkout: element.scan_out_time !== null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : null
+        })
+      })
+      console.log(this.myAttendace);
+      this.reportAttendance();
+    })
+    // this.myAttendace=[]
+    // this.myAttendace.push({
+    //   date: moment('11/20/2018').format('YYYY/MM/DD'),
+    //   status: 'ontime',
+    //   checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
+    //   checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
     // })
-    this.myAttendace=[]
-    this.myAttendace.push({
-      date: moment('11/20/2018').format('YYYY/MM/DD'),
-      status: 'ontime',
-      checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
-      checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
-    })
-    this.myAttendace.push({
-      date: moment('11/21/2018').format('YYYY/MM/DD'),
-      status: 'late',
-      checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
-      checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
-    })
-    this.myAttendace.push({
-      date: moment('11/22/2018').format('YYYY/MM/DD'),
-      status: 'verylate',
-      checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
-      checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
-    })
-    this.myAttendace.push({
-      date: moment('11/23/2018').format('YYYY/MM/DD'),
-      status: 'absent',
-      checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
-      checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
-    })
-    this.myAttendace.push({
-      date: moment('11/24/2018').format('YYYY/MM/DD'),
-      status: 'onleave',
-      checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
-      checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
-    })
-    this.reportAttendance()
+    // this.myAttendace.push({
+    //   date: moment('11/21/2018').format('YYYY/MM/DD'),
+    //   status: 'late',
+    //   checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
+    //   checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
+    // })
+    // this.myAttendace.push({
+    //   date: moment('11/22/2018').format('YYYY/MM/DD'),
+    //   status: 'verylate',
+    //   checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
+    //   checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
+    // })
+    // this.myAttendace.push({
+    //   date: moment('11/23/2018').format('YYYY/MM/DD'),
+    //   status: 'absent',
+    //   checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
+    //   checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
+    // })
+    // this.myAttendace.push({
+    //   date: moment('11/24/2018').format('YYYY/MM/DD'),
+    //   status: 'onleave',
+    //   checkin: moment('2018-11-11 ' + '08:00:00').format('LTS'),
+    //   checkout: moment('2018-11-11 ' + '17:00:00').format('LTS')
+    // })
+    // this.reportAttendance()
   }
   reportAttendance() {
 
