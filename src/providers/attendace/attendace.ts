@@ -27,36 +27,38 @@ export class AttendaceProvider {
     return this._myAttendance.asObservable()
   }
   getAttendence(month : number, year:number) {
-    // if (new Date().getMonth() - month > 2) return
-    // month = month + 1;
-    // const url = api + `/personal-attendance?month=${month}&year=${year}`;
+    if (new Date().getMonth() - month > 2) return
+    month = month + 1;
+    const url = api + `/personal-attendance?month=${month}&year=${year}`;
     
-    // const parram = new HttpParams().set('month', month + 1+'').set('year', year+'')
-    // this.storage.get('token').then(data => {
-    //   if (data != null) {
-    //     let header = new HttpHeaders().set("Authorization", "Bearer " + data);
-    //     return this.http.get(url, { headers: header })
-    //       .subscribe(data => {
-    //         let myattendace: Attendance[] = []
-    //         let attendance = data['data']
-    //         if (attendance === undefined) return;
-    //         attendance.forEach(element => {
-    //           myattendace.push({
-    //             attendance_date: element.attendance_date,
-    //             scan_in_time: element.scan_in_time,
-    //             scan_out_time: element.scan_out_time,
-    //             attendance_status: element.attendance_status,
-    //           })
-    //         });
-    //         this.dataStore.myattendace = myattendace;
+    const parram = new HttpParams().set('month', month + 1+'').set('year', year+'')
+    this.storage.get('token').then(data => {
+      if (data != null) {
+        let header = new HttpHeaders().set("Authorization", "Bearer " + data);
+        return this.http.get(url, { headers: header })
+          .subscribe(data => {
+            console.log(data);
             
-    //         this._myAttendance.next(Object.assign({}, this.dataStore).myattendace);
-    //       }, error => {
-    //         console.log(error);
+            let myattendace: Attendance[] = []
+            let attendance = data['data']
+            if (attendance === undefined) return;
+            attendance.forEach(element => {
+              myattendace.push({
+                attendance_date: element.attendance_date,
+                scan_in_time: element.scan_in_time,
+                scan_out_time: element.scan_out_time,
+                attendance_status: element.attendance_status,
+              })
+            });
+            this.dataStore.myattendace = myattendace;
+            
+            this._myAttendance.next(Object.assign({}, this.dataStore).myattendace);
+          }, error => {
+            console.log(error);
 
-    //       })
-    //   }
-    // })
+          })
+      }
+    })
   }
 
 

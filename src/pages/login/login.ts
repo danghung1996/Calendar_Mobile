@@ -71,41 +71,41 @@ export class LoginPage {
     this.navCtrl.setRoot(ProfilePage);
   }
   login() {
-    this.isLogged = true;
-    // if (!this.formGroup.valid) {
-    //   console.log("error");
-    //   const toast = this.toastCtrl.create({
-    //     message: 'Please! Check Email and Password',
-    //     duration: 1500,
-    //     cssClass: 'success',
-    //     position: 'top'
-    //   });
-    //   toast.present();
-    //   return
-    // } else {
-    //   const loader = this.loadingCtrl.create({
-    //     content: "Login Authentication",
-    //   });
-    //   loader.present();
-    //   this._loginService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe(
-    //     data => {
-    //       var token = data['token']
-    //       if (token !== undefined && token !== null) {
-    //         this._storage.set("token", token)
-    //         loader.dismiss();
-    //         console.log(token);
-    //         this._profileProvider.getUserProfile();
-    //         this.navCtrl.setRoot(ProfilePage);
-    //       }
-    //       this.isLogged = true;
-    //     }, error => {
-    //       console.log(error)
-    //       loader.dismiss();
-    //       this.isFailed = true;
-    //       this.isLogged = false
-    //     }
-    //   )
-    // }
+    // this.isLogged = true;
+    if (!this.formGroup.valid) {
+      console.log("error");
+      const toast = this.toastCtrl.create({
+        message: 'Please! Check Email and Password',
+        duration: 1500,
+        cssClass: 'success',
+        position: 'top'
+      });
+      toast.present();
+      return
+    } else {
+      const loader = this.loadingCtrl.create({
+        content: "Login Authentication",
+      });
+      loader.present();
+      this._loginService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe(
+        data => {
+          var token = data['token']
+          if (token !== undefined && token !== null) {
+            this._storage.set("token", token)
+            loader.dismiss();
+            console.log(token);
+            this._profileProvider.getUserProfile();
+            this.navCtrl.setRoot(ProfilePage);
+          }
+          this.isLogged = true;
+        }, error => {
+          console.log(error)
+          loader.dismiss();
+          this.isFailed = true;
+          this.isLogged = false
+        }
+      )
+    }
   }
 
   reTry() {

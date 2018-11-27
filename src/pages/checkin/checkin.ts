@@ -59,17 +59,14 @@ export class CheckinPage {
     
     setInterval(() => {
       this.currentTime = moment(new Date).format('h:mm:ss a');
+      if(this.timeCheckin1 !== null || this.timeCheckin1 !== undefined){
+        var currentDate = moment(new Date()).format("HH:mm:ss")
+        this.totalWorkHour = moment.utc(moment(currentDate, "HH:mm:ss").diff(moment(this.timeCheckin1, "HH:mm"))).format("HH:mm");
+      }
     }, 1);
 
 
     this.getCheckInTime();
-    if (this.timeCheckin1 !== null || this.timeCheckin1 !== undefined) {
-      // setInterval(() => {
-      //   console.log("hello");
-      //   var currentDate = moment(new Date()).format("HH:mm:ss")
-      //   this.totalWorkHour = moment.utc(moment(currentDate, "HH:mm:ss").diff(moment(this.timeCheckin1, "HH:mm"))).format("HH:mm");
-      // }, 1)
-    }
     this.checkCheckIn();
     this.checkCheckOut();
   }
