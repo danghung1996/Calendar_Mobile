@@ -64,8 +64,6 @@ export class CheckinPage {
         this.totalWorkHour = moment.utc(moment(currentDate, "HH:mm:ss").diff(moment(this.timeCheckin1, "HH:mm"))).format("HH:mm");
       }
     }, 1);
-
-
     this.getCheckInTime();
     this.checkCheckIn();
     this.checkCheckOut();
@@ -131,7 +129,6 @@ export class CheckinPage {
   checkCheckIn() {
     this.checkInService.isCheckIn();
     this.checkInService.isCheckInAlready.subscribe(data => {
-      console.log(data);
       if (data['message'] === 'Checked in') {
         this.isCheckIn = false;
         this.isCheckOut = true;

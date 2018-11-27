@@ -77,7 +77,6 @@ export class AttendancePage {
     this.buildData();
   }
   onMonthSelect(event) {
-    console.log(event);
     this.AttendanceProvider.getAttendence(event.month, event.year);
     this.buildData()
   }
@@ -93,7 +92,6 @@ export class AttendancePage {
           checkout: element.scan_out_time !== null ? moment('2018-11-11 ' + element.scan_out_time).format('LTS') : null
         })
       })
-      console.log(this.myAttendace);
       this.reportAttendance();
     })
     // this.myAttendace=[]
@@ -155,7 +153,6 @@ export class AttendancePage {
       this.attedance_report_percen.verylate = (Math.round(verylate * 100) / total).toFixed(2);
       this.attedance_report_percen.onleave = (Math.round(onleave * 100) / total).toFixed(2);
       this.attedance_report_percen.ontime = (Math.round(ontime * 100) / total).toFixed(2);
-      console.log(this.attedance_report_percen);
     }
   }
   ionViewDidLoad() {
