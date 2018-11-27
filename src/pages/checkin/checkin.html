@@ -17,6 +17,7 @@
 <ion-content>
   <!-- check-in -->
   <div *ngIf="isCheckIn">
+      <!-- isCheckIn -->
     <!-- start check-in -->
     <div *ngIf="isCheckInStart" padding>
       <div class="currentTime">
@@ -29,6 +30,7 @@
         Mobile Check-in</button>
       <div class="location">
         <div class="locationLogo">
+          <ion-icon name="navigate" class="logo"></ion-icon>
         </div>
         <div class="locationTitle">
           Your GPS location will be track upon mobile check in.
@@ -41,16 +43,16 @@
         {{timeCheckin}}
       </div>
       <div class="locationConfirm">
-          <div class="labelLocation">online check-out at</div>
-          <div class="addressDetail">
-            <div class="addressLogo">
-              <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
-            </div>
-            <div class="address">
-              {{lat}} , {{long}}
-            </div>
+        <div class="labelLocation">online check-out at</div>
+        <div class="addressDetail">
+          <div class="addressLogo">
+            <ion-icon name="navigate" class="logo"></ion-icon>
+          </div>
+          <div class="address">
+            {{lat}} , {{long}}
           </div>
         </div>
+      </div>
       <div class="groupButtonConfirm">
         <button ion-button block class="button" (click)="confirmCheckIn()">Confirm
           check-in</button>
@@ -82,18 +84,17 @@
         </div>
         <div class="textAreaTitle">Reason for online check-in</div>
         <div class="textAreaConfirm" padding>
-          <ion-textarea readonly rows="3" [(ngModel)]="remarks"
-            placeholder="Reason for online check in.">
+          <ion-textarea readonly rows="3" [(ngModel)]="remarks" placeholder="Reason for online check in.">
           </ion-textarea>
         </div>
       </div>
       <div style="width: 100%" class="location">
         <div class="labelLocation">online check-in from</div>
-        <div class="addressDetail">
-          <div class="addressLogo" text-center>
-            <ion-icon name="navigate" class="logo"></ion-icon>
+        <div class="addressDetailBottom">
+          <div class="addressLogoBottom" text-center>
+              <ion-icon name="navigate" class="logo"></ion-icon>            
           </div>
-          <div class="address">
+          <div class="addressBottom">
             {{lat}} , {{long}}
           </div>
         </div>
@@ -103,6 +104,7 @@
   </div>
   <!-- check out -->
   <div *ngIf="isCheckOut">
+      <!-- isCheckOut -->
     <div *ngIf="isCheckOutStart">
       <div padding>
         <div class="currentTime">
@@ -112,7 +114,7 @@
           <ion-textarea rows="5" [(ngModel)]="remarks" placeholder="Reason for online check out."></ion-textarea>
         </div>
       </div>
-      <button ion-button block class="buttonCheckOut" (click)="mobileCheckOut()">mobile check-out</button>
+      <button ion-button block class="buttonCheckOut" (click)="mobileCheckOut()">Mobile check-out</button>
       <div class="headerCheckOut">
         <button ion-button block class="workHours">
           TO DAY WORK HOUR</button>
@@ -122,6 +124,7 @@
       </div>
       <div class="location">
         <div class="locationLogo">
+          <ion-icon name="navigate" class="logo"></ion-icon>
         </div>
         <div class="locationTitle">
           Your GPS location will be track upon mobile check in.
@@ -132,19 +135,19 @@
     <!-- isCheckOutConfirm -->
     <div style="margin-top:50px" *ngIf="isCheckOutConfirm">
       <div class="currentTime">
-       {{timecheckOut}}
+        {{timecheckOut}}
       </div>
       <div class="locationConfirm">
-          <div class="labelLocation">online check-out at</div>
-          <div class="addressDetail">
-            <div class="addressLogo">
-              <ion-icon name="navigate" style="font-size: 40px;color:lightseagreen;margin: 5px"></ion-icon>
-            </div>
-            <div class="address">
-              {{lat}} , {{long}}
-            </div>
+        <div class="labelLocation">online check-out at</div>
+        <div class="addressDetail">
+          <div class="addressLogo">
+            <ion-icon name="navigate" class="logo"></ion-icon>
+          </div>
+          <div class="address">
+            {{lat}} , {{long}}
           </div>
         </div>
+      </div>
       <div class="groupButtonConfirm">
         <button ion-button block style="background-color:#00CCCC" class="button" (click)="confirmCheckOut()">Confirm
           check in</button>
@@ -174,21 +177,20 @@
       <div class="textAreaTitle">Reason
         for online check-out</div>
       <div class="textAreaConfirm" padding>
-        <ion-textarea readonly rows="3" [(ngModel)]="remarks"
-          placeholder="Reason for online check out.">
+        <ion-textarea readonly rows="3" [(ngModel)]="remarks" placeholder="Reason for online check out.">
         </ion-textarea>
       </div>
       <div style="width: 100%" class="location">
-          <div class="labelLocation">online check out at</div>
-          <div class="addressDetail">
-            <div class="addressLogo" text-center>
-              <ion-icon name="navigate" class="logo"></ion-icon>
-            </div>
-            <div class="address">
-              {{lat}} , {{long}}
-            </div>
+        <div class="labelLocation">online check out at</div>
+        <div class="addressDetailBottom">
+          <div class="addressLogoBottom" text-center>
+          <ion-icon name="navigate" class="logo"></ion-icon>
+          </div>
+          <div class="addressBottom">
+            {{lat}} , {{long}}
           </div>
         </div>
+      </div>
     </div>
   </div>
   <!-- is Error   -->
