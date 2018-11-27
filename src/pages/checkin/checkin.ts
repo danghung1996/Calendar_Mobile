@@ -131,6 +131,7 @@ export class CheckinPage {
   checkCheckIn() {
     this.checkInService.isCheckIn();
     this.checkInService.isCheckInAlready.subscribe(data => {
+      console.log(data);
       if (data['message'] === 'Checked in') {
         this.isCheckIn = false;
         this.isCheckOut = true;
