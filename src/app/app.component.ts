@@ -21,7 +21,7 @@ import { ProfileProvider } from '../providers/profile/ProfileSerivce'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = CheckinPage;
   employeeName: string = ""
   pages: Array<{ icon: string, title: string, component: any }>;
 

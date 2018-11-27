@@ -55,14 +55,10 @@ page-checkin {
     bottom: 5px;
     width: 100%;
     .locationLogo {
-      background: url("../../assets/icon/location_558562.png") center;
-      width: 30px;
-      background-repeat: no-repeat;
-      background-size: cover;
       width:15%;
-      height: 60px;
+      height: auto;
       float: left;
-
+      text-align: center;
     }
     .locationTitle{
       font-size: 18px;
@@ -84,30 +80,59 @@ page-checkin {
     color:gray;
   }
   .addressDetail{
-    width: 100%;
+    width: 320px;
     height: 50px;
-    padding:0px;
+    margin: auto;
+    // background-color: #CCEBEB;
     background-color: #CCEBEB;
+        box-shadow: 3px 3px #888888;
     .addressLogo{
-      width:10%;
+      width:50px;
       height: auto;
-      float: left
+      float: left;
+      text-align: center;
     }
     .address{
       font-size: 25px;
+      width: 270px;
       height: auto;
       float: left;
-      margin-left:10px;
-      text-align: center;
+      padding-left: 10px;
       color:rgb(128, 128, 128);
-      line-height: 50px
-    }
-    .logo{
-      font-size: 40px;
-      color:lightseagreen;
-      margin: 5px;
+      line-height: 50px;
+      padding-left:10px
     }
   }
+
+  .addressDetailBottom{
+    width: auto;
+    height: 50px;
+    margin: auto;
+    background-color: #CCEBEB;
+    .addressLogoBottom{
+      width:15%;
+      height: auto;
+      float: left;
+      text-align: center;
+    }
+    .addressBottom{
+      font-size: 25px;
+      width: auto;
+      height: auto;
+      float: left;
+      padding-left: 10px;
+      color:rgb(128, 128, 128);
+      line-height: 50px;
+      padding-left:10px
+    }
+  }
+
+  .logo{
+    font-size: 40px;
+    color:lightseagreen;
+    margin: 5px
+  }
+
   .headerCheckIn{
     background-color: #28CFCF;
     @extend .wrapper;

@@ -17,6 +17,7 @@ page-attendance {
   ion-card-content{
     padding: 0px 0px 14px 0px !important;
   }
+
   .list-header-ios {
     text-transform: none !important;
   }
@@ -37,6 +38,7 @@ page-attendance {
   }
 
   .checkout-time {
+    margin-bottom: 7px;
     text-align: end;
     font-size: 28px;
     color: #C2C2C2;
@@ -94,6 +96,7 @@ page-attendance {
      ion-col{
        padding-left: 12%;
        color: #666666;
+       font-size: 19px;
      }
   }
 }

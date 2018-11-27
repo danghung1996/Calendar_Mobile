@@ -57,9 +57,9 @@ export class CheckinPage {
       })
     })
     
-    // setInterval(() => {
-    //   this.currentTime = moment(new Date).format('h:mm:ss a');
-    // }, 1);
+    setInterval(() => {
+      this.currentTime = moment(new Date).format('h:mm:ss a');
+    }, 1);
 
 
     this.getCheckInTime();
