@@ -17,12 +17,12 @@ import { ApplyleaveProvider } from '../../providers/applyleave/applyleave';
 })
 export class ProfilePage {
 
-  employeeName: string='Nguyen Viet Thang';
-  employeeID: string='SE05071';
-  department: string='Infomation Techology';
-  designnation: string='Intern Software';
-  supervisor: string='Simon Soo';
-  hrMaster: string='Jason Ngo';
+  employeeName: string
+  employeeID: string
+  department: string
+  designnation: string
+  supervisor: string
+  hrMaster: string
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,6 +33,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    //get data from server.
     this.profileService.getUserProfile()
     this.profileService.getProfile.subscribe(data => {
       this.employeeName = data['employee_name'];

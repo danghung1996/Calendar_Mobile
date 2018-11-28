@@ -86,14 +86,14 @@ page-checkin {
     background-color: #CCEBEB;
     box-shadow: 3px 3px #888888;
     .addressLogo{
-      width:50px;
+      width:15%;
       height: auto;
       float: left;
       text-align: center;
     }
     .address{
       font-size: 25px;
-      width: 270px;
+      width: 85%;
       height: auto;
       float: left;
       padding-left: 10px;
@@ -102,7 +102,9 @@ page-checkin {
       padding-left:10px;
     }
   }
-
+  .button-md{
+    height: 60px;
+  }
   .addressDetailBottom{
     width: auto;
     height: 50px;
