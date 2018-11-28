@@ -95,4 +95,24 @@ page-profile {
     text-align: center;
     color:#006699;
   }
+  .empID{
+    font-size: 25px;
+    text-align: center;
+  }
+  .empDepartment{
+    text-align: center;
+    @extend .fontCommon;
+  }
+  .empDesignnation{
+    color:cornflowerblue;
+    @extend .fontCommon;
+  }
+  .hrNSup{
+    padding-left: 10vw;
+    text-align: left;
+    @extend .fontCommon;
+  }
+  .fontCommon{
+      font-size: 23px;
+  }
 }

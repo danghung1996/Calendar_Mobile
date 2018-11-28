@@ -44,6 +44,7 @@ export class LoginPage {
     })
     this.isLoginAlready()
   }
+  //check already login
   isLoginAlready() {
     this._loginService.tokenAuth().then(data => {
       if (data) {
@@ -51,12 +52,14 @@ export class LoginPage {
       }
     })
   }
+  //select list company
   selectCompany(index) {
     console.log(index);
     this.company = index
     console.log(this.company);
     
   }
+  
   presentLoading(mess: string) {
     const loader = this.loadingCtrl.create({
       content: mess,
@@ -65,13 +68,15 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-
+  //confrm after select company
   }
   loginConfirm() {
     this.navCtrl.setRoot(ProfilePage);
   }
+
+  //login
   login() {
-    // this.isLogged = true;
+    //invalid data
     if (!this.formGroup.valid) {
       console.log("error");
       const toast = this.toastCtrl.create({
@@ -87,6 +92,7 @@ export class LoginPage {
         content: "Login Authentication",
       });
       loader.present();
+      //call login service
       this._loginService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe(
         data => {
           var token = data['token']
@@ -94,6 +100,7 @@ export class LoginPage {
             this._storage.set("token", token)
             loader.dismiss();
             console.log(token);
+            //login success and navigate
             this._profileProvider.getUserProfile();
             this.navCtrl.setRoot(ProfilePage);
           }
@@ -107,7 +114,7 @@ export class LoginPage {
       )
     }
   }
-
+  //re-try action.
   reTry() {
     this.isFailed = false;
   }
