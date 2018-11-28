@@ -50,7 +50,7 @@ export class AttendaceProvider {
                 attendance_status: element.attendance_status,
               })
             });
-            this.dataStore.myattendace = myattendace;
+            this.dataStore.myattendace = myattendace.reverse();
             
             this._myAttendance.next(Object.assign({}, this.dataStore).myattendace);
           }, error => {

@@ -35,9 +35,7 @@ export class ApplyleaveProvider {
   get myLeaves(): Observable<ApplyLeave[]> {
     return this._myLeaves.asObservable()
   }
-  myformPost(leaverequest, loading) {
-    console.log(JSON.stringify(leaverequest));
-
+  myformPost(leaverequest, loading,reset,form) {
     this.storage.get('token').then(data => {
       if (data != null) {
         let header = new HttpHeaders().set("Authorization", "Bearer " + data);
@@ -46,10 +44,13 @@ export class ApplyleaveProvider {
             this.showAlert('Notification', 'Applied Leave Request Successfully')
             this.getAllMyApply()
             loading.dismiss()
+            reset(form);
+            return true;
           }, error => {
             if (error['error']['success'] === false) this.showAlert('Notification', 'Unable to apply leave on blocked day')
             else this.showAlert('Notification', 'Error ! Try Again')
             loading.dismiss()
+            return false;            
           })
       }
     })

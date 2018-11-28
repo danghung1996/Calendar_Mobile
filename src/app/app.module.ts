@@ -32,6 +32,7 @@ import { EventProvider } from '../providers/event/event';
 import { AttendaceProvider } from '../providers/attendace/attendace';
 import { CheckInProvider } from '../providers/check-in/check-in';
 import { ScrollHideDirective } from '../providers/const/scroll-hide';
+import { ClaimsProvider } from '../providers/claims/claims';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ScrollHideDirective } from '../providers/const/scroll-hide';
     EventProvider,
     AttendaceProvider,
     CheckInProvider,
+    ClaimsProvider,
   ]
 })
 export class AppModule { }

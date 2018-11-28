@@ -28,7 +28,7 @@ export class LeavePage {
   to_a = 'am'
   show_datepickder = false;
   isRemark: boolean = false;
-  tesstt= false;
+  tesstt = false;
   isAttachment: boolean = false;
   type_of_leave: string[] = ['Medical', 'Annual', 'Compassionate', 'Maternity', 'Pilgrimage', 'Prolong Illness']
   status_leave: string[] = ['PENDING', 'ON HOLD', 'APPROVE', 'CANCEL', 'DECLINE']
@@ -89,11 +89,11 @@ export class LeavePage {
 
   }
   showLeaveRequest(i: number) {
-    if(this.showLeave[i]) {this.showLeave[i]= false;return;}
+    if (this.showLeave[i]) { this.showLeave[i] = false; return; }
     this.showLeave.forEach((element, index) => {
       this.showLeave[index] = index === i
     })
-     
+
   }
   showAlert() {
     const alert = this.alertCtrl.create({
@@ -147,13 +147,13 @@ export class LeavePage {
   getProfileImageStyle() {
     return 'url(' + this.base64Image + ')'
   }
-  resetForm() {
-    this.show_type_of_leave = false;
-    this.show_datepickder = false;
-    this.isRemark = false;
-    this.isAttachment = false;
-    this.base64Image = '';
-    this.tab_show = false
+  resetForm(form) {
+    form.show_type_of_leave = false;
+    form.show_datepickder = false;
+    form.isRemark = false;
+    form.isAttachment = false;
+    form.base64Image = '';
+    form.tab_show = false
   }
   async logForm() {
     if (!this.form_leave.valid) {
@@ -170,15 +170,17 @@ export class LeavePage {
       await this.uploadImage().then((snapshot) => {
         snapshot.ref.getDownloadURL().then((url) => {
           this.image.setValue(url);
+          console.log(url);
           var leaverequest = this.buildData();
-          this.applyleaveProvider.myformPost(leaverequest, loading);
-          this.resetForm();
+          console.log(leaverequest);
+         this.applyleaveProvider.myformPost(leaverequest, loading,this.resetForm,this);
+          
         })
       });
     } else {
       var leaverequest = this.buildData();
-      this.applyleaveProvider.myformPost(leaverequest, loading)
-      this.resetForm()
+      this.applyleaveProvider.myformPost(leaverequest, loading,this.resetForm,this)
+
     }
   }
   buildData() {
@@ -253,9 +255,9 @@ export class LeavePage {
   }
   collaspeStatus(i) {
     this.myleave.subscribe(data => {
-      if(data[i].show) {data[i].show = false; return;}
+      if (data[i].show) { data[i].show = false; return; }
       data.forEach((element, index) => {
-        element.show = index === i ;
+        element.show = index === i;
       })
     })
 
