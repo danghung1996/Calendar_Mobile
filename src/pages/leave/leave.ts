@@ -173,13 +173,13 @@ export class LeavePage {
           console.log(url);
           var leaverequest = this.buildData();
           console.log(leaverequest);
-         this.applyleaveProvider.myformPost(leaverequest, loading,this.resetForm,this);
-          
+          this.applyleaveProvider.myformPost(leaverequest, loading, this.resetForm, this);
+
         })
       });
     } else {
       var leaverequest = this.buildData();
-      this.applyleaveProvider.myformPost(leaverequest, loading,this.resetForm,this)
+      this.applyleaveProvider.myformPost(leaverequest, loading, this.resetForm, this)
 
     }
   }
@@ -212,7 +212,9 @@ export class LeavePage {
         days = data;
         daysOfleave = []
         for (let day = new Date(this.fromdate.value); day <= new Date(this.todate.value); day.setDate(day.getDate() + 1)) {
-          daysOfleave.push({ date: new Date(moment(day).format('YYYY MM DD 00:00:00')), active: true, value: 1 })
+          let date = new Date(day);
+          date.setHours(0, 0, 0, 0);
+          daysOfleave.push({ date: date, active: true, value: 1 })
         }
         console.log(daysOfleave);
 
@@ -223,7 +225,12 @@ export class LeavePage {
           console.log(days);
 
           days.forEach(element => {
-            let find_day = daysOfleave.findIndex(x => { return moment(x.date).isSame(moment(element)) })
+            let find_day = daysOfleave.findIndex(x => {
+              return (
+                x.date.getFullYear() === element.getFullYear()
+                && x.date.getMonth() === element.getMonth()
+                && x.date.getDate() === element.getDate())
+            })
 
             if (find_day >= 0) daysOfleave[find_day].active = false;
           });

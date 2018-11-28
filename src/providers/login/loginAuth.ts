@@ -37,9 +37,6 @@ export class LoginProvider {
    }
    return false;
   }
-  async ExpiredToken(){
-
-  }
    async getToken(){
     await this.storage.get("token").then(data => {  
       this.token = data;  
