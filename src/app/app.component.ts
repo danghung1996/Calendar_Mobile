@@ -21,7 +21,7 @@ import { ProfileProvider } from '../providers/profile/ProfileSerivce'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ProfilePage;
   employeeName: string = ""
   pages: Array<{ icon: string, title: string, component: any }>;
 
@@ -38,11 +38,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { icon: 'people', title: 'Profile', component: ProfilePage },
-      { icon: 'planet', title: 'Attendance', component: AttendancePage },
-      { icon: 'podium', title: 'Checkin', component: CheckinPage },
-      { icon: 'power', title: 'Leave', component: LeavePage },
-      { icon: 'radio', title: 'Claim', component: ClaimPage },
-      { icon: 'redo', title: 'Logout', component: LoginPage },
+      { icon: 'alarm', title: 'Attendance', component: AttendancePage },
+      { icon: 'navigate', title: 'Checkin', component: CheckinPage },
+      { icon: 'calendar', title: 'Leave', component: LeavePage },
+      { icon: 'calculator', title: 'Claim', component: ClaimPage },
+      { icon: 'log-in', title: 'Logout', component: LoginPage },
     ];
     this.getDataProfile();
   }

@@ -102,7 +102,6 @@ export class LoginPage {
             console.log(token);
             //login success and navigate
             this._profileProvider.getUserProfile();
-            this.navCtrl.setRoot(ProfilePage);
           }
           this.isLogged = true;
         }, error => {

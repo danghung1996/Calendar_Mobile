@@ -101,7 +101,7 @@ page-profile {
   }
   .empDepartment{
     text-align: center;
-    @extend .fontCommon;
+    font-size: 22px;
   }
   .empDesignnation{
     color:cornflowerblue;
@@ -110,9 +110,9 @@ page-profile {
   .hrNSup{
     padding-left: 10vw;
     text-align: left;
-    @extend .fontCommon;
+    font-size: 22px;
   }
   .fontCommon{
-      font-size: 23px;
+      font-size: 24px;
   }
 }
