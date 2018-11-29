@@ -4,6 +4,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
 import moment from 'moment-timezone';
+import { Claim } from '../../Model/Claim';
+import { ClaimsProvider } from '../../providers/claims/claims';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ClaimPage page.
@@ -42,6 +45,7 @@ export class ClaimPage {
     '../../assets/icon/m_decline.png'
   ]
   showClaim: boolean[] = [false, false, false, false]
+  myclaim: Observable<Claim[]>
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -49,24 +53,28 @@ export class ClaimPage {
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,    
-    private formBuilder: FormBuilder
+    public loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    private claimProvider: ClaimsProvider
   ) {
     this.menuCtrl.enable(true, 'myMenu');
     this.form_claim = this.formBuilder.group({
       application_date: moment().format('YYYY-MM-DD'),
       claim_type: this.claimtypeFC,
-      amount:this.amountFC,
-      remarks:this.remarkFC
+      amount: this.amountFC,
+      remarks: this.remarkFC,
+      image: this.imageFC.value
     })
+    this.claimProvider.getAllClaims();
+    this.myclaim = this.claimProvider.myClaim;
   }
-  
+
   showClaimInput(i: number) {
-    if(this.showClaim[i]) {this.showClaim[i]= false;return;}
+    if (this.showClaim[i]) { this.showClaim[i] = false; return; }
     this.showClaim.forEach((element, index) => {
       this.showClaim[index] = index === i
     })
-     
+
   }
   takePhoto(sourceType) {
     const options: CameraOptions = {
@@ -92,7 +100,7 @@ export class ClaimPage {
     const imageRef = storageRef.child(`images/${filename}.jpg`);
     return imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL)
   }
-  onClick() {
+  async onClick() {
     if (!this.form_claim.valid) {
       this.showAlert();
       return;
@@ -101,13 +109,29 @@ export class ClaimPage {
       spinner: 'hide',
       content: 'Loading Please Wait...'
     });
-    console.log(this.form_claim.value);
-    
+    loading.present();
+    if (this.base64Image) {
+      await this.uploadImage().then((snapshot) => {
+        snapshot.ref.getDownloadURL().then((url) => {
+          let myclaim = this.form_claim.value;
+          myclaim.image = url;
+          console.log(myclaim);
+          this.claimProvider.myformPost(myclaim, loading, this.resetForm, this)
+        })
+      })
+    } else {
+      let myclaim = this.form_claim.value;
+      this.claimProvider.myformPost(myclaim, loading, this.resetForm, this)
+    }
   }
+  resetForm(form) {
+    form.tab_show = false;
+  }
+
   showAlert() {
     const alert = this.alertCtrl.create({
       title: 'Notification',
-      subTitle: 'Check your leave request again !',
+      subTitle: 'Check your claim again !',
       buttons: ['OK']
     });
     alert.present();
@@ -137,7 +161,15 @@ export class ClaimPage {
     });
     actionSheet.present();
   }
+  collaspeStatus(i) {
+    this.myclaim.subscribe(data => {
+      if (data[i].show) { data[i].show = false; return; }
+      data.forEach((element, index) => {
+        element.show = index === i;
+      })
+    })
 
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClaimPage');
   }

@@ -82,7 +82,7 @@
       <div *ngIf="showLeave[0]">
         <ion-item *ngFor="let item of type_of_leave;let i = index" no-lines>
           <ion-label>{{item}}</ion-label>
-          <ion-radio [value]="i"></ion-radio>
+          <ion-radio [checked]="i===leavetype.value" [value]="i"></ion-radio>
         </ion-item>
       </div>
     </ion-list>
@@ -134,7 +134,7 @@
         <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>
       </ion-list-header>
       <ion-item no-lines *ngIf="showLeave[2]">
-        <ion-input [formControl]="remark" placeholder="Input remark" type="text" value=""></ion-input>
+        <ion-input [formControl]="remark" placeholder="Input remark" type="text"></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
@@ -177,10 +177,10 @@
           <ion-col style="background-color:#8AB1C9;color:white;" col-12>{{status_leave[leave.leave_status]}}
             <span style="float:right">AM to PM</span>
           </ion-col>
-          <ion-col style="padding:10px 0px 10px 0px" col-12>Last Update
-            <span style="float:right">07 Nov 2018</span>
+          <ion-col col-12>Last Update
+            <span style="float:right">{{leave.created_at }}</span>
           </ion-col>
-          <ion-col style="padding:10px 0px 10px 0px" col-12>
+          <ion-col col-12>
 
             Day(s) Applied : {{leave.date_applied}}
 

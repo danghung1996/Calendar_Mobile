@@ -22,7 +22,8 @@
     <ion-label style="font-weight: bolder">Steven Chong</ion-label>
   </ion-item>
   <button class="leaveavai" ion-item (click)="show = !show" detail-none>
-    Total successful claims this year <span style="color:#EB4997;float:right">$42.22</span>
+    Total successful claims this year
+    <span style="color:#EB4997;float:right">$42.22</span>
   </button>
   <div class="tab">
     <button (click)="tab_show = true" [ngClass]="tab_show ? 'active': 'non-active'">Apply</button>
@@ -36,12 +37,12 @@
       <ion-list-header class="typeofclaim" (click)="showClaimInput(0)">
         Type of claim
         <ion-icon item-right name="md-arrow-dropdown" *ngIf="!show_type_of_leave"></ion-icon>
-          <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon>
       </ion-list-header>
-      <div *ngIf="showClaim[0]" >
+      <div *ngIf="showClaim[0]">
         <ion-item *ngFor="let item of type_of_claim;let i = index" no-lines>
           <ion-label>{{item}}</ion-label>
-          <ion-radio [value]="i"></ion-radio>
+          <ion-radio [checked]="claimtypeFC.value ===i" [value]="i"></ion-radio>
         </ion-item>
       </div>
     </ion-list>
@@ -49,34 +50,35 @@
       <ion-list-header class="typeofclaim" (click)="showClaimInput(1)">
         Amount
         <ion-icon item-right name="md-arrow-dropdown"></ion-icon>
-          <!-- <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon> -->
+        <!-- <ion-icon item-right name="md-arrow-dropup" *ngIf="show_type_of_leave"></ion-icon> -->
       </ion-list-header>
       <div *ngIf="showClaim[1]">
         <ion-item no-lines>
-          <ion-input [formControl]="amountFC" placeholder="Input Amount" type="number" value=""></ion-input>
+          <ion-input [formControl]="amountFC" placeholder="Input Amount" type="number"></ion-input>
         </ion-item>
       </div>
     </ion-list>
     <ion-list>
       <ion-list-header class="remark" (click)="showClaimInput(2)">
         Remark
-        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>   
-        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>      
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isRemark"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isRemark"></ion-icon>
 
       </ion-list-header>
       <ion-item no-lines *ngIf="showClaim[2]">
-        <ion-input [formControl]="remarkFC" placeholder="Input remark" type="text" value=""></ion-input>
+        <ion-input [formControl]="remarkFC" placeholder="Input remark" type="text"></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-list-header class="remark" (click)="showClaimInput(3)">
         Attachment (optional)
-        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>   
-        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>      
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="!isAttachment"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropup" *ngIf="isAttachment"></ion-icon>
 
       </ion-list-header>
       <ion-item no-lines *ngIf="showClaim[3]">
-        <ion-label class="camera" (click)="presentActionSheet()">Open Camera<ion-icon style="float:right" name="md-camera"></ion-icon>
+        <ion-label class="camera" (click)="presentActionSheet()">Open Camera
+          <ion-icon style="float:right" name="md-camera"></ion-icon>
         </ion-label>
       </ion-item>
       <img [src]="base64Image" *ngIf="base64Image" />
@@ -96,25 +98,28 @@
         <ion-col col-5>Type</ion-col>
         <ion-col col-3>Status</ion-col>
       </ion-row>
-      <ion-row (click)="showleave = !showleave" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
-        <ion-col col-4>07 Nov</ion-col>
-        <ion-col col-5>Time of in lieu</ion-col>
-        <ion-col col-3>
-          <img [src]="icon_status[0]">
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="showleave">
-        <ion-grid>
-          <ion-row style="background-color:#8AB1C9;color:white;padding:10px 0px 10px 0px">
-            <ion-col col-6>PENDING</ion-col>
-            <ion-col col-6>56$</ion-col>
-          </ion-row>
-          <ion-row style="padding:10px 0px 10px 0px">
-            <ion-col col-6>Last Update </ion-col>
-            <ion-col col-6>07 Nov 2018</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-row>
+      <div *ngFor="let claim of (myclaim | async); let i=index">
+        <ion-row (click)="collaspeStatus(i)" style="background-color:#F4F4F4;height:40px;margin-top: 10px;line-height: 40px;">
+          <ion-col col-4>{{claim.created_at}}</ion-col>
+          <ion-col col-5>{{type_of_claim[claim.claim_type]}}</ion-col>
+          <ion-col col-3>
+            <img [src]="icon_status[0]">
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="claim.show">
+          <ion-grid>
+            <ion-row style="background-color:#8AB1C9;color:white;padding:10px 0px 10px 0px">
+              <ion-col col-6>PENDING</ion-col>
+              <ion-col col-6>{{claim.amount}}$</ion-col>
+            </ion-row>
+            <ion-row style="padding:10px 0px 10px 0px">
+              <ion-col col-6>Last Update </ion-col>
+              <ion-col col-6>{{claim.created_at}}</ion-col>
+            </ion-row>
+          <img style="width:500px;height:500px;" [src]="claim.image" *ngIf="claim.image" />            
+          </ion-grid>
+        </ion-row>
+      </div>
     </ion-grid>
   </div>
 </ion-content>
