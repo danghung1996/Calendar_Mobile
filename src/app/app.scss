@@ -23,6 +23,7 @@
     height: 50px;
     float: left;
     margin: 5px 0px 5px 3px;
+    
 }   
 ion-toolbar{
     padding:0px !important;
@@ -33,13 +34,17 @@ ion-toast.success .toast-wrapper {
     font-size: 20px;
 }
 .userName{
-    width: 75%;
+    width: auto;
     height: 100%;
-    float: right;
-    font-size: 20px;
-    line-height: 50px;
-    padding-left: 5px;
+    float: left;
+    font-size: 19px;
+    margin: 0px 0px 0px 7px;
+    padding: 5px 0px 0px 0px;
     font-weight: bolder;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 50px;
 }
 .toolbar-md{
     padding:0px !important;
