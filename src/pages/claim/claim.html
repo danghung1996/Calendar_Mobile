@@ -23,7 +23,7 @@
   </ion-item>
   <button class="leaveavai" ion-item (click)="show = !show" detail-none>
     Total successful claims this year
-    <span style="color:#EB4997;float:right">$42.22</span>
+    <span style="color:#B0D34E;float:right;font-weight:bold">$42.22</span>
   </button>
   <div class="tab">
     <button (click)="tab_show = true" [ngClass]="tab_show ? 'active': 'non-active'">Apply</button>
@@ -108,7 +108,7 @@
         </ion-row>
         <ion-row *ngIf="claim.show">
           <ion-grid>
-            <ion-row style="background-color:#8AB1C9;color:white;padding:10px 0px 10px 0px">
+            <ion-row style="background-color:#A3C93E;color:white;padding:10px 0px 10px 0px">
               <ion-col col-6>PENDING</ion-col>
               <ion-col col-6>{{claim.amount}}$</ion-col>
             </ion-row>
