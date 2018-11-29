@@ -81,4 +81,14 @@ page-login {
     ion-header{
         visibility: hidden !important;
     }
-}
+    .radio-md-color-on{
+        color:red;
+    }
+    .radio-ios-color-on{
+        color:red;
+        background-color:red;
+    }
+    md-radio-button.md-checked.my-radio .md-on{
+        background-color: red;
+    }
+}   
