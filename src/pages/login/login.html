@@ -59,7 +59,7 @@
       <div radio-group>
         <ion-item *ngFor="let item of listCompany;let i = index" no-lines>
           <ion-label> <ion-icon name="arrow-forward" style="margin-right: 30px;margin-left: 30px"></ion-icon> {{item}}</ion-label>
-          <ion-radio [value]="i" (click)="selectCompany(i)"></ion-radio>
+          <ion-radio color="comfirm" [value]="i" (click)="selectCompany(i)"></ion-radio>
         </ion-item>
       </div>
       <!-- <h4 *ngFor="let item of listCompany" style="margin-left: 50px">

@@ -52,6 +52,7 @@ export class AttendancePage {
     mode: "month",
     currentDate: new Date()
   };
+  today = moment()
   attedance_report_percen = {
     ontime: '0',
     onleave: '0',
