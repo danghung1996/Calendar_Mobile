@@ -85,7 +85,7 @@
     </button>
     <ion-item *ngIf="showAtendenRP" [@enterAnimation] ion-item detail text-wrap>
     <div text-center>
-      <circle-progress [percent]="(100-attedance_report_percen.absent)" [responsive] = "false" [titleFontSize]="14" [radius]="110" [outerStrokeWidth]="10" [innerStrokeWidth]="5" [outerStrokeColor]="'#4397C7'"
+      <circle-progress [percent]="(100-attedance_report_percen.absent)" [responsive] = "false" [titleFontSize]="35" [radius]="110" [outerStrokeWidth]="10" [innerStrokeWidth]="5" [outerStrokeColor]="'#4397C7'"
         [innerStrokeColor]="'#4397C7'" [animation]="false" [toFixed]=2 [showSubtitle]="false" [animationDuration]="0"></circle-progress>
     </div>
       <h2 class="text-end month">{{today | date :'MMMM'}}</h2>
