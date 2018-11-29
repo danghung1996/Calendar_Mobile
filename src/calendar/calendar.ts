@@ -133,10 +133,15 @@ export class Calendar {
   isHaveStatus(year, month, date) {
     let result = 'nostatus'
     this.status.forEach(element => {
+      console.log(element.status);
+      
       if (
         new Date(element.date).getTime() ===
         new Date(year, month, date).getTime()
-      ) result = element.status.toString()
+      ) 
+      if(element.status !== undefined){
+        result = element.status.toString()
+      }
     });
     return result;
   }
