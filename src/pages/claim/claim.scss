@@ -6,7 +6,7 @@ page-claim {
   }
 
   ion-content .leaveavai {
-    border-bottom: 5px solid #F8CECD !important;
+    border-bottom: 5px solid #A6CD56 !important;
     background-color: #F5F5F5 !important;
     font-size: 15px;
     color: #333333
@@ -17,7 +17,7 @@ page-claim {
   }
 
   .tab {
-    margin-top: 50px;
+    margin-top: 80px;
     position: relative;
     font-size: large;
 
@@ -29,13 +29,13 @@ page-claim {
     }
 
     .active {
-      height: 40px;
-      background: #EB4997;
+      height: 50px;
+      background: #A3C93E;
       color: white
     }
 
     .non-active {
-      height: 30px;
+      height: 35px;
       background-color: #DDDDDD
     }
   }
@@ -71,7 +71,7 @@ page-claim {
   }
 
   .toolbar-background {
-    background-color: #EB4997;
+    background-color: #A1C73D;
     color: white
   }
 
@@ -90,18 +90,18 @@ page-claim {
   }
 
   .typeofclaim {
-    background-color: #ED7099 !important;
+    background-color: #A4CA9D !important;
     font-size: 18px;
   }
 
   .remark {
-    background-color: #F4BAB8 !important;
+    background-color: #BEDABA !important;
     font-size: 18px;
 
   }
 
   .submit {
-    background-color: #5F3634 !important;
+    background-color: #74902D !important;
     font-size: 18px;
 
   }

@@ -76,7 +76,6 @@ export class Calendar {
     if (this.lang === "es") {
       this.weekHead = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
     }
-    console.log(this.status);
 
     if (this.leaveFromDate !== undefined && this.leaveToDate !== undefined && this.leaveFromDate !== '' && this.leaveToDate !== '') {
       let year = moment(this.leaveFromDate).year();
@@ -133,8 +132,6 @@ export class Calendar {
   isHaveStatus(year, month, date) {
     let result = 'nostatus'
     this.status.forEach(element => {
-      console.log(element.status);
-      
       if (
         new Date(element.date).getTime() ===
         new Date(year, month, date).getTime()
