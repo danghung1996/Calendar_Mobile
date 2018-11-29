@@ -88,9 +88,9 @@
       <circle-progress [percent]="(100-attedance_report_percen.absent)" [responsive] = "false" [titleFontSize]="35" [radius]="110" [outerStrokeWidth]="10" [innerStrokeWidth]="5" [outerStrokeColor]="'#4397C7'"
         [innerStrokeColor]="'#4397C7'" [animation]="false" [toFixed]=2 [showSubtitle]="false" [animationDuration]="0"></circle-progress>
     </div>
-      <h2 class="text-end month">{{today | date :'MMMM'}}</h2>
-      <h4 class="text-end month">Monthly Attendence</h4>
-      <h5 class="text-end">As of {{today | date:'dd MMMM yyyy'}}</h5>
+      <h1 class="text-end month">{{today | date :'MMMM'}}</h1>
+      <h3 class="text-end monthly-title">Monthly Attendence</h3>
+      <h5 class="text-end today">As of {{today | date:'dd MMMM yyyy'}}</h5>
       <ion-grid>
         <ion-row style="color:white;background-color:#296291;text-align:center">
           <ion-col>On time</ion-col>

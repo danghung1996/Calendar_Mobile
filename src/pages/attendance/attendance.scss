@@ -23,7 +23,8 @@ page-attendance {
   }
 
   .text-end {
-    text-align: end
+    text-align: end;
+    padding-right: 15px;
   }
   .item-inner{
     padding-right: 0px !important;
@@ -64,8 +65,17 @@ page-attendance {
   }
   .month{
     color: #4197C7;
-    font-size: 20px;
     font-weight: bold;
+    font-size: 35px;
+    padding-bottom: 0px;
+  }
+  .monthly-title{
+    color: #4197C7;
+    font-weight: bold;
+    font-size: 22px;
+  }
+  .today{
+    margin-top: 5px;
   }
   .toolbar-background {
     background-color: #006699;
