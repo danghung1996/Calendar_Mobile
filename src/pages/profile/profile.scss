@@ -90,6 +90,7 @@ page-profile {
     border-bottom: none !important;
   }
   .empName{
+    width: 100%;
     font-size: 28px;
     font-weight: bolder;
     text-align: center;
@@ -108,11 +109,11 @@ page-profile {
     @extend .fontCommon;
   }
   .hrNSup{
-    padding-left: 10vw;
-    text-align: left;
-    font-size: 20px;
+    text-align: center;
+    font-size: 18px;
   }
   .fontCommon{
       font-size: 24px;
   }
+
 }

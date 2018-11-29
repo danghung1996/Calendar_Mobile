@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Platform, LoadingController, ToastController } from 'ionic-angular';
 import moment from 'moment';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CheckInProvider } from '../../providers/check-in/check-in'
@@ -47,6 +47,7 @@ export class CheckinPage {
     private checkInService: CheckInProvider,
     public storage: Storage,
     public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
   ) {
     //get location lat and long
     this.platForm.ready().then(() => {
@@ -99,6 +100,10 @@ export class CheckinPage {
 
   // button Mobile check-in
   mobileCheckin() {
+    if(this.remarks == null || this.remarks.trim() === ''){
+      this.errorMess("Input Reason")
+      return
+    }
     this.isCheckInStart = false;
     this.isCheckInConfirm = true;
     this.timeCheckin = this.currentTime
@@ -160,23 +165,32 @@ export class CheckinPage {
     }
     return time.join (''); // return adjusted time or original string
   }
+  errorMess(mess:string) {
+    const toast = this.toastCtrl.create({
+      message: mess,
+      duration: 1500,
+      cssClass: 'success',
+      position: 'top'
+    });
+    toast.present();
+  }
   //click mobile check in
   confirmCheckOut() {
-    this.isCheckOutConfirm = false;
-    this.isCheckOutSuccess = true;
-    if (this.lat === null && this.long === null) {
-      this.location.getCurrentPosition().then(res => {
-        this.lat = parseFloat(res.coords.latitude.toString()).toFixed(5);
-        this.long = parseFloat(res.coords.longitude.toString()).toFixed(5);
-      }).catch(() => {
-        console.log("Error:")
-      })
-    }
-    var location = this.lat + "," + this.long;
-    this.timecheckOut = this.currentTime
-    this.checkInService.checkOut(location, this.remarks)
-
+      this.isCheckOutConfirm = false;
+      this.isCheckOutSuccess = true;
+      if (this.lat === null && this.long === null) {
+        this.location.getCurrentPosition().then(res => {
+          this.lat = parseFloat(res.coords.latitude.toString()).toFixed(5);
+          this.long = parseFloat(res.coords.longitude.toString()).toFixed(5);
+        }).catch(() => {
+          console.log("Error:")
+        })
+      }
+      var location = this.lat + "," + this.long;
+      this.timecheckOut = this.currentTime
+      this.checkInService.checkOut(location, this.remarks)
   }
+
   //click confirm check-in
   checkInSuccess() {
     this.isCheckIn = false
@@ -189,6 +203,10 @@ export class CheckinPage {
   }
   //click mobile check out
   mobileCheckOut() {
+    if(this.remarks == null || this.remarks.trim() === ''){
+      this.errorMess("Input Reason")
+      return
+    }
     this.isCheckOutStart = false;
     this.isCheckOutConfirm = true;
     this.timecheckOut = this.currentTime

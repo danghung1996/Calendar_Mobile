@@ -19,8 +19,8 @@
     background-repeat: no-repeat,repeat;
     background-size: cover; 
     border-radius: 50px;
-    width: 50px;
-    height: 50px;
+    width: 15vw;
+    height: 15vw;
     float: left;
     margin: 5px 0px 5px 3px;
     
@@ -34,14 +34,14 @@ ion-toast.success .toast-wrapper {
     font-size: 20px;
 }
 .userName{
-    width: auto;
+    width: 75%;
     height: 100%;
     float: left;
-    font-size: 19px;
+    font-size: 18px;
     margin: 0px 0px 0px 7px;
     padding: 5px 0px 0px 0px;
     font-weight: bolder;
-    word-wrap: break-word;
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 50px;

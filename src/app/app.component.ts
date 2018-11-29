@@ -84,16 +84,17 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     if (page.title === 'Logout') {
       this.storage.remove("token");
+      this.nav.setRoot(LoginPage);
+    }else{
+      this._auth.tokenAuth().then(data => {
+        if (!data) {
+          this.authLogin();
+          // this.nav.setRoot(page.component)
+          this.nav.setRoot(LoginPage);
+        } else {
+          this.nav.setRoot(page.component);
+        }
+      })
     }
-
-    this._auth.tokenAuth().then(data => {
-      if (!data) {
-        this.authLogin();
-        // this.nav.setRoot(page.component)
-        this.nav.setRoot(LoginPage);
-      } else {
-        this.nav.setRoot(page.component);
-      }
-    })
   }
 }
